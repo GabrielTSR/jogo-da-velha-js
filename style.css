@@ -1,0 +1,34 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding: 10px;
+    background-color: #111111;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-image: url(img/background_pixel.jpg);
+}
+
+h1 {
+    background: rgb(36, 85, 207);
+    background: linear-gradient(87deg, rgba(36, 85, 207, 1) 28%, rgba(35, 29, 142, 1) 66%);
+    font-family: "Vermin Vibes";
+    text-align: center;
+    color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: lighter;
+    font-size: 3.5rem;
+    width: 420px;
+    height: 90px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border: 10px groove whitesmoke;
+}
