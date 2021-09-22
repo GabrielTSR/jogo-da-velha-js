@@ -1,3 +1,10 @@
+@import url(//db.onlinewebfonts.com/c/e3c6568f663d720746429b638227d340?family=Vermin+Vibes);
+@font-face {
+    font-family: "Vermin Vibes";
+    src: url("//db.onlinewebfonts.com/t/e3c6568f663d720746429b638227d340.eot");
+    src: url("//db.onlinewebfonts.com/t/e3c6568f663d720746429b638227d340.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/e3c6568f663d720746429b638227d340.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/e3c6568f663d720746429b638227d340.woff") format("woff"), url("//db.onlinewebfonts.com/t/e3c6568f663d720746429b638227d340.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/e3c6568f663d720746429b638227d340.svg#Vermin Vibes") format("svg");
+}
+
 * {
     padding: 0;
     margin: 0;
