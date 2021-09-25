@@ -10,8 +10,46 @@
     <title>Jogo da velha</title>
 </head>
 
-<body>
-    <h1>Jogo da velha</h1>
+<body class="flex-column-centralized">
+    <header class="flex-row-centralized">
+        <h1 class="flex-row-centralized">Jogo da velha</h1>
+    </header>
+    <main class="flex-row-centralized">
+        <section class="campo-config">
+            <h2>OPÇÕES</h2>
+
+            <div class="cada-questao-container">
+                <label for="quemContraQuem">MODO DE JOGO</label>
+                <select name="quemContraQuemSelect" id="quemContraQuem">
+                    <option value="pvp"> Jogador vs Jogador</option>
+                    <option value="pvm"> Jogador vs Máquina</option>
+                </select>
+            </div>
+
+            <div class="cada-questao-container">
+                <label for="jogadorPrincipalComeca">JOGADOR 1 SERÁ</label>
+                <select name="jogadorPrincipalComecaSelect" id="jogadorPrincipalComeca">
+                    <option value="x">x</option>
+                    <option value="fantasma">Fantasma</option>
+                </select>
+            </div>
+
+            <div class="cada-questao-container">
+                <label for="dificuldadeMaquinaSelect">DIFICULDADE DA MÁQUINA</label>
+                <select name="dificuldadeMaquinaSelect" id="dificuldadeMaquinaSelect">
+                    <option value="facil">Fácil</option>
+                    <option value="medio">Médio</option>
+                    <option value="dificil">Difícil</option>
+                </select>
+            </div>
+
+            <div class="button-container flex-row-centralized">
+                <button id="aplicar-alteracoes-config">APLICAR ALTERAÇÕES</button>
+            </div>
+
+        </section>
+        <img src="img/tabela.png" alt="">
+    </main>
 </body>
 
 </html>

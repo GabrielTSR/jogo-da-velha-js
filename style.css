@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: "Vermin Vibes";
 }
 
 body {
@@ -9,26 +10,110 @@ body {
     background-color: #111111;
     height: 100vh;
     width: 100vw;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
     background-image: url(img/background_pixel.jpg);
+    position: relative;
+}
+
+.flex-column-centralized {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-row-centralized {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+header {
+    height: 150px;
+    width: 100%;
 }
 
 h1 {
-    background: rgb(36, 85, 207);
     background: linear-gradient(87deg, rgba(36, 85, 207, 1) 28%, rgba(35, 29, 142, 1) 66%);
     font-family: "Vermin Vibes";
     text-align: center;
     color: whitesmoke;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     font-weight: lighter;
     font-size: 3.5rem;
     width: 420px;
     height: 90px;
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    border: 10px groove whitesmoke;
+    border: 10px outset whitesmoke;
+    transition: all 1s;
+}
+
+h2 {
+    font-weight: lighter;
+}
+
+h1:hover {
+    margin-top: 15px;
+    transform: scale(1.1);
+}
+
+main {
+    width: 100%;
+    flex-direction: row;
+    flex: 1;
+}
+
+.campo-config {
+    height: 370px;
+    width: 250px;
+    padding: 25px;
+    margin-left: 10px;
+    position: absolute;
+    left: 0;
+    background-color: black;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border: 10px outset whitesmoke;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.campo-config .cada-questao-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.campo-config .cada-questao-container label {
+    margin-bottom: 5px;
+}
+
+.campo-config .cada-questao-container select,
+.campo-config .cada-questao-container option {
+    height: 30px;
+    font-size: 1rem;
+}
+
+.button-container {
+    height: 40px;
+    width: 100%;
+    gap: 5px;
+}
+
+.button-container button {
+    height: 100%;
+    flex: 1;
+}
+
+.campo-config .cada-questao-container select,
+.button-container button {
+    box-shadow: 0 0 10px 0 #264257 inset, 0 0 10px 4px #264257;
+}
+
+.campo-config .cada-questao-container select:hover,
+.button-container button:hover {
+    transition: all 0.5s;
+    cursor: pointer;
+    box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
 }
