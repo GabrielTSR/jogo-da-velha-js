@@ -1,8 +1,14 @@
+@font-face {
+    font-family: 'Vermin Vibes';
+    src: url(font/Vermin_Vibes_V.otf);
+    font-weight: bold;
+}
+
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: "Vermin Vibes";
+    font-family: 'Vermin Vibes';
 }
 
 body {
@@ -35,11 +41,11 @@ header {
 
 h1 {
     background: linear-gradient(87deg, rgba(36, 85, 207, 1) 28%, rgba(35, 29, 142, 1) 66%);
-    font-family: "Vermin Vibes";
+    font-family: "vermin vibes";
     text-align: center;
     color: whitesmoke;
     font-weight: lighter;
-    font-size: 3.5rem;
+    font-size: 2.2rem;
     width: 420px;
     height: 90px;
     border-top-left-radius: 20px;
@@ -64,9 +70,8 @@ main {
 }
 
 .campo-config {
-    height: 370px;
+    height: 380px;
     width: 250px;
-    padding: 25px;
     margin-left: 10px;
     position: absolute;
     left: 0;
@@ -78,6 +83,10 @@ main {
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+.campo-config * {
+    margin: 0px 12.5px 0px 12.5px;
 }
 
 .campo-config .cada-questao-container {
@@ -92,17 +101,17 @@ main {
 .campo-config .cada-questao-container select,
 .campo-config .cada-questao-container option {
     height: 30px;
-    font-size: 1rem;
+    font-size: 0.6rem;
 }
 
 .button-container {
     height: 40px;
-    width: 100%;
     gap: 5px;
 }
 
 .button-container button {
     height: 100%;
+    font-size: 0.8rem;
     flex: 1;
 }
 
