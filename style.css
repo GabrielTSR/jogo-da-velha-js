@@ -11,6 +11,8 @@
     font-family: 'Vermin Vibes';
 }
 
+:root {}
+
 body {
     padding: 10px;
     background-color: #111111;
@@ -19,6 +21,13 @@ body {
     background-image: url(img/background_pixel.jpg);
     position: relative;
 }
+
+h2 {
+    color: whitesmoke;
+    margin-bottom: 20px;
+}
+
+main {}
 
 .flex-column-centralized {
     display: flex;
@@ -40,7 +49,7 @@ header {
 }
 
 h1 {
-    background: linear-gradient(87deg, rgba(36, 85, 207, 1) 28%, rgba(35, 29, 142, 1) 66%);
+    background: linear-gradient(87deg, rgb(8, 35, 104) 28%, rgb(7, 1, 126) 66%);
     font-family: "vermin vibes";
     text-align: center;
     color: whitesmoke;
@@ -54,13 +63,130 @@ h1 {
     transition: all 1s;
 }
 
-h2 {
-    font-weight: lighter;
+@-webkit-keyframes swing {
+    15% {
+        -webkit-transform: translateX(5px);
+        transform: translateX(5px);
+    }
+    30% {
+        -webkit-transform: translateX(-5px);
+        transform: translateX(-5px);
+    }
+    50% {
+        -webkit-transform: translateX(3px);
+        transform: translateX(3px);
+    }
+    65% {
+        -webkit-transform: translateX(-3px);
+        transform: translateX(-3px);
+    }
+    80% {
+        -webkit-transform: translateX(2px);
+        transform: translateX(2px);
+    }
+    100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+
+@keyframes swing {
+    15% {
+        -webkit-transform: translateX(5px);
+        transform: translateX(5px);
+    }
+    30% {
+        -webkit-transform: translateX(-5px);
+        transform: translateX(-5px);
+    }
+    50% {
+        -webkit-transform: translateX(3px);
+        transform: translateX(3px);
+    }
+    65% {
+        -webkit-transform: translateX(-3px);
+        transform: translateX(-3px);
+    }
+    80% {
+        -webkit-transform: translateX(2px);
+        transform: translateX(2px);
+    }
+    100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
 }
 
 h1:hover {
-    margin-top: 15px;
-    transform: scale(1.1);
+    -webkit-animation: swing 1s ease;
+    animation: swing 1s ease;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+}
+
+#ranking-container {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    padding: 30px;
+    background-color: #000A;
+    z-index: 999;
+}
+
+#ranking-container:target {
+    display: flex;
+}
+
+#ranking-modal {
+    position: relative;
+    width: 400px;
+    height: 70vh;
+    overflow-y: scroll;
+    background: linear-gradient(87deg, rgb(6, 35, 109) 28%, rgb(24, 18, 134) 66%);
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border: 10px outset whitesmoke;
+    color: white;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fechar {
+    position: absolute;
+    color: white;
+    background-color: #0005;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.5rem;
+    transition: all .3s linear;
+}
+
+.fechar:hover {
+    background-color: #ff4949;
+}
+
+#ranking-modal table {
+    width: 100%;
+}
+
+#ranking-modal::-webkit-scrollbar {
+    display: none;
+}
+
+h2 {
+    font-weight: lighter;
 }
 
 main {
@@ -72,10 +198,10 @@ main {
 .campo-config {
     height: 380px;
     width: 250px;
-    margin-left: 10px;
+    margin-left: 40px;
     position: absolute;
     left: 0;
-    background-color: black;
+    background: linear-gradient(87deg, rgb(6, 35, 109) 28%, rgb(24, 18, 134) 66%);
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;
     border: 10px outset whitesmoke;
@@ -117,12 +243,91 @@ main {
 
 .campo-config .cada-questao-container select,
 .button-container button {
-    box-shadow: 0 0 10px 0 #264257 inset, 0 0 10px 4px #264257;
+    box-shadow: 0 0 10px 0 #23689c inset, 0 0 10px 4px #23689c;
 }
 
 .campo-config .cada-questao-container select:hover,
 .button-container button:hover {
     transition: all 0.5s;
     cursor: pointer;
-    box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
+    box-shadow: 0 0 10px 0 #31adff inset, 0 0 10px 4px #31adff;
+}
+
+#jogo-container {
+    width: 360px;
+    height: 360px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    row-gap: 2px;
+}
+
+.cada-campo {
+    width: 116px;
+    height: 116px;
+    border: 13px outset whitesmoke;
+    transition: all .5s linear;
+}
+
+.cada-campo:hover {
+    cursor: pointer;
+    background-color: rgba(245, 245, 245, 0.157);
+}
+
+#campo-1 {
+    border-top: none;
+    border-left: none;
+}
+
+#campo-2 {
+    border-top: none;
+}
+
+#campo-3 {
+    border-top: none;
+    border-right: none;
+}
+
+#campo-4 {
+    border-left: none;
+}
+
+#campo-6 {
+    border-right: none;
+}
+
+#campo-7 {
+    border-left: none;
+    border-bottom: none;
+}
+
+#campo-8 {
+    border-bottom: none;
+}
+
+#campo-9 {
+    border-right: none;
+    border-bottom: none;
+}
+
+footer {
+    position: relative;
+    height: 60px;
+    width: 100vw;
+    align-self: flex-end;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer span {
+    color: whitesmoke;
+}
+
+footer img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 60px;
+    margin-right: 15px;
 }

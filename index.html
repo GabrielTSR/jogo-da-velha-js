@@ -13,8 +13,38 @@
     <header class="flex-row-centralized">
         <h1 class="flex-row-centralized">Jogo da velha</h1>
     </header>
-    <main class="flex-row-centralized">
+
+    <div id="ranking-container" class="flex-column-centralized">
+        <div id="ranking-modal">
+            <a href="" class="fechar">&#128473;</a>
+            <h2>Ranking:</h2>
+            <table border="10px">
+                <tr>
+                    <td>
+                        <th>Nome:</th>
+                    </td>
+                    <td>
+                        <th>Pontuação:</th>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <th>Marcelinho</th>
+                    </td>
+                    <td>
+                        <th>2</th>
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <main class="flex-column-centralized">
         <section class="campo-config">
+
             <h2>OPÇÕES</h2>
 
             <div class="cada-questao-container">
@@ -43,12 +73,32 @@
             </div>
 
             <div class="button-container flex-row-centralized">
-                <button id="aplicar-alteracoes-config">ALTERAR</button>
+                <button id="aplicar-alteracoes-config">JOGAR</button>
             </div>
 
         </section>
-        <img src="img/tabela.png" alt="">
+
+        <h2>É a vez do jogador 1</h2>
+
+        <div id="jogo-container">
+            <div id="campo-1" class="cada-campo flex-column-centralized"></div>
+            <div id="campo-2" class="cada-campo flex-column-centralized"></div>
+            <div id="campo-3" class="cada-campo flex-column-centralized"></div>
+            <div id="campo-4" class="cada-campo flex-column-centralized"></div>
+            <div id="campo-5" class="cada-campo flex-column-centralized"></div>
+            <div id="campo-6" class="cada-campo flex-column-centralized"></div>
+            <div id="campo-7" class="cada-campo flex-column-centralized"></div>
+            <div id="campo-8" class="cada-campo flex-column-centralized"></div>
+            <div id="campo-9" class="cada-campo flex-column-centralized"></div>
+        </div>
     </main>
+    <footer>
+        <span> Copyright 2021 Gabriel Tavares AND Daniel Wilson</span>;
+
+        <div id="ranking">
+            <a href="#ranking-container"><img src="img/trofeu.png" alt=""></a>
+        </div>
+    </footer>
 </body>
 
 </html>
