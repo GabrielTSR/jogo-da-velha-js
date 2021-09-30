@@ -44,12 +44,12 @@ main {}
 }
 
 header {
-    height: 150px;
+    height: 170px;
     width: 100%;
 }
 
 h1 {
-    background: linear-gradient(87deg, rgb(8, 35, 104) 28%, rgb(7, 1, 126) 66%);
+    background: linear-gradient(87deg, #082368 28%, #07017e 66%);
     font-family: "vermin vibes";
     text-align: center;
     color: whitesmoke;
@@ -145,12 +145,12 @@ h1:hover {
     width: 400px;
     height: 70vh;
     overflow-y: scroll;
-    background: linear-gradient(87deg, rgb(6, 35, 109) 28%, rgb(24, 18, 134) 66%);
+    background: linear-gradient(87deg, #06236d 28%, #181286 66%);
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;
     border: 10px outset whitesmoke;
     color: white;
-    padding: 5px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -178,7 +178,38 @@ h1:hover {
 }
 
 #ranking-modal table {
+    border: none;
+    border-collapse: collapse;
     width: 100%;
+    border-color: black;
+}
+
+#ranking-modal table tr th {
+    background-color: white;
+    color: black;
+}
+
+#ranking-modal table tr th:first-of-type {
+    border: none;
+    background-color: transparent;
+}
+
+#ranking-modal table td {
+    height: 30px;
+    border-top: 1px solid black;
+    border-bottom-right-radius: 1px solid black;
+}
+
+.fonte-amarela {
+    color: #FFD700;
+}
+
+.fonte-cinza {
+    color: #d6d6d6;
+}
+
+.fonte-bronze {
+    color: #cd7f32;
 }
 
 #ranking-modal::-webkit-scrollbar {
@@ -201,7 +232,7 @@ main {
     margin-left: 40px;
     position: absolute;
     left: 0;
-    background: linear-gradient(87deg, rgb(6, 35, 109) 28%, rgb(24, 18, 134) 66%);
+    background: linear-gradient(87deg, #06236d 28%, #181286 66%);
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;
     border: 10px outset whitesmoke;
@@ -255,59 +286,46 @@ main {
 
 #jogo-container {
     width: 360px;
-    height: 360px;
+    height: 348px;
     display: flex;
     flex-wrap: wrap;
-    gap: 4px;
-    row-gap: 2px;
 }
 
 .cada-campo {
     width: 116px;
     height: 116px;
     border: 13px outset whitesmoke;
-    transition: all .5s linear;
+    transition: all .5s ease-out;
 }
 
 .cada-campo:hover {
     cursor: pointer;
-    background-color: rgba(245, 245, 245, 0.157);
+    background-color: #f5f5f528;
 }
 
-#campo-1 {
-    border-top: none;
-    border-left: none;
-}
-
-#campo-2 {
-    border-top: none;
-}
-
+#campo-1,
+#campo-2,
+#campo-3,
 #campo-3 {
     border-top: none;
-    border-right: none;
 }
 
-#campo-4 {
-    border-left: none;
-}
-
-#campo-6 {
-    border-right: none;
-}
-
-#campo-7 {
-    border-left: none;
-    border-bottom: none;
-}
-
-#campo-8 {
-    border-bottom: none;
-}
-
+#campo-3,
+#campo-6,
 #campo-9 {
     border-right: none;
+}
+
+#campo-7,
+#campo-8,
+#campo-9 {
     border-bottom: none;
+}
+
+#campo-1,
+#campo-4,
+#campo-7 {
+    border-left: none;
 }
 
 footer {
