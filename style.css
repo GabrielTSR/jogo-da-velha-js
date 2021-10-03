@@ -13,7 +13,23 @@
 
 :root {}
 
+.modal-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    padding: 30px;
+    background-color: #000A;
+    z-index: 999;
+}
+
 body {
+    z-index: 0;
     padding: 10px;
     background-color: #111111;
     height: 100vh;
@@ -27,7 +43,9 @@ h2 {
     margin-bottom: 20px;
 }
 
-main {}
+main {
+    z-index: 0;
+}
 
 .flex-column-centralized {
     display: flex;
@@ -212,8 +230,18 @@ h1:hover {
     color: #cd7f32;
 }
 
+#ranking-modal::-webkit-scrollbar-track {
+    background-color: #F4F4F4;
+}
+
 #ranking-modal::-webkit-scrollbar {
-    display: none;
+    width: 12px;
+}
+
+#ranking-modal::-webkit-scrollbar-thumb {
+    background: #FFD700;
+    border-radius: 20px;
+    border: 3px solid #9c8500;
 }
 
 h2 {
@@ -226,7 +254,17 @@ main {
     flex: 1;
 }
 
+#config-modal-container {
+    background-color: transparent;
+    z-index: -999;
+}
+
+.campo-config .fechar {
+    display: none;
+}
+
 .campo-config {
+    z-index: 999;
     height: 380px;
     width: 250px;
     margin-left: 40px;
@@ -286,14 +324,15 @@ main {
 
 #jogo-container {
     width: 360px;
-    height: 348px;
+    height: 360px;
     display: flex;
     flex-wrap: wrap;
+    align-content: flex-start;
 }
 
 .cada-campo {
-    width: 116px;
-    height: 116px;
+    width: 33.3333%;
+    height: 33.3333%;
     border: 13px outset whitesmoke;
     transition: all .5s ease-out;
 }
@@ -329,7 +368,7 @@ main {
 }
 
 footer {
-    position: relative;
+    z-index: 1;
     height: 60px;
     width: 100vw;
     align-self: flex-end;
@@ -342,10 +381,19 @@ footer span {
     color: whitesmoke;
 }
 
-footer img {
+#footer-img-container {
+    display: flex;
     position: absolute;
-    top: 0;
+    gap: 20px;
+    bottom: 0;
     right: 0;
-    height: 60px;
     margin-right: 15px;
+}
+
+footer img {
+    height: 60px;
+}
+
+#config-icon {
+    display: none;
 }

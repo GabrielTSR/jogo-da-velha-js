@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsividade.css">
     <title>Jogo da velha</title>
 </head>
 
@@ -14,7 +15,7 @@
         <h1 class="flex-row-centralized">Jogo da velha</h1>
     </header>
 
-    <div id="ranking-container" class="flex-column-centralized">
+    <div id="ranking-container" class="modal-container">
         <div id="ranking-modal">
             <a href="#" class="fechar">&#128473;</a>
             <h2>Ranking:</h2>
@@ -225,40 +226,46 @@
     </div>
 
     <main class="flex-column-centralized">
-        <section class="campo-config">
 
-            <h2>OPÇÕES</h2>
+        <div class="modal-container" id="config-modal-container">
 
-            <div class="cada-questao-container">
-                <label for="quemContraQuem">MODO DE JOGO</label>
-                <select name="quemContraQuemSelect" id="quemContraQuem">
+            <section class="campo-config">
+                <a href="#" class="fechar">&#128473;</a>
+
+                <h2>OPÇÕES</h2>
+
+                <div class="cada-questao-container">
+                    <label for="quemContraQuem">MODO DE JOGO</label>
+                    <select name="quemContraQuemSelect" id="quemContraQuem">
                     <option value="pvp"> Jogador vs Jogador</option>
                     <option value="pvm"> Jogador vs Máquina</option>
                 </select>
-            </div>
+                </div>
 
-            <div class="cada-questao-container">
-                <label for="jogadorPrincipalComeca">JOGADOR 1 SERÁ</label>
-                <select name="jogadorPrincipalComecaSelect" id="jogadorPrincipalComeca">
+                <div class="cada-questao-container">
+                    <label for="jogadorPrincipalComeca">JOGADOR 1 SERÁ</label>
+                    <select name="jogadorPrincipalComecaSelect" id="jogadorPrincipalComeca">
                     <option value="x">x</option>
                     <option value="fantasma">Fantasma</option>
                 </select>
-            </div>
+                </div>
 
-            <div class="cada-questao-container">
-                <label for="dificuldadeMaquinaSelect">DIFICULDADE DA MÁQUINA</label>
-                <select name="dificuldadeMaquinaSelect" id="dificuldadeMaquinaSelect">
+                <div class="cada-questao-container">
+                    <label for="dificuldadeMaquinaSelect">DIFICULDADE DA MÁQUINA</label>
+                    <select name="dificuldadeMaquinaSelect" id="dificuldadeMaquinaSelect">
                     <option value="facil">Fácil</option>
                     <option value="medio">Médio</option>
                     <option value="dificil">Difícil</option>
                 </select>
-            </div>
+                </div>
 
-            <div class="button-container flex-row-centralized">
-                <button id="aplicar-alteracoes-config">JOGAR</button>
-            </div>
+                <div class="button-container flex-row-centralized">
+                    <button id="aplicar-alteracoes-config">JOGAR</button>
+                </div>
 
-        </section>
+            </section>
+
+        </div>
 
         <h2>É a vez do jogador 1</h2>
 
@@ -277,8 +284,9 @@
     <footer>
         <span> Copyright 2021 Gabriel Tavares AND Daniel Wilson</span>;
 
-        <div id="ranking">
-            <a href="#ranking-container"><img src="img/trofeu.png" alt=""></a>
+        <div id="footer-img-container" class="flex-column-centralized">
+            <a id="config-icon" href="#config-modal-container"><img src="img/config-icone.png" alt="configurações"></a>
+            <a href="#ranking-container"><img src="img/trofeu.png" alt="troféu"></a>
         </div>
     </footer>
 </body>

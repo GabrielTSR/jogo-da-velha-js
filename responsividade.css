@@ -1,0 +1,27 @@
+    @media (max-width: 1018px) {
+        #config-modal-container {
+            background-color: #000A;
+            display: none;
+            z-index: 999;
+        }
+        #config-modal-container:target {
+            display: flex;
+        }
+        .campo-config {
+            position: relative
+        }
+        .campo-config .fechar {
+            display: flex;
+        }
+        footer span {
+            width: 60vw;
+            font-size: 0.70rem;
+            text-align: justify;
+        }
+        footer img {
+            height: 40px;
+        }
+        #config-icon {
+            display: flex;
+        }
+    }
