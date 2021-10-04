@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Vermin Vibes';
-    src: url(font/Vermin_Vibes_V.otf);
+    src: url(../font/Vermin_Vibes_V.otf);
     font-weight: bold;
 }
 
@@ -28,23 +28,52 @@
     z-index: 999;
 }
 
+#resultado-container {
+    display: none;
+}
+
+#resultado-modal {
+    justify-content: space-around;
+    padding: 10px;
+    width: auto;
+    max-width: 400px;
+    height: 200px;
+    background: linear-gradient(87deg, #082368 28%, #07017e 66%);
+    background-color: black;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border: 10px outset whitesmoke;
+}
+
+#resultado-modal h2 {
+    text-align: center;
+}
+
+.botao-container {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+}
+
+.botao-container * {
+    flex: 1;
+    text-decoration: none;
+    color: black;
+}
+
 body {
-    z-index: 0;
     padding: 10px;
     background-color: #111111;
     height: 100vh;
     width: 100vw;
-    background-image: url(img/background_pixel.jpg);
+    background-image: url(../img/background_pixel.jpg);
     position: relative;
 }
 
 h2 {
     color: whitesmoke;
     margin-bottom: 20px;
-}
-
-main {
-    z-index: 0;
+    font-weight: lighter;
 }
 
 .flex-column-centralized {
@@ -72,9 +101,11 @@ h1 {
     text-align: center;
     color: whitesmoke;
     font-weight: lighter;
-    font-size: 2.2rem;
+    font-size: 30px;
     width: 420px;
-    height: 90px;
+    height: 100px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;
     border: 10px outset whitesmoke;
@@ -160,7 +191,7 @@ h1:hover {
 
 #ranking-modal {
     position: relative;
-    width: 400px;
+    min-width: 100px;
     height: 70vh;
     overflow-y: scroll;
     background: linear-gradient(87deg, #06236d 28%, #181286 66%);
@@ -213,6 +244,8 @@ h1:hover {
 }
 
 #ranking-modal table td {
+    padding-left: 20px;
+    font-size: 10px;
     height: 30px;
     border-top: 1px solid black;
     border-bottom-right-radius: 1px solid black;
@@ -244,10 +277,6 @@ h1:hover {
     border: 3px solid #9c8500;
 }
 
-h2 {
-    font-weight: lighter;
-}
-
 main {
     width: 100%;
     flex-direction: row;
@@ -259,11 +288,11 @@ main {
     z-index: -999;
 }
 
-.campo-config .fechar {
+#campo-config .fechar {
     display: none;
 }
 
-.campo-config {
+#campo-config {
     z-index: 999;
     height: 380px;
     width: 250px;
@@ -280,23 +309,28 @@ main {
     gap: 20px;
 }
 
-.campo-config * {
+#campo-config * {
     margin: 0px 12.5px 0px 12.5px;
 }
 
-.campo-config .cada-questao-container {
+#campo-config .cada-questao-container {
     display: flex;
     flex-direction: column;
 }
 
-.campo-config .cada-questao-container label {
+#campo-config .cada-questao-container label {
     margin-bottom: 5px;
 }
 
-.campo-config .cada-questao-container select,
-.campo-config .cada-questao-container option {
+#campo-config .cada-questao-container select,
+#campo-config .cada-questao-container option {
     height: 30px;
     font-size: 0.6rem;
+}
+
+#h2-quem-e-a-vez {
+    width: 100%;
+    text-align: center;
 }
 
 .button-container {
@@ -310,12 +344,12 @@ main {
     flex: 1;
 }
 
-.campo-config .cada-questao-container select,
-.button-container button {
+#campo-config .cada-questao-container select,
+button {
     box-shadow: 0 0 10px 0 #23689c inset, 0 0 10px 4px #23689c;
 }
 
-.campo-config .cada-questao-container select:hover,
+#campo-config .cada-questao-container select:hover,
 .button-container button:hover {
     transition: all 0.5s;
     cursor: pointer;
@@ -333,7 +367,7 @@ main {
 .cada-campo {
     width: 33.3333%;
     height: 33.3333%;
-    border: 13px outset whitesmoke;
+    border: 1vw outset whitesmoke;
     transition: all .5s ease-out;
 }
 
@@ -368,7 +402,6 @@ main {
 }
 
 footer {
-    z-index: 1;
     height: 60px;
     width: 100vw;
     align-self: flex-end;
@@ -385,7 +418,7 @@ footer span {
     display: flex;
     position: absolute;
     gap: 20px;
-    bottom: 0;
+    bottom: 10px;
     right: 0;
     margin-right: 15px;
 }

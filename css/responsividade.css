@@ -2,21 +2,35 @@
         #config-modal-container {
             background-color: #000A;
             display: none;
-            z-index: 999;
         }
         #config-modal-container:target {
             display: flex;
+            z-index: 999;
         }
-        .campo-config {
+        #config-modal-container:target::before {
+            background-color: yellow;
+        }
+        #campo-config {
             position: relative
         }
-        .campo-config .fechar {
+        #campo-config .fechar {
             display: flex;
+            right: -10px;
+        }
+        #jogo-container {
+            max-width: 65vh;
+            max-height: 65vh;
+            width: 60vw;
+            height: 60vw;
+        }
+        .cada-campo img {
+            width: 50%;
+            height: 50%;
         }
         footer span {
             width: 60vw;
             font-size: 0.70rem;
-            text-align: justify;
+            text-align: center;
         }
         footer img {
             height: 40px;
