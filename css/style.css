@@ -32,6 +32,10 @@
     display: none;
 }
 
+#resultado-container:target {
+    display: flex;
+}
+
 #resultado-modal {
     justify-content: space-around;
     padding: 10px;
@@ -320,7 +324,7 @@ main {
     font-size: 0.6rem;
 }
 
-#h2-quem-e-a-vez {
+#quemEAVezMensagem {
     width: 100%;
     text-align: center;
 }
