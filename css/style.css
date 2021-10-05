@@ -175,14 +175,6 @@ h1:hover {
 
 #ranking-container {
     display: none;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    padding: 30px;
-    background-color: #000A;
-    z-index: 999;
 }
 
 #ranking-container:target {
@@ -278,14 +270,15 @@ h1:hover {
 }
 
 main {
-    width: 100%;
-    flex-direction: row;
+    width: calc(90% - 450px);
     flex: 1;
 }
 
 #config-modal-container {
+    width: 0%;
     background-color: transparent;
-    z-index: -999;
+    height: 100%;
+    z-index: 1;
 }
 
 #campo-config .fechar {
@@ -293,7 +286,6 @@ main {
 }
 
 #campo-config {
-    z-index: 999;
     height: 380px;
     width: 250px;
     margin-left: 40px;
