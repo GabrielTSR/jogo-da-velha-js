@@ -49,10 +49,6 @@
     border: 10px outset whitesmoke;
 }
 
-#resultado-modal h2 {
-    text-align: center;
-}
-
 .botao-container {
     display: flex;
     width: 100%;
@@ -78,6 +74,7 @@ h2 {
     color: whitesmoke;
     margin-bottom: 20px;
     font-weight: lighter;
+    text-align: center;
 }
 
 .flex-column-centralized {
@@ -114,6 +111,13 @@ h1 {
     border-bottom-right-radius: 20px;
     border: 10px outset whitesmoke;
     transition: all 1s;
+}
+
+h1:hover {
+    -webkit-animation: swing 1s ease;
+    animation: swing 1s ease;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
 }
 
 @-webkit-keyframes swing {
@@ -168,13 +172,6 @@ h1 {
         -webkit-transform: translateX(0);
         transform: translateX(0);
     }
-}
-
-h1:hover {
-    -webkit-animation: swing 1s ease;
-    animation: swing 1s ease;
-    -webkit-animation-iteration-count: 1;
-    animation-iteration-count: 1;
 }
 
 #ranking-container {
@@ -350,6 +347,10 @@ button {
     transition: all 0.5s;
     cursor: pointer;
     box-shadow: 0 0 10px 0 #31adff inset, 0 0 10px 4px #31adff;
+}
+
+#quem-e-a-vez-mensagem {
+    height: 50px;
 }
 
 #jogo-container {

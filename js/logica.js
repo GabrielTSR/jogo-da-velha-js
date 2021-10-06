@@ -2,6 +2,9 @@
 
 //**Pegar os elementos**/
 const cadaCampo = document.querySelector(".cada-campo")
+
+var vencedorDaParida = 0 //entre 0, 'x', e 'fantasma'
+
 var matrizJogo = [
         0, 0, 0,
         0, 0, 0,
@@ -50,23 +53,8 @@ function verSeFantasmaGanhou() {
     }
 }
 
-function verificarSeHaVitoria() {
-    if (verSeXGanhou() || verSeFantasmaGanhou()) {
-        let vencedor = 0
-        if (verSeXGanhou()) {
-            vencedor = 'x'
-        } else if (verSeFantasmaGanhou()) {
-            vencedor = 'fantasma'
-        }
-
-        const textoVencedor = document.getElementById("quem-venceu")
-        textoVencedor.innerText = `${vencedor} venceu!`
-        window.location.replace('#resultado-container')
-
-    } else {
-        return false
-    }
-
+function checarSeHaVencedor() {
+    verSeXGanhou() ? vencedorDaParida = 'x' : verSeFantasmaGanhou() ? vencedorDaParida = 'fantasma' : false
 }
 
 function indicarDeQuemEAVez(simboloVezDe) {
@@ -75,18 +63,31 @@ function indicarDeQuemEAVez(simboloVezDe) {
 
 }
 
+function exibirVencedor() {
+    if (vencedorDaParida !== 0) {
+        const textoVencedor = document.getElementById("quem-venceu")
+        textoVencedor.innerText = `"${vencedorDaParida}" venceu!`
+        window.location.replace('#resultado-container')
+    }
+}
+
 function inserirOpcao(campo, indice) {
     const campoSelecionado = document.getElementById(campo)
 
     let simbolo
     let simboloVezDe
 
-    if (eJogadorInicial && campoEstaVazio(campoSelecionado)) {
+    if (eJogadorInicial &&
+        campoEstaVazio(campoSelecionado) &&
+        vencedorDaParida === 0) {
         simbolo = 'x'
         simboloVezDe = 'fantasma'
         eJogadorInicial = false
 
-    } else if (!eJogadorInicial && campoEstaVazio(campoSelecionado)) {
+    } else if (!eJogadorInicial &&
+        campoEstaVazio(campoSelecionado) &&
+        vencedorDaParida === 0) {
+
         simbolo = 'fantasma'
         simboloVezDe = 'x'
         inserirElemento(campoSelecionado, simbolo)
@@ -100,5 +101,6 @@ function inserirOpcao(campo, indice) {
     inserirElemento(campoSelecionado, simbolo)
     atualizarMatriz(indice, simbolo)
     indicarDeQuemEAVez(simboloVezDe)
-    console.log(verificarSeHaVitoria())
+    checarSeHaVencedor()
+    exibirVencedor()
 }
