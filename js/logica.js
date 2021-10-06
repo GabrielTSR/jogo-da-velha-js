@@ -1,7 +1,11 @@
 "use strict"
 
-//**Pegar os elementos**/
-const cadaCampo = document.querySelector(".cada-campo")
+/*Declarando variáveis globais*/
+var modoDeJogo = document.getElementById("quemContraQuem").value
+
+var jogador1Sera = document.getElementById("jogadorPrincipalComeca").value
+
+var dificuldadeDaMaquina = document.getElementById("dificuldadeMaquinaSelect").value
 
 var vencedorDaParida = 0 //entre 0, 'x', e 'fantasma'
 
@@ -12,6 +16,45 @@ var matrizJogo = [
     ] //0 = vazio
 
 var eJogadorInicial = true //true para primeiro jogador, false para segundo jogador
+
+const resetarCadaCampo = (cadaCampo, i) => cadaCampo[i].innerHTML = ''
+
+function aplicarAlteracoesConfig() {
+    modoDeJogo = document.getElementById("quemContraQuem").value
+    jogador1Sera = document.getElementById("jogadorPrincipalComeca").value
+    dificuldadeDaMaquina = document.getElementById("dificuldadeMaquinaSelect").value
+
+    resetarJogo()
+}
+
+function limparTabuleiro() {
+    const cadaCampo = document.getElementsByClassName("cada-campo")
+    for (var i = cadaCampo.length - 1; i >= 0; i--) {
+        resetarCadaCampo(cadaCampo, i)
+    }
+}
+
+const resetarMatrizJogo = () => matrizJogo = [
+    0, 0, 0,
+    0, 0, 0,
+    0, 0, 0
+]
+
+const fecharModal = () => window.location.replace('#')
+
+function resetarJogo() {
+
+    resetarMatrizJogo()
+
+    vencedorDaParida = 0
+
+    eJogadorInicial = true
+
+    limparTabuleiro()
+
+    fecharModal()
+
+}
 
 const campoEstaVazio = (campoSelecionado) => campoSelecionado.children.length == 0
 
@@ -72,8 +115,8 @@ function exibirVencedor() {
 }
 
 function inserirOpcao(campo, indice) {
-    const campoSelecionado = document.getElementById(campo)
 
+    const campoSelecionado = document.getElementById(campo)
     let simbolo
     let simboloVezDe
 

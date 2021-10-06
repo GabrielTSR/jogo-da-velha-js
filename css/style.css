@@ -337,6 +337,10 @@ main {
     flex: 1;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 #campo-config .cada-questao-container select,
 button {
     box-shadow: 0 0 10px 0 #23689c inset, 0 0 10px 4px #23689c;
@@ -345,7 +349,6 @@ button {
 #campo-config .cada-questao-container select:hover,
 .button-container button:hover {
     transition: all 0.5s;
-    cursor: pointer;
     box-shadow: 0 0 10px 0 #31adff inset, 0 0 10px 4px #31adff;
 }
 
