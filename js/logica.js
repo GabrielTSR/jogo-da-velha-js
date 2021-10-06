@@ -51,14 +51,22 @@ function verSeFantasmaGanhou() {
 }
 
 function verificarSeHaVitoria() {
+    if (verSeXGanhou() || verSeFantasmaGanhou()) {
+        let vencedor = 0
+        if (verSeXGanhou()) {
+            vencedor = 'x'
+        } else if (verSeFantasmaGanhou()) {
+            vencedor = 'fantasma'
+        }
 
-    if (verSeXGanhou()) {
-        return window.location.replace('#resultado-container')
-    } else if (verSeFantasmaGanhou()) {
-        return 'fantasma'
+        const textoVencedor = document.getElementById("quem-venceu")
+        textoVencedor.innerText = `${vencedor} venceu!`
+        window.location.replace('#resultado-container')
+
     } else {
         return false
     }
+
 }
 
 function indicarDeQuemEAVez(simboloVezDe) {
