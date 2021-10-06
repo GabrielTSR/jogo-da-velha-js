@@ -1,0 +1,46 @@
+    @media (max-width: 1018px) {
+        main {
+            width: 100%;
+        }
+        #config-modal-container {
+            background-color: #000A;
+            width: 100%;
+            height: 100%;
+            z-index: 999;
+            display: none;
+        }
+        #config-modal-container:target {
+            display: flex;
+        }
+        #config-modal-container:target::before {
+            background-color: yellow;
+        }
+        #campo-config {
+            position: relative
+        }
+        #campo-config .fechar {
+            display: flex;
+            right: -10px;
+        }
+        #jogo-container {
+            max-width: 65vh;
+            max-height: 65vh;
+            width: 60vw;
+            height: 60vw;
+        }
+        .cada-campo img {
+            width: 50%;
+            height: 50%;
+        }
+        footer span {
+            width: 60vw;
+            font-size: 0.70rem;
+            text-align: center;
+        }
+        footer img {
+            height: 40px;
+        }
+        #config-icon {
+            display: flex;
+        }
+    }
