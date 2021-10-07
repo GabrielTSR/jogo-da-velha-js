@@ -7,13 +7,15 @@ var jogador1Sera = document.getElementById("jogadorPrincipalComeca").value
 
 var dificuldadeDaMaquina = document.getElementById("dificuldadeMaquinaSelect").value
 
-var vencedorDaParida = 0 //entre 0, 'x', e 'fantasma'
+var vencedorDaPartida = 0 //entre 0, 'x', e 'fantasma'
 
 var matrizJogo = [
         0, 0, 0,
         0, 0, 0,
         0, 0, 0
     ] //0 = vazio
+
+var totalCamposPreenchidos
 
 var eJogadorInicial = true //true para primeiro jogador, false para segundo jogador
 
@@ -46,7 +48,7 @@ function resetarJogo() {
 
     resetarMatrizJogo()
 
-    vencedorDaParida = 0
+    vencedorDaPartida = 0
 
     eJogadorInicial = true
 
@@ -62,16 +64,16 @@ const inserirElemento = (campoSelecionado, elementoInserido) => campoSelecionado
 
 const atualizarMatriz = (indice, simbolo) => matrizJogo[indice] = simbolo
 
-function verSeXGanhou() {
+function verSeGanhou(simboloJogador) {
     if (
-        matrizJogo[0] === 'x' && matrizJogo[3] === 'x' && matrizJogo[6] === 'x' ||
-        matrizJogo[1] === 'x' && matrizJogo[4] === 'x' && matrizJogo[7] === 'x' ||
-        matrizJogo[2] === 'x' && matrizJogo[5] === 'x' && matrizJogo[8] === 'x' ||
-        matrizJogo[2] === 'x' && matrizJogo[4] === 'x' && matrizJogo[6] === 'x' ||
-        matrizJogo[0] === 'x' && matrizJogo[4] === 'x' && matrizJogo[8] === 'x' ||
-        matrizJogo[0] === 'x' && matrizJogo[1] === 'x' && matrizJogo[2] === 'x' ||
-        matrizJogo[3] === 'x' && matrizJogo[4] === 'x' && matrizJogo[5] === 'x' ||
-        matrizJogo[6] === 'x' && matrizJogo[7] === 'x' && matrizJogo[8] === 'x'
+        matrizJogo[0] === simboloJogador && matrizJogo[3] === simboloJogador && matrizJogo[6] === simboloJogador ||
+        matrizJogo[1] === simboloJogador && matrizJogo[4] === simboloJogador && matrizJogo[7] === simboloJogador ||
+        matrizJogo[2] === simboloJogador && matrizJogo[5] === simboloJogador && matrizJogo[8] === simboloJogador ||
+        matrizJogo[2] === simboloJogador && matrizJogo[4] === simboloJogador && matrizJogo[6] === simboloJogador ||
+        matrizJogo[0] === simboloJogador && matrizJogo[4] === simboloJogador && matrizJogo[8] === simboloJogador ||
+        matrizJogo[0] === simboloJogador && matrizJogo[1] === simboloJogador && matrizJogo[2] === simboloJogador ||
+        matrizJogo[3] === simboloJogador && matrizJogo[4] === simboloJogador && matrizJogo[5] === simboloJogador ||
+        matrizJogo[6] === simboloJogador && matrizJogo[7] === simboloJogador && matrizJogo[8] === simboloJogador
     ) {
         return true
     } else {
@@ -79,25 +81,19 @@ function verSeXGanhou() {
     }
 }
 
-function verSeFantasmaGanhou() {
-    if (
-        matrizJogo[0] === 'fantasma' && matrizJogo[3] === 'fantasma' && matrizJogo[6] === 'fantasma' ||
-        matrizJogo[1] === 'fantasma' && matrizJogo[4] === 'fantasma' && matrizJogo[7] === 'fantasma' ||
-        matrizJogo[2] === 'fantasma' && matrizJogo[5] === 'fantasma' && matrizJogo[8] === 'fantasma' ||
-        matrizJogo[2] === 'fantasma' && matrizJogo[4] === 'fantasma' && matrizJogo[6] === 'fantasma' ||
-        matrizJogo[0] === 'fantasma' && matrizJogo[4] === 'fantasma' && matrizJogo[8] === 'fantasma' ||
-        matrizJogo[0] === 'fantasma' && matrizJogo[1] === 'fantasma' && matrizJogo[2] === 'fantasma' ||
-        matrizJogo[3] === 'fantasma' && matrizJogo[4] === 'fantasma' && matrizJogo[5] === 'fantasma' ||
-        matrizJogo[6] === 'fantasma' && matrizJogo[7] === 'fantasma' && matrizJogo[8] === 'fantasma'
-    ) {
-        return true
-    } else {
-        return false
-    }
+function encontrouCampoVazio(cadaCampo) {
+    cadaCampo !== 0 ? totalCamposPreenchidos += 1 : false
 }
 
-function checarSeHaVencedor() {
-    verSeXGanhou() ? vencedorDaParida = 'x' : verSeFantasmaGanhou() ? vencedorDaParida = 'fantasma' : false
+function verSeEmpatou() {
+    totalCamposPreenchidos = 0
+    matrizJogo.forEach(encontrouCampoVazio);
+    return totalCamposPreenchidos === 9 ? true : false
+}
+
+function checarSeOJogoAcabou() {
+
+    vencedorDaPartida = verSeGanhou('x') ? 'x' : verSeGanhou('fantasma') ? 'fantasma' : verSeEmpatou() ? 'empate' : 0
 }
 
 function indicarDeQuemEAVez(simboloVezDe) {
@@ -106,10 +102,20 @@ function indicarDeQuemEAVez(simboloVezDe) {
 
 }
 
-function exibirVencedor() {
-    if (vencedorDaParida !== 0) {
-        const textoVencedor = document.getElementById("quem-venceu")
-        textoVencedor.innerText = `"${vencedorDaParida}" venceu!`
+const exibirVencedor = (tagDaMensagem) => tagDaMensagem.innerText = `"${vencedorDaPartida}" venceu!`
+
+const divulgarEmpate = (tagDaDivulgacao) => tagDaDivulgacao.innerText = `Ops! deu ${vencedorDaPartida}!`
+
+function exibirResultado() {
+    if (vencedorDaPartida !== 0) {
+        const tagDaDivulgacao = document.getElementById("quem-venceu")
+
+        if (vencedorDaPartida === 'empate') {
+            divulgarEmpate(tagDaDivulgacao)
+        } else {
+            exibirVencedor(tagDaDivulgacao)
+        }
+
         window.location.replace('#resultado-container')
     }
 }
@@ -122,14 +128,14 @@ function inserirOpcao(campo, indice) {
 
     if (eJogadorInicial &&
         campoEstaVazio(campoSelecionado) &&
-        vencedorDaParida === 0) {
+        vencedorDaPartida === 0) {
         simbolo = 'x'
         simboloVezDe = 'fantasma'
         eJogadorInicial = false
 
     } else if (!eJogadorInicial &&
         campoEstaVazio(campoSelecionado) &&
-        vencedorDaParida === 0) {
+        vencedorDaPartida === 0) {
 
         simbolo = 'fantasma'
         simboloVezDe = 'x'
@@ -144,6 +150,6 @@ function inserirOpcao(campo, indice) {
     inserirElemento(campoSelecionado, simbolo)
     atualizarMatriz(indice, simbolo)
     indicarDeQuemEAVez(simboloVezDe)
-    checarSeHaVencedor()
-    exibirVencedor()
+    checarSeOJogoAcabou()
+    exibirResultado()
 }
