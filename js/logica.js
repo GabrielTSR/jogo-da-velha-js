@@ -104,7 +104,7 @@ function indicarDeQuemEAVez(simboloVezDe) {
 
 const exibirVencedor = (tagDaMensagem) => tagDaMensagem.innerText = `"${vencedorDaPartida}" venceu!`
 
-const divulgarEmpate = (tagDaDivulgacao) => tagDaDivulgacao.innerText = `Ops! deu ${vencedorDaPartida}!`
+const divulgarEmpate = (tagDaDivulgacao) => tagDaDivulgacao.innerText = `O jogo está empatado!`
 
 function exibirResultado() {
     if (vencedorDaPartida !== 0) {
@@ -129,6 +129,7 @@ function inserirOpcao(campo, indice) {
     if (eJogadorInicial &&
         campoEstaVazio(campoSelecionado) &&
         vencedorDaPartida === 0) {
+
         simbolo = 'x'
         simboloVezDe = 'fantasma'
         eJogadorInicial = false
@@ -139,11 +140,10 @@ function inserirOpcao(campo, indice) {
 
         simbolo = 'fantasma'
         simboloVezDe = 'x'
-        inserirElemento(campoSelecionado, simbolo)
-        atualizarMatriz(indice, simbolo)
         eJogadorInicial = true
-        indicarDeQuemEAVez(simboloVezDe)
+
     } else {
+        exibirResultado()
         return false
     }
 
