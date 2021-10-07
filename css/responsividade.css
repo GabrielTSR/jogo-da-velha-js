@@ -20,7 +20,7 @@
         }
         #campo-config .fechar {
             display: flex;
-            right: -12px;
+            right: -12.5px;
         }
         #jogo-container {
             max-width: 65vh;
