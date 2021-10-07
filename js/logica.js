@@ -93,10 +93,10 @@ function verSeEmpatou() {
 
 function checarSeOJogoAcabou() {
 
-    vencedorDaPartida = verSeGanhou('x') ? 'x' : verSeGanhou('fantasma') ? 'fantasma' : verSeEmpatou() ? 'empate' : 0
+    return vencedorDaPartida = verSeGanhou('x') ? 'x' : verSeGanhou('fantasma') ? 'fantasma' : verSeEmpatou() ? 'empate' : 0
 }
 
-function indicarDeQuemEAVez(simboloVezDe) {
+function passarAVez(simboloVezDe) {
     const h2EAVezDe = document.getElementById("quem-e-a-vez-mensagem")
     h2EAVezDe.innerText = `É a vez de "${simboloVezDe}"`
 
@@ -149,7 +149,7 @@ function inserirOpcao(campo, indice) {
 
     inserirElemento(campoSelecionado, simbolo)
     atualizarMatriz(indice, simbolo)
-    indicarDeQuemEAVez(simboloVezDe)
+    passarAVez(simboloVezDe)
     checarSeOJogoAcabou()
     exibirResultado()
 }
