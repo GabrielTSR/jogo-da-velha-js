@@ -35,7 +35,7 @@ var matrizJogo = [
 var camposVagos = [
     campo1, campo2, campo3,
     campo4, campo5, campo6,
-    campo7, campo8, campo9,
+    campo7, campo8, campo9
 ]
 
 var eJogadorInicial = true //true para primeiro jogador, false para segundo jogador
@@ -70,6 +70,12 @@ const resetarMatrizJogo = () => matrizJogo = [
     0, 0, 0
 ]
 
+const resetarCamposVagos = () => camposVagos = [
+    campo1, campo2, campo3,
+    campo4, campo5, campo6,
+    campo7, campo8, campo9
+]
+
 const fecharModal = () => window.location.replace('#')
 
 function resetarJogo() {
@@ -79,6 +85,8 @@ function resetarJogo() {
     h2EAVezDe.innerHTML = 'É a vez de <br>"X"'
 
     resetarMatrizJogo()
+
+    resetarCamposVagos()
 
     vencedorDaPartida = 0
 
@@ -149,37 +157,91 @@ function exibirResultado() {
     }
 }
 
-function inserirOpcao(campo, indice) {
+function resgatarindexDoCampoEmMatrizJogo(campo) {
+    switch (campo.id) {
+
+        case 'campo-1':
+            return 0
+
+        case 'campo-2':
+            return 1
+
+
+        case 'campo-3':
+            return 2
+
+        case 'campo-4':
+            return 3
+
+        case 'campo-5':
+            return 4
+
+        case 'campo-6':
+            return 5
+
+        case 'campo-7':
+            return 6
+
+        case 'campo-8':
+            return 7
+
+        case 'campo-9':
+            return 8
+
+        default:
+            return false
+    }
+}
+
+function aplicarJogada(campoSelecionado, indice, simbolo, proximoSimbolo) {
+    inserirElemento(campoSelecionado, simbolo)
+    atualizarMatrizJogo(indice, simbolo)
+    atualizarCamposVagos()
+    eJogadorInicial = !eJogadorInicial
+    passarAVez(proximoSimbolo)
+    checarSeOJogoAcabou()
+    exibirResultado()
+}
+
+function aplicarJogadaDaMaquina(proximoSimbolo, simbolo) {
+    let campoSelecionado
+
+    if (dificuldadeDaMaquina === 'facil') {
+        const jogada = Math.floor(Math.random() * camposVagos.length)
+        campoSelecionado = camposVagos[jogada]
+    }
+    const indexDoCampo = resgatarindexDoCampoEmMatrizJogo(campoSelecionado)
+    aplicarJogada(campoSelecionado, indexDoCampo, simbolo, proximoSimbolo, eJogadorInicial)
+}
+
+const modoDeJogoEJogadorVersusMaquina = () => modoDeJogo === 'jvsm'
+
+
+function aplicarJogadaDoJogador(campo, indiceCampoSelecionado) {
 
     let simbolo
-    let simboloVezDe
+    let proximoSimbolo
     const campoSelecionado = document.getElementById(campo)
 
-    if (eJogadorInicial &&
-        campoEstaVazio(campoSelecionado) &&
+    if (campoEstaVazio(campoSelecionado) &&
         vencedorDaPartida === 0) {
 
-        simbolo = 'x'
-        simboloVezDe = 'fantasma'
-        eJogadorInicial = false
+        if (eJogadorInicial) {
 
-    } else if (!eJogadorInicial &&
-        campoEstaVazio(campoSelecionado) &&
-        vencedorDaPartida === 0) {
+            simbolo = 'x'
+            proximoSimbolo = 'fantasma'
 
-        simbolo = 'fantasma'
-        simboloVezDe = 'x'
-        eJogadorInicial = true
+        } else if (!eJogadorInicial) {
 
+            simbolo = 'fantasma'
+            proximoSimbolo = 'x'
+
+        }
+        aplicarJogada(campoSelecionado, indiceCampoSelecionado, simbolo, proximoSimbolo)
+
+        modoDeJogoEJogadorVersusMaquina() ? aplicarJogadaDaMaquina(simbolo, proximoSimbolo) : false
     } else {
         exibirResultado()
         return false
     }
-
-    inserirElemento(campoSelecionado, simbolo)
-    atualizarMatrizJogo(indice, simbolo)
-    atualizarCamposVagos()
-    passarAVez(simboloVezDe)
-    checarSeOJogoAcabou()
-    exibirResultado()
 }
