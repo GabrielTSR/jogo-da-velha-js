@@ -1,6 +1,23 @@
 "use strict"
 
+const cadaCampo = document.getElementsByClassName("cada-campo")
+
+const tagDaDivulgacao = document.getElementById("quem-venceu")
+
+const h2EAVezDe = document.getElementById("quem-e-a-vez-mensagem")
+
+const campo1 = document.getElementById("campo-1")
+const campo2 = document.getElementById("campo-2")
+const campo3 = document.getElementById("campo-3")
+const campo4 = document.getElementById("campo-4")
+const campo5 = document.getElementById("campo-5")
+const campo6 = document.getElementById("campo-6")
+const campo7 = document.getElementById("campo-7")
+const campo8 = document.getElementById("campo-8")
+const campo9 = document.getElementById("campo-9")
+
 /*Declarando variáveis globais*/
+
 var modoDeJogo = document.getElementById("quemContraQuem").value
 
 var jogador1Sera = document.getElementById("jogadorPrincipalComeca").value
@@ -15,9 +32,21 @@ var matrizJogo = [
         0, 0, 0
     ] //0 = vazio
 
-var totalCamposPreenchidos
+var camposVagos = [
+    campo1, campo2, campo3,
+    campo4, campo5, campo6,
+    campo7, campo8, campo9,
+]
 
 var eJogadorInicial = true //true para primeiro jogador, false para segundo jogador
+
+function retornarCamposVazios(campo) {
+    if (campoEstaVazio(campo)) {
+        return campo
+    }
+}
+
+const atualizarCamposVagos = () => camposVagos = camposVagos.filter(retornarCamposVazios)
 
 const resetarCadaCampo = (cadaCampo, i) => cadaCampo[i].innerHTML = ''
 
@@ -30,7 +59,6 @@ function aplicarAlteracoesConfig() {
 }
 
 function limparTabuleiro() {
-    const cadaCampo = document.getElementsByClassName("cada-campo")
     for (var i = cadaCampo.length - 1; i >= 0; i--) {
         resetarCadaCampo(cadaCampo, i)
     }
@@ -45,6 +73,10 @@ const resetarMatrizJogo = () => matrizJogo = [
 const fecharModal = () => window.location.replace('#')
 
 function resetarJogo() {
+
+    tagDaDivulgacao.innerText = 'Jogo inacabado'
+
+    h2EAVezDe.innerHTML = 'É a vez de <br>"X"'
 
     resetarMatrizJogo()
 
@@ -62,7 +94,7 @@ const campoEstaVazio = (campoSelecionado) => campoSelecionado.children.length ==
 
 const inserirElemento = (campoSelecionado, elementoInserido) => campoSelecionado.innerHTML = `<img src="./img/${elementoInserido}.png" alt="${elementoInserido}">`
 
-const atualizarMatriz = (indice, simbolo) => matrizJogo[indice] = simbolo
+const atualizarMatrizJogo = (indice, simbolo) => matrizJogo[indice] = simbolo
 
 function verSeGanhou(simboloJogador) {
     if (
@@ -81,14 +113,8 @@ function verSeGanhou(simboloJogador) {
     }
 }
 
-function encontrouCampoVazio(cadaCampo) {
-    cadaCampo !== 0 ? totalCamposPreenchidos += 1 : false
-}
-
 function verSeEmpatou() {
-    totalCamposPreenchidos = 0
-    matrizJogo.forEach(encontrouCampoVazio);
-    return totalCamposPreenchidos === 9 ? true : false
+    return camposVagos.length === 0 ? true : false
 }
 
 function checarSeOJogoAcabou() {
@@ -96,19 +122,22 @@ function checarSeOJogoAcabou() {
     return vencedorDaPartida = verSeGanhou('x') ? 'x' : verSeGanhou('fantasma') ? 'fantasma' : verSeEmpatou() ? 'empate' : 0
 }
 
-function passarAVez(simboloVezDe) {
-    const h2EAVezDe = document.getElementById("quem-e-a-vez-mensagem")
-    h2EAVezDe.innerText = `É a vez de "${simboloVezDe}"`
+const passarAVez = (simboloVezDe) => h2EAVezDe.innerHTML = `É a vez de <br>"${simboloVezDe}"`
 
+const exibirVencedor = (tagDaMensagem) => {
+    const mensagem = `"${vencedorDaPartida}" venceu!`
+    tagDaMensagem.innerText = mensagem
+    h2EAVezDe.innerText = mensagem
 }
 
-const exibirVencedor = (tagDaMensagem) => tagDaMensagem.innerText = `"${vencedorDaPartida}" venceu!`
-
-const divulgarEmpate = (tagDaDivulgacao) => tagDaDivulgacao.innerText = `O jogo está empatado!`
+const divulgarEmpate = (tagDaDivulgacao) => {
+    const mensagem = `O jogo está empatado!`
+    tagDaDivulgacao.innerText = mensagem
+    h2EAVezDe.innerText = mensagem
+}
 
 function exibirResultado() {
     if (vencedorDaPartida !== 0) {
-        const tagDaDivulgacao = document.getElementById("quem-venceu")
 
         if (vencedorDaPartida === 'empate') {
             divulgarEmpate(tagDaDivulgacao)
@@ -122,9 +151,9 @@ function exibirResultado() {
 
 function inserirOpcao(campo, indice) {
 
-    const campoSelecionado = document.getElementById(campo)
     let simbolo
     let simboloVezDe
+    const campoSelecionado = document.getElementById(campo)
 
     if (eJogadorInicial &&
         campoEstaVazio(campoSelecionado) &&
@@ -148,7 +177,8 @@ function inserirOpcao(campo, indice) {
     }
 
     inserirElemento(campoSelecionado, simbolo)
-    atualizarMatriz(indice, simbolo)
+    atualizarMatrizJogo(indice, simbolo)
+    atualizarCamposVagos()
     passarAVez(simboloVezDe)
     checarSeOJogoAcabou()
     exibirResultado()
