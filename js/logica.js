@@ -16,11 +16,9 @@ const campo7 = document.getElementById("campo-7")
 const campo8 = document.getElementById("campo-8")
 const campo9 = document.getElementById("campo-9")
 
-/*Declarando variáveis globais*/
-
 var modoDeJogo = document.getElementById("quemContraQuem").value
 
-var jogador1Sera = document.getElementById("jogadorPrincipalComeca").value
+var xSera = document.getElementById("xSera").value
 
 var dificuldadeDaMaquina = document.getElementById("dificuldadeMaquinaSelect").value
 
@@ -38,7 +36,7 @@ var camposVagos = [
     campo7, campo8, campo9
 ]
 
-var eJogadorInicial = true //true para primeiro jogador, false para segundo jogador
+var eX = true //true para primeiro jogador, false para segundo jogador
 
 function retornarCamposVazios(campo) {
     if (campoEstaVazio(campo)) {
@@ -52,7 +50,7 @@ const resetarCadaCampo = (cadaCampo, i) => cadaCampo[i].innerHTML = ''
 
 function aplicarAlteracoesConfig() {
     modoDeJogo = document.getElementById("quemContraQuem").value
-    jogador1Sera = document.getElementById("jogadorPrincipalComeca").value
+    xSera = document.getElementById("xSera").value
     dificuldadeDaMaquina = document.getElementById("dificuldadeMaquinaSelect").value
 
     resetarJogo()
@@ -78,6 +76,14 @@ const resetarCamposVagos = () => camposVagos = [
 
 const fecharModal = () => window.location.replace('#')
 
+const maquinaComeca = () => xSera === 'outro'
+
+function aplicarPrimeiraJogadaMaquina() {
+
+    aplicarJogadaDaMaquina('fantasma', 'x')
+
+}
+
 function resetarJogo() {
 
     tagDaDivulgacao.innerText = 'Jogo inacabado'
@@ -90,11 +96,13 @@ function resetarJogo() {
 
     vencedorDaPartida = 0
 
-    eJogadorInicial = true
+    eX = true
 
     limparTabuleiro()
 
     fecharModal()
+
+    maquinaComeca() && maquinaPodeJogar() ? aplicarPrimeiraJogadaMaquina() : false
 
 }
 
@@ -197,7 +205,7 @@ function aplicarJogada(campoSelecionado, indice, simbolo, proximoSimbolo) {
     inserirElemento(campoSelecionado, simbolo)
     atualizarMatrizJogo(indice, simbolo)
     atualizarCamposVagos()
-    eJogadorInicial = !eJogadorInicial
+    eX = !eX
     passarAVez(proximoSimbolo)
     checarSeOJogoAcabou()
     exibirResultado()
@@ -211,10 +219,10 @@ function aplicarJogadaDaMaquina(proximoSimbolo, simbolo) {
         campoSelecionado = camposVagos[jogada]
     }
     const indexDoCampo = resgatarindexDoCampoEmMatrizJogo(campoSelecionado)
-    aplicarJogada(campoSelecionado, indexDoCampo, simbolo, proximoSimbolo, eJogadorInicial)
+    aplicarJogada(campoSelecionado, indexDoCampo, simbolo, proximoSimbolo, eX)
 }
 
-const modoDeJogoEJogadorVersusMaquina = () => modoDeJogo === 'jvsm'
+const maquinaPodeJogar = () => modoDeJogo === 'jvsm' && checarSeOJogoAcabou() === 0
 
 
 function aplicarJogadaDoJogador(campo, indiceCampoSelecionado) {
@@ -226,20 +234,21 @@ function aplicarJogadaDoJogador(campo, indiceCampoSelecionado) {
     if (campoEstaVazio(campoSelecionado) &&
         vencedorDaPartida === 0) {
 
-        if (eJogadorInicial) {
+        if (eX) {
 
             simbolo = 'x'
             proximoSimbolo = 'fantasma'
 
-        } else if (!eJogadorInicial) {
+        } else if (!eX) {
 
             simbolo = 'fantasma'
             proximoSimbolo = 'x'
 
         }
+
         aplicarJogada(campoSelecionado, indiceCampoSelecionado, simbolo, proximoSimbolo)
 
-        modoDeJogoEJogadorVersusMaquina() ? aplicarJogadaDaMaquina(simbolo, proximoSimbolo) : false
+        maquinaPodeJogar() ? aplicarJogadaDaMaquina(simbolo, proximoSimbolo) : false
     } else {
         exibirResultado()
         return false
