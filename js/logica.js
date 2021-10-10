@@ -4,7 +4,7 @@ const cadaCampo = document.getElementsByClassName("cada-campo")
 
 const tagDaDivulgacao = document.getElementById("quem-venceu")
 
-const h2EAVezDe = document.getElementById("quem-e-a-vez-mensagem")
+const EAVezDe = document.getElementById("quem-e-a-vez-mensagem")
 
 const campo1 = document.getElementById("campo-1")
 const campo2 = document.getElementById("campo-2")
@@ -88,7 +88,7 @@ function resetarJogo() {
 
     tagDaDivulgacao.innerText = 'Jogo inacabado'
 
-    h2EAVezDe.innerHTML = 'É a vez de <br>"X"'
+    EAVezDe.innerHTML = 'É a vez de <br>"X"'
 
     resetarMatrizJogo()
 
@@ -138,30 +138,26 @@ function checarSeOJogoAcabou() {
     return vencedorDaPartida = verSeGanhou('x') ? 'x' : verSeGanhou('fantasma') ? 'fantasma' : verSeEmpatou() ? 'empate' : 0
 }
 
-const passarAVez = (simboloVezDe) => h2EAVezDe.innerHTML = `É a vez de <br>"${simboloVezDe}"`
+const passarAVez = (simboloVezDe) => EAVezDe.innerHTML = `É a vez de <br>"${simboloVezDe}"`
 
-const exibirVencedor = (tagDaMensagem) => {
-    const mensagem = `"${vencedorDaPartida}" venceu!`
-    tagDaMensagem.innerText = mensagem
-    h2EAVezDe.innerText = mensagem
-}
-
-const divulgarEmpate = (tagDaDivulgacao) => {
-    const mensagem = `O jogo está empatado!`
+const escreverResultado = (mensagem) => {
     tagDaDivulgacao.innerText = mensagem
-    h2EAVezDe.innerText = mensagem
+    EAVezDe.innerText = mensagem
 }
+
+const abrirModalResultado = () => window.location.replace('#resultado-container')
 
 function exibirResultado() {
+    let mensagem
     if (vencedorDaPartida !== 0) {
 
         if (vencedorDaPartida === 'empate') {
-            divulgarEmpate(tagDaDivulgacao)
+            mensagem = `O jogo está empatado!`
         } else {
-            exibirVencedor(tagDaDivulgacao)
+            mensagem = `"${vencedorDaPartida}" venceu!`
         }
-
-        window.location.replace('#resultado-container')
+        escreverResultado(mensagem)
+        abrirModalResultado()
     }
 }
 
