@@ -16,11 +16,13 @@ const campo7 = document.getElementById("campo-7")
 const campo8 = document.getElementById("campo-8")
 const campo9 = document.getElementById("campo-9")
 
-var modoDeJogo = document.getElementById("quemContraQuem").value
+var modosDeJogo = document.getElementById("quemContraQuem")
+var modoDeJogoSelecionado = modosDeJogo.value
 
 var xSera = document.getElementById("xSera").value
 
-var dificuldadeDaMaquina = document.getElementById("dificuldadeMaquinaSelect").value
+var dificuldadeDaMaquina = document.getElementById("dificuldadeMaquina")
+var dificuldadeDaMaquinaSelecionada = dificuldadeDaMaquina.value
 
 var vencedorDaPartida = 0 //entre 0, 'x', e 'fantasma'
 
@@ -36,7 +38,31 @@ var camposVagos = [
     campo7, campo8, campo9
 ]
 
+var possibilidadesVitoria = [
+    [matrizJogo[0], matrizJogo[1], matrizJogo[2]],
+    [matrizJogo[3], matrizJogo[4], matrizJogo[5]],
+    [matrizJogo[6], matrizJogo[7], matrizJogo[8]],
+    [matrizJogo[0], matrizJogo[3], matrizJogo[6]],
+    [matrizJogo[1], matrizJogo[4], matrizJogo[7]],
+    [matrizJogo[2], matrizJogo[5], matrizJogo[8]],
+    [matrizJogo[0], matrizJogo[4], matrizJogo[8]],
+    [matrizJogo[2], matrizJogo[4], matrizJogo[6]]
+]
+
 var eX = true //true para primeiro jogador, false para segundo jogador
+
+modosDeJogo.addEventListener('input', desabilitarDificuldadeDaMaquina)
+
+desabilitarDificuldadeDaMaquina()
+    //Função chamada para o caso de a página carregar com jogador vs jogador habilitado
+
+function desabilitarDificuldadeDaMaquina() {
+    if (modosDeJogo.value == "jvsj") {
+        dificuldadeDaMaquina.disabled = true
+    } else {
+        dificuldadeDaMaquina.disabled = false
+    }
+}
 
 function retornarCamposVazios(campo) {
     if (campoEstaVazio(campo)) {
@@ -49,9 +75,9 @@ const atualizarCamposVagos = () => camposVagos = camposVagos.filter(retornarCamp
 const resetarCadaCampo = (cadaCampo, i) => cadaCampo[i].innerHTML = ''
 
 function aplicarAlteracoesConfig() {
-    modoDeJogo = document.getElementById("quemContraQuem").value
+    modoDeJogoSelecionado = modosDeJogo.value
     xSera = document.getElementById("xSera").value
-    dificuldadeDaMaquina = document.getElementById("dificuldadeMaquinaSelect").value
+    dificuldadeDaMaquinaSelecionada = dificuldadeDaMaquina.value
 
     resetarJogo()
 }
@@ -110,7 +136,20 @@ const campoEstaVazio = (campoSelecionado) => campoSelecionado.children.length ==
 
 const inserirElemento = (campoSelecionado, elementoInserido) => campoSelecionado.innerHTML = `<img src="./img/${elementoInserido}.png" alt="${elementoInserido}">`
 
-const atualizarMatrizJogo = (indice, simbolo) => matrizJogo[indice] = simbolo
+const atualizarMatrizJogo = (indice, simbolo) => {
+    matrizJogo[indice] = simbolo
+
+    possibilidadesVitoria = [
+        [matrizJogo[0], matrizJogo[1], matrizJogo[2]],
+        [matrizJogo[3], matrizJogo[4], matrizJogo[5]],
+        [matrizJogo[6], matrizJogo[7], matrizJogo[8]],
+        [matrizJogo[0], matrizJogo[3], matrizJogo[6]],
+        [matrizJogo[1], matrizJogo[4], matrizJogo[7]],
+        [matrizJogo[2], matrizJogo[5], matrizJogo[8]],
+        [matrizJogo[0], matrizJogo[4], matrizJogo[8]],
+        [matrizJogo[2], matrizJogo[4], matrizJogo[6]]
+    ]
+}
 
 function verSeGanhou(simboloJogador) {
     if (
@@ -161,7 +200,7 @@ function exibirResultado() {
     }
 }
 
-function resgatarindexDoCampoEmMatrizJogo(campo) {
+function resgatarIndexDoCampoEmMatrizJogo(campo) {
     switch (campo.id) {
 
         case 'campo-1':
@@ -207,18 +246,29 @@ function aplicarJogada(campoSelecionado, indice, simbolo, proximoSimbolo) {
     exibirResultado()
 }
 
+function bloquearVitoria(elemento) {
+
+}
+
 function aplicarJogadaDaMaquina(proximoSimbolo, simbolo) {
     let campoSelecionado
 
-    if (dificuldadeDaMaquina === 'facil') {
-        const jogada = Math.floor(Math.random() * camposVagos.length)
-        campoSelecionado = camposVagos[jogada]
+    if (dificuldadeDaMaquinaSelecionada === 'facil') {
+        const jogadaAleatoria = Math.floor(Math.random() * camposVagos.length)
+        campoSelecionado = camposVagos[jogadaAleatoria]
+    } else if (dificuldadeDaMaquinaSelecionada === 'medio') {
+        possibilidadesVitoria.forEach(bloquearVitoria)
+
+    } else {
+        console.log("dificil")
     }
-    const indexDoCampo = resgatarindexDoCampoEmMatrizJogo(campoSelecionado)
+
+
+    const indexDoCampo = resgatarIndexDoCampoEmMatrizJogo(campoSelecionado)
     aplicarJogada(campoSelecionado, indexDoCampo, simbolo, proximoSimbolo, eX)
 }
 
-const maquinaPodeJogar = () => modoDeJogo === 'jvsm' && checarSeOJogoAcabou() === 0
+const maquinaPodeJogar = () => modoDeJogoSelecionado === 'jvsm' && checarSeOJogoAcabou() === 0
 
 
 function aplicarJogadaDoJogador(campo, indiceCampoSelecionado) {
