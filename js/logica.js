@@ -90,11 +90,26 @@ function limparTabuleiro() {
     }
 }
 
-const resetarMatrizJogo = () => matrizJogo = [
-    0, 0, 0,
-    0, 0, 0,
-    0, 0, 0
-]
+const resetarMatrizJogo = () => {
+    matrizJogo = [
+        0, 0, 0,
+        0, 0, 0,
+        0, 0, 0
+    ]
+
+    possibilidadesVitoria = [
+        [matrizJogo[0], matrizJogo[1], matrizJogo[2]],
+        [matrizJogo[3], matrizJogo[4], matrizJogo[5]],
+        [matrizJogo[6], matrizJogo[7], matrizJogo[8]],
+
+        [matrizJogo[0], matrizJogo[3], matrizJogo[6]],
+        [matrizJogo[1], matrizJogo[4], matrizJogo[7]],
+        [matrizJogo[2], matrizJogo[5], matrizJogo[8]],
+
+        [matrizJogo[0], matrizJogo[4], matrizJogo[8]],
+        [matrizJogo[2], matrizJogo[4], matrizJogo[6]]
+    ]
+}
 
 const resetarCamposVagos = () => camposVagos = [
     campo1, campo2, campo3,
@@ -265,24 +280,22 @@ function bloquearVitoria(adversarioSimbolo) {
 
     possibilidadesVitoria.forEach(cadaReta => {
 
-        if (contadorSimbolo !== 2 && contadorVazio !== 1) {
-            contadorVazio = 0
-            contadorSimbolo = 0
+        // if (contadorSimbolo !== 2 && contadorVazio !== 1) {
+        contadorVazio = 0
+        contadorSimbolo = 0
 
-            cadaReta.forEach(cadaCampo => {
-                contadorSimbolo += adversarioSimbolo === cadaCampo && 1
-                contadorVazio += 0 === cadaCampo && 1
-                console.log(cadaCampo)
-            });
+        cadaReta.forEach(cadaCampo => {
+            contadorSimbolo += adversarioSimbolo === cadaCampo && 1
+            contadorVazio += 0 === cadaCampo && 1
+                // console.log(cadaCampo)
+        });
+        console.log(`Esta reta possui ${contadorSimbolo} simbolos inimigos, e ${contadorVazio} campos vazios, sendo a reta ${cadaReta}`)
+        if (contadorSimbolo === 2 && contadorVazio === 1) {
+            console.log(cadaReta)
+            return true
         }
-        // console.log(`Esta reta possui ${contadorSimbolo} simbolos inimigos, e ${contadorVazio} campos vazios`)
     });
-
-    if (contadorSimbolo === 2 && contadorVazio === 1) {
-        console.log(true)
-    } else {
-        console.log(false)
-    }
+    return false
 }
 
 const jogarAleatoriamente = (campoSelecionado) => {
