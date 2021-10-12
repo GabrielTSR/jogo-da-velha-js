@@ -42,9 +42,11 @@ var possibilidadesVitoria = [
     [matrizJogo[0], matrizJogo[1], matrizJogo[2]],
     [matrizJogo[3], matrizJogo[4], matrizJogo[5]],
     [matrizJogo[6], matrizJogo[7], matrizJogo[8]],
+
     [matrizJogo[0], matrizJogo[3], matrizJogo[6]],
     [matrizJogo[1], matrizJogo[4], matrizJogo[7]],
     [matrizJogo[2], matrizJogo[5], matrizJogo[8]],
+
     [matrizJogo[0], matrizJogo[4], matrizJogo[8]],
     [matrizJogo[2], matrizJogo[4], matrizJogo[6]]
 ]
@@ -72,7 +74,7 @@ function retornarCamposVazios(campo) {
 
 const atualizarCamposVagos = () => camposVagos = camposVagos.filter(retornarCamposVazios)
 
-const resetarCadaCampo = (cadaCampo, i) => cadaCampo[i].innerHTML = ''
+const resetarCadaCampo = (cadaCampo, contador) => cadaCampo[contador].innerHTML = ''
 
 function aplicarAlteracoesConfig() {
     modoDeJogoSelecionado = modosDeJogo.value
@@ -83,8 +85,8 @@ function aplicarAlteracoesConfig() {
 }
 
 function limparTabuleiro() {
-    for (var i = cadaCampo.length - 1; i >= 0; i--) {
-        resetarCadaCampo(cadaCampo, i)
+    for (var contador = cadaCampo.length - 1; contador >= 0; contador--) {
+        resetarCadaCampo(cadaCampo, contador)
     }
 }
 
@@ -151,17 +153,27 @@ const atualizarMatrizJogo = (indice, simbolo) => {
     ]
 }
 
+const encontrouSimbolo = (elemento) => simboloEncontrado += simboloJogador === cadaCampo && 1
+
+// cadaCampo => {
+
+//     simboloEncontrado += simboloJogador === cadaCampo && 1
+// }
+
 function verSeGanhou(simboloJogador) {
-    if (
-        matrizJogo[0] === simboloJogador && matrizJogo[3] === simboloJogador && matrizJogo[6] === simboloJogador ||
-        matrizJogo[1] === simboloJogador && matrizJogo[4] === simboloJogador && matrizJogo[7] === simboloJogador ||
-        matrizJogo[2] === simboloJogador && matrizJogo[5] === simboloJogador && matrizJogo[8] === simboloJogador ||
-        matrizJogo[2] === simboloJogador && matrizJogo[4] === simboloJogador && matrizJogo[6] === simboloJogador ||
-        matrizJogo[0] === simboloJogador && matrizJogo[4] === simboloJogador && matrizJogo[8] === simboloJogador ||
-        matrizJogo[0] === simboloJogador && matrizJogo[1] === simboloJogador && matrizJogo[2] === simboloJogador ||
-        matrizJogo[3] === simboloJogador && matrizJogo[4] === simboloJogador && matrizJogo[5] === simboloJogador ||
-        matrizJogo[6] === simboloJogador && matrizJogo[7] === simboloJogador && matrizJogo[8] === simboloJogador
-    ) {
+
+    let contadorSimbolo = 0
+    possibilidadesVitoria.forEach(cadaReta => {
+
+        if (contadorSimbolo < 3) {
+            contadorSimbolo = 0
+            cadaReta.forEach(cadaCampo => {
+                contadorSimbolo += simboloJogador === cadaCampo && 1
+            });
+        }
+    });
+
+    if (contadorSimbolo === 3) {
         return true
     } else {
         return false
@@ -236,28 +248,55 @@ function resgatarIndexDoCampoEmMatrizJogo(campo) {
     }
 }
 
-function aplicarJogada(campoSelecionado, indice, simbolo, proximoSimbolo) {
+function aplicarJogada(campoSelecionado, indice, simbolo, adversarioSimbolo) {
     inserirElemento(campoSelecionado, simbolo)
     atualizarMatrizJogo(indice, simbolo)
     atualizarCamposVagos()
     eX = !eX
-    passarAVez(proximoSimbolo)
+    passarAVez(adversarioSimbolo)
     checarSeOJogoAcabou()
     exibirResultado()
 }
 
-function bloquearVitoria(elemento) {
+function bloquearVitoria(adversarioSimbolo) {
 
+    let contadorSimbolo = 0
+    let contadorVazio = 0
+    possibilidadesVitoria.forEach(cadaReta => {
+
+        if (contadorSimbolo !== 2 && contadorVazio !== 1) {
+            contadorVazio = 0
+            contadorSimbolo = 0
+
+            cadaReta.forEach(cadaCampo => {
+                contadorSimbolo += adversarioSimbolo === cadaCampo && 1
+                contadorVazio += 0 === cadaCampo && 1
+            });
+        }
+        console.log(`Esta reta possui ${contadorSimbolo} simbolos inimigos, e ${contadorVazio} campos vazios`)
+    });
+
+    if (contadorSimbolo === 2 && contadorVazio === 1) {
+        console.log(true)
+    } else {
+        console.log(false)
+    }
 }
 
-function aplicarJogadaDaMaquina(proximoSimbolo, simbolo) {
+const jogarAleatoriamente = (campoSelecionado) => {
+    const jogadaAleatoria = Math.floor(Math.random() * camposVagos.length)
+    return campoSelecionado = camposVagos[jogadaAleatoria]
+}
+
+function aplicarJogadaDaMaquina(adversarioSimbolo, simbolo) {
     let campoSelecionado
 
     if (dificuldadeDaMaquinaSelecionada === 'facil') {
-        const jogadaAleatoria = Math.floor(Math.random() * camposVagos.length)
-        campoSelecionado = camposVagos[jogadaAleatoria]
+        campoSelecionado = jogarAleatoriamente(campoSelecionado)
+
     } else if (dificuldadeDaMaquinaSelecionada === 'medio') {
-        possibilidadesVitoria.forEach(bloquearVitoria)
+        campoSelecionado = jogarAleatoriamente(campoSelecionado)
+        bloquearVitoria(adversarioSimbolo)
 
     } else {
         console.log("dificil")
@@ -265,7 +304,7 @@ function aplicarJogadaDaMaquina(proximoSimbolo, simbolo) {
 
 
     const indexDoCampo = resgatarIndexDoCampoEmMatrizJogo(campoSelecionado)
-    aplicarJogada(campoSelecionado, indexDoCampo, simbolo, proximoSimbolo, eX)
+    aplicarJogada(campoSelecionado, indexDoCampo, simbolo, adversarioSimbolo, eX)
 }
 
 const maquinaPodeJogar = () => modoDeJogoSelecionado === 'jvsm' && checarSeOJogoAcabou() === 0
@@ -274,7 +313,7 @@ const maquinaPodeJogar = () => modoDeJogoSelecionado === 'jvsm' && checarSeOJogo
 function aplicarJogadaDoJogador(campo, indiceCampoSelecionado) {
 
     let simbolo
-    let proximoSimbolo
+    let adversarioSimbolo
     const campoSelecionado = document.getElementById(campo)
 
     if (campoEstaVazio(campoSelecionado) &&
@@ -283,18 +322,18 @@ function aplicarJogadaDoJogador(campo, indiceCampoSelecionado) {
         if (eX) {
 
             simbolo = 'x'
-            proximoSimbolo = 'fantasma'
+            adversarioSimbolo = 'fantasma'
 
         } else if (!eX) {
 
             simbolo = 'fantasma'
-            proximoSimbolo = 'x'
+            adversarioSimbolo = 'x'
 
         }
 
-        aplicarJogada(campoSelecionado, indiceCampoSelecionado, simbolo, proximoSimbolo)
+        aplicarJogada(campoSelecionado, indiceCampoSelecionado, simbolo, adversarioSimbolo)
 
-        maquinaPodeJogar() ? aplicarJogadaDaMaquina(simbolo, proximoSimbolo) : false
+        maquinaPodeJogar() ? aplicarJogadaDaMaquina(simbolo, adversarioSimbolo) : false
     } else {
         exibirResultado()
         return false
