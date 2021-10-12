@@ -262,6 +262,7 @@ function bloquearVitoria(adversarioSimbolo) {
 
     let contadorSimbolo = 0
     let contadorVazio = 0
+
     possibilidadesVitoria.forEach(cadaReta => {
 
         if (contadorSimbolo !== 2 && contadorVazio !== 1) {
@@ -271,9 +272,10 @@ function bloquearVitoria(adversarioSimbolo) {
             cadaReta.forEach(cadaCampo => {
                 contadorSimbolo += adversarioSimbolo === cadaCampo && 1
                 contadorVazio += 0 === cadaCampo && 1
+                console.log(cadaCampo)
             });
         }
-        console.log(`Esta reta possui ${contadorSimbolo} simbolos inimigos, e ${contadorVazio} campos vazios`)
+        // console.log(`Esta reta possui ${contadorSimbolo} simbolos inimigos, e ${contadorVazio} campos vazios`)
     });
 
     if (contadorSimbolo === 2 && contadorVazio === 1) {
