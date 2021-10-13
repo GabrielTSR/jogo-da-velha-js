@@ -68,6 +68,8 @@ var eX = true //true para primeiro jogador, false para segundo jogador
 
 var campoQueSeraMarcado
 
+var indiceCampoQueSeraMarcado
+
 modosDeJogo.addEventListener('input', desabilitarDificuldadeDaMaquina)
 
 desabilitarDificuldadeDaMaquina()
@@ -292,7 +294,6 @@ function haComoBloquear(adversarioSimbolo) {
 
     let contadorSimbolo = 0
     let contadorVazio = 0
-    var indiceCampoQueSeraMarcado
     let retornoDaFuncao = false
 
     possibilidadesVitoriaMatriz.forEach((cadaReta, indiceCadaReta) => {
@@ -304,14 +305,10 @@ function haComoBloquear(adversarioSimbolo) {
         cadaReta.forEach((cadaCampo, indiceCadaCampo) => {
             contadorSimbolo += adversarioSimbolo === cadaCampo && 1
             contadorVazio += 0 === cadaCampo && 1
-            indiceCampoQueSeraMarcado = 0 === cadaCampo && indiceCadaCampo
-                // console.log(cadaCampo)
+            0 === cadaCampo ? indiceCampoQueSeraMarcado = indiceCadaCampo : false
         });
-        console.log(`Esta reta possui ${contadorSimbolo} simbolos inimigos, e ${contadorVazio} campos vazios, sendo a reta ${cadaReta}`)
-        if (contadorSimbolo === 2 && contadorVazio === 1) {
-            console.log(`marcar reta ${indiceCadaReta}, no campo ${indiceCampoQueSeraMarcado}`)
 
-            console.log(possibilidadesVitoriaCampo[indiceCadaReta][indiceCampoQueSeraMarcado])
+        if (contadorSimbolo === 2 && contadorVazio === 1) {
             campoQueSeraMarcado = possibilidadesVitoriaCampo[indiceCadaReta][indiceCampoQueSeraMarcado]
 
             retornoDaFuncao = true
