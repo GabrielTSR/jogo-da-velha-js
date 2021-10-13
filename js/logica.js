@@ -38,7 +38,7 @@ var camposVagos = [
     campo7, campo8, campo9
 ]
 
-var possibilidadesVitoria = [
+var possibilidadesVitoriaMatriz = [
     [matrizJogo[0], matrizJogo[1], matrizJogo[2]],
     [matrizJogo[3], matrizJogo[4], matrizJogo[5]],
     [matrizJogo[6], matrizJogo[7], matrizJogo[8]],
@@ -51,7 +51,22 @@ var possibilidadesVitoria = [
     [matrizJogo[2], matrizJogo[4], matrizJogo[6]]
 ]
 
+var possibilidadesVitoriaCampo = [
+    [campo1, campo2, campo3],
+    [campo4, campo5, campo6],
+    [campo7, campo8, campo9],
+
+    [campo1, campo4, campo7],
+    [campo2, campo5, campo8],
+    [campo3, campo6, campo9],
+
+    [campo1, campo5, campo9],
+    [campo3, campo5, campo7]
+]
+
 var eX = true //true para primeiro jogador, false para segundo jogador
+
+var campoQueSeraMarcado
 
 modosDeJogo.addEventListener('input', desabilitarDificuldadeDaMaquina)
 
@@ -97,7 +112,7 @@ const resetarMatrizJogo = () => {
         0, 0, 0
     ]
 
-    possibilidadesVitoria = [
+    possibilidadesVitoriaMatriz = [
         [matrizJogo[0], matrizJogo[1], matrizJogo[2]],
         [matrizJogo[3], matrizJogo[4], matrizJogo[5]],
         [matrizJogo[6], matrizJogo[7], matrizJogo[8]],
@@ -156,7 +171,7 @@ const inserirElemento = (campoSelecionado, elementoInserido) => campoSelecionado
 const atualizarMatrizJogo = (indice, simbolo) => {
     matrizJogo[indice] = simbolo
 
-    possibilidadesVitoria = [
+    possibilidadesVitoriaMatriz = [
         [matrizJogo[0], matrizJogo[1], matrizJogo[2]],
         [matrizJogo[3], matrizJogo[4], matrizJogo[5]],
         [matrizJogo[6], matrizJogo[7], matrizJogo[8]],
@@ -178,7 +193,7 @@ const encontrouSimbolo = (elemento) => simboloEncontrado += simboloJogador === c
 function verSeGanhou(simboloJogador) {
 
     let contadorSimbolo = 0
-    possibilidadesVitoria.forEach(cadaReta => {
+    possibilidadesVitoriaMatriz.forEach(cadaReta => {
 
         if (contadorSimbolo < 3) {
             contadorSimbolo = 0
@@ -273,29 +288,36 @@ function aplicarJogada(campoSelecionado, indice, simbolo, adversarioSimbolo) {
     exibirResultado()
 }
 
-function bloquearVitoria(adversarioSimbolo) {
+function haComoBloquear(adversarioSimbolo) {
 
     let contadorSimbolo = 0
     let contadorVazio = 0
+    var indiceCampoQueSeraMarcado
+    let retornoDaFuncao = false
 
-    possibilidadesVitoria.forEach(cadaReta => {
+    possibilidadesVitoriaMatriz.forEach((cadaReta, indiceCadaReta) => {
 
         // if (contadorSimbolo !== 2 && contadorVazio !== 1) {
         contadorVazio = 0
         contadorSimbolo = 0
 
-        cadaReta.forEach(cadaCampo => {
+        cadaReta.forEach((cadaCampo, indiceCadaCampo) => {
             contadorSimbolo += adversarioSimbolo === cadaCampo && 1
             contadorVazio += 0 === cadaCampo && 1
+            indiceCampoQueSeraMarcado = 0 === cadaCampo && indiceCadaCampo
                 // console.log(cadaCampo)
         });
         console.log(`Esta reta possui ${contadorSimbolo} simbolos inimigos, e ${contadorVazio} campos vazios, sendo a reta ${cadaReta}`)
         if (contadorSimbolo === 2 && contadorVazio === 1) {
-            console.log(cadaReta)
-            return true
+            console.log(`marcar reta ${indiceCadaReta}, no campo ${indiceCampoQueSeraMarcado}`)
+
+            console.log(possibilidadesVitoriaCampo[indiceCadaReta][indiceCampoQueSeraMarcado])
+            campoQueSeraMarcado = possibilidadesVitoriaCampo[indiceCadaReta][indiceCampoQueSeraMarcado]
+
+            retornoDaFuncao = true
         }
     });
-    return false
+    return retornoDaFuncao
 }
 
 const jogarAleatoriamente = (campoSelecionado) => {
@@ -310,8 +332,11 @@ function aplicarJogadaDaMaquina(adversarioSimbolo, simbolo) {
         campoSelecionado = jogarAleatoriamente(campoSelecionado)
 
     } else if (dificuldadeDaMaquinaSelecionada === 'medio') {
-        campoSelecionado = jogarAleatoriamente(campoSelecionado)
-        bloquearVitoria(adversarioSimbolo)
+        if (haComoBloquear(adversarioSimbolo) === true) {
+            campoSelecionado = campoQueSeraMarcado //var vindo da função bloquearVitoria
+        } else {
+            campoSelecionado = jogarAleatoriamente(campoSelecionado)
+        }
 
     } else {
         console.log("dificil")
