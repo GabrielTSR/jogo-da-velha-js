@@ -102,7 +102,7 @@ function aplicarJogadaDaMaquina(adversarioSimbolo, simbolo) {
             campoSelecionado = jogarAleatoriamente(pontasTabuleiro)
 
         } else {
-            campoSelecionado = jogarAleatoriamente(campoSelecionado)
+            campoSelecionado = jogarAleatoriamente(camposVagos)
         }
     }
 
