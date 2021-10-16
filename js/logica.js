@@ -1,5 +1,8 @@
 "use strict"
 
+
+//** INICIO --> PEGANDO ELEMENTOS ATRAVÉS DO ID E CLASSE **//
+
 const cadaCampo = document.getElementsByClassName("cada-campo")
 
 const tagDaDivulgacao = document.getElementById("quem-venceu")
@@ -15,6 +18,11 @@ const campo6 = document.getElementById("campo-6")
 const campo7 = document.getElementById("campo-7")
 const campo8 = document.getElementById("campo-8")
 const campo9 = document.getElementById("campo-9")
+
+//** FIM --> PEGANDO ELEMENTOS ATRAVÉS DO ID E CLASSE **/
+
+
+//** INICIO --> DECLARANDO VARIAVEIS GLOBAIS **//
 
 var modosDeJogo = document.getElementById("quemContraQuem")
 var modoDeJogoSelecionado = modosDeJogo.value
@@ -70,7 +78,37 @@ var campoQueSeraMarcado
 
 var indiceCampoQueSeraMarcado
 
+//** FIM --> DECLARANDO VARIAVEIS GLOBAIS **//
+
+//** INICIO --> USO DO EVENT LISTENER **//
+
 modosDeJogo.addEventListener('input', desabilitarDificuldadeDaMaquina)
+
+//** FIM --> USO DO EVENT LISTENER **//
+
+
+//** INICIO --> FUNÇÕES **//
+
+const inserirElemento =
+    (campoSelecionado, elementoInserido) => campoSelecionado.innerHTML =
+    `<img src="./img/${elementoInserido}.png" alt="${elementoInserido}">`
+
+const atualizarMatrizJogo = (indice, simbolo) => {
+    matrizJogo[indice] = simbolo
+
+    possibilidadesVitoriaMatriz = [
+        [matrizJogo[0], matrizJogo[1], matrizJogo[2]],
+        [matrizJogo[3], matrizJogo[4], matrizJogo[5]],
+        [matrizJogo[6], matrizJogo[7], matrizJogo[8]],
+        [matrizJogo[0], matrizJogo[3], matrizJogo[6]],
+        [matrizJogo[1], matrizJogo[4], matrizJogo[7]],
+        [matrizJogo[2], matrizJogo[5], matrizJogo[8]],
+        [matrizJogo[0], matrizJogo[4], matrizJogo[8]],
+        [matrizJogo[2], matrizJogo[4], matrizJogo[6]]
+    ]
+}
+
+
 
 desabilitarDificuldadeDaMaquina()
     //Função chamada para o caso de a página carregar com jogador vs jogador habilitado
@@ -168,22 +206,9 @@ function resetarJogo() {
 
 const campoEstaVazio = (campoSelecionado) => campoSelecionado.children.length == 0
 
-const inserirElemento = (campoSelecionado, elementoInserido) => campoSelecionado.innerHTML = `<img src="./img/${elementoInserido}.png" alt="${elementoInserido}">`
 
-const atualizarMatrizJogo = (indice, simbolo) => {
-    matrizJogo[indice] = simbolo
 
-    possibilidadesVitoriaMatriz = [
-        [matrizJogo[0], matrizJogo[1], matrizJogo[2]],
-        [matrizJogo[3], matrizJogo[4], matrizJogo[5]],
-        [matrizJogo[6], matrizJogo[7], matrizJogo[8]],
-        [matrizJogo[0], matrizJogo[3], matrizJogo[6]],
-        [matrizJogo[1], matrizJogo[4], matrizJogo[7]],
-        [matrizJogo[2], matrizJogo[5], matrizJogo[8]],
-        [matrizJogo[0], matrizJogo[4], matrizJogo[8]],
-        [matrizJogo[2], matrizJogo[4], matrizJogo[6]]
-    ]
-}
+
 
 const encontrouSimbolo = (elemento) => simboloEncontrado += simboloJogador === cadaCampo && 1
 
@@ -376,3 +401,5 @@ function aplicarJogadaDoJogador(campo, indiceCampoSelecionado) {
         return false
     }
 }
+
+//** FIM --> FUNÇÕES **//
