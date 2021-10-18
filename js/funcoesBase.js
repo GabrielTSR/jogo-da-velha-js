@@ -91,17 +91,44 @@ function exibirReta() {
         retaVitoria.classList.remove("reta-vertical", "ultima-vertical")
         retaVitoria.classList.remove("reta-horizontal", "primeira-horizontal")
         retaVitoria.classList.remove("reta-horizontal", "meio-horizontal")
-
         retaVitoria.classList.remove("reta-diagonal", "diagonal-inicio")
         retaVitoria.classList.remove("reta-diagonal", "diagonal-fim")
     } else if (indiceRetaVencedora === 4) {
         retaVitoria.classList.add("reta-vertical", "meio-vertical")
+        retaVitoria.classList.remove("reta-vertical", "primeira-vertical")
+        retaVitoria.classList.remove("reta-vertical", "ultima-vertical")
+        retaVitoria.classList.remove("reta-horizontal", "primeira-horizontal")
+        retaVitoria.classList.remove("reta-horizontal", "meio-horizontal")
+        retaVitoria.classList.remove("reta-horizontal", "ultima-horizontal")
+        retaVitoria.classList.remove("reta-diagonal", "diagonal-inicio")
+        retaVitoria.classList.remove("reta-diagonal", "diagonal-fim")
     } else if (indiceRetaVencedora === 5) {
         retaVitoria.classList.add("reta-vertical", "ultima-vertical")
+        retaVitoria.classList.remove("reta-vertical", "meio-vertical")
+        retaVitoria.classList.remove("reta-vertical", "primeira-vertical")
+        retaVitoria.classList.remove("reta-horizontal", "primeira-horizontal")
+        retaVitoria.classList.remove("reta-horizontal", "meio-horizontal")
+        retaVitoria.classList.remove("reta-horizontal", "ultima-horizontal")
+        retaVitoria.classList.remove("reta-diagonal", "diagonal-inicio")
+        retaVitoria.classList.remove("reta-diagonal", "diagonal-fim")
     } else if (indiceRetaVencedora === 6) {
         retaVitoria.classList.add("reta-diagonal", "diagonal-inicio")
+        retaVitoria.classList.remove("reta-vertical", "ultima-vertical")
+        retaVitoria.classList.remove("reta-diagonal", "diagonal-fim")
+        retaVitoria.classList.remove("reta-vertical", "primeira-vertical")
+        retaVitoria.classList.remove("reta-vertical", "meio-vertical")
+        retaVitoria.classList.remove("reta-horizontal", "primeira-horizontal")
+        retaVitoria.classList.remove("reta-horizontal", "meio-horizontal")
+        retaVitoria.classList.remove("reta-horizontal", "ultima-horizontal")
     } else if (indiceRetaVencedora === 7) {
         retaVitoria.classList.add("reta-diagonal", "diagonal-fim")
+        retaVitoria.classList.remove("reta-diagonal", "diagonal-inicio")
+        retaVitoria.classList.remove("reta-horizontal", "primeira-horizontal")
+        retaVitoria.classList.remove("reta-horizontal", "meio-horizontal")
+        retaVitoria.classList.remove("reta-horizontal", "ultima-horizontal")
+        retaVitoria.classList.remove("reta-vertical", "primeira-vertical")
+        retaVitoria.classList.remove("reta-vertical", "meio-vertical")
+        retaVitoria.classList.remove("reta-vertical", "ultima-vertical")
     }
 }
 
