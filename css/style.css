@@ -361,42 +361,38 @@ button {
     width: 360px;
     height: 360px;
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
     align-content: flex-start;
 }
 
 #reta-vitoria {
-    width: 100%;
+    width: 0;
     height: 4%;
     position: absolute;
-    align-self: center;
-    display: none;
+    transition: width 1s ease-in-out;
 }
 
 #jogo-container>.reta-diagonal {
-    width: 130%;
+    width: 125%;
 }
 
 #jogo-container>.diagonal-inicio {
     transform: rotate(45deg);
-    right: -15%;
 }
 
 #jogo-container>.diagonal-fim {
     transform: rotate(-45deg);
-    left: -15%;
 }
 
 #jogo-container>.reta-horizontal {
     transform: rotate(0deg);
+    right: 0%;
 }
 
 #jogo-container>.primeira-horizontal {
     top: 14%;
-}
-
-#jogo-container>.meio-horizontal {
-    top: 48%;
 }
 
 #jogo-container>.ultima-horizontal {
@@ -408,15 +404,11 @@ button {
 }
 
 #jogo-container>.primeira-vertical {
-    right: 34%;
-}
-
-#jogo-container>.meio-vertical {
-    right: 0;
+    margin-right: 69%;
 }
 
 #jogo-container>.ultima-vertical {
-    left: 34%;
+    margin-left: 69%;
 }
 
 .cada-campo {
@@ -428,7 +420,7 @@ button {
 
 .cada-campo:hover {
     cursor: pointer;
-    background-color: #f5f5f528;
+    background-color: #cc9d9d28;
 }
 
 #campo-1,
