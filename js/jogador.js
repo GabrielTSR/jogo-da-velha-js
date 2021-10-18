@@ -19,10 +19,12 @@ function aplicarJogadaDoJogador(campo, indiceCampoSelecionado) {
             simbolo = 'x'
             adversarioSimbolo = 'fantasma'
 
+
         } else if (!eX) {
 
             simbolo = 'fantasma'
             adversarioSimbolo = 'x'
+
 
         }
 

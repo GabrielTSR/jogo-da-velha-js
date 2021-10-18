@@ -46,8 +46,62 @@ function checarSeOJogoAcabou() {
 function exibirReta() {
     retaVitoria.style.display = "flex"
 
+    if (vencedorDaPartida !== 0 && vencedorDaPartida == 'x') {
+
+        retaVitoria.src =
+            `./img/retaVitoriaX.png`
+
+    } else {
+        retaVitoria.src =
+            `./img/retaVitoriaFantasma.png`
+    }
+
     if (indiceRetaVencedora === 0) {
         retaVitoria.classList.add("reta-horizontal", "primeira-horizontal")
+        retaVitoria.classList.remove("reta-horizontal", "meio-horizontal")
+        retaVitoria.classList.remove("reta-horizontal", "ultima-horizontal")
+        retaVitoria.classList.remove("reta-vertical", "primeira-vertical")
+        retaVitoria.classList.remove("reta-vertical", "meio-vertical")
+        retaVitoria.classList.remove("reta-vertical", "ultima-vertical")
+        retaVitoria.classList.remove("reta-diagonal", "diagonal-inicio")
+        retaVitoria.classList.remove("reta-diagonal", "diagonal-fim")
+    } else if (indiceRetaVencedora === 1) {
+        retaVitoria.classList.add("reta-horizontal", "meio-horizontal")
+        retaVitoria.classList.remove("reta-horizontal", "primeira-horizontal")
+        retaVitoria.classList.remove("reta-horizontal", "ultima-horizontal")
+        retaVitoria.classList.remove("reta-vertical", "primeira-vertical")
+        retaVitoria.classList.remove("reta-vertical", "meio-vertical")
+        retaVitoria.classList.remove("reta-vertical", "ultima-vertical")
+        retaVitoria.classList.remove("reta-diagonal", "diagonal-inicio")
+        retaVitoria.classList.remove("reta-diagonal", "diagonal-fim")
+    } else if (indiceRetaVencedora === 2) {
+        retaVitoria.classList.add("reta-horizontal", "ultima-horizontal")
+        retaVitoria.classList.remove("reta-horizontal", "meio-horizontal")
+        retaVitoria.classList.remove("reta-horizontal", "primeira-horizontal")
+        retaVitoria.classList.remove("reta-vertical", "primeira-vertical")
+        retaVitoria.classList.remove("reta-vertical", "meio-vertical")
+        retaVitoria.classList.remove("reta-vertical", "ultima-vertical")
+        retaVitoria.classList.remove("reta-diagonal", "diagonal-inicio")
+        retaVitoria.classList.remove("reta-diagonal", "diagonal-fim")
+
+    } else if (indiceRetaVencedora === 3) {
+        retaVitoria.classList.add("reta-vertical", "primeira-vertical")
+        retaVitoria.classList.remove("reta-horizontal", "ultima-horizontal")
+        retaVitoria.classList.remove("reta-vertical", "meio-vertical")
+        retaVitoria.classList.remove("reta-vertical", "ultima-vertical")
+        retaVitoria.classList.remove("reta-horizontal", "primeira-horizontal")
+        retaVitoria.classList.remove("reta-horizontal", "meio-horizontal")
+
+        retaVitoria.classList.remove("reta-diagonal", "diagonal-inicio")
+        retaVitoria.classList.remove("reta-diagonal", "diagonal-fim")
+    } else if (indiceRetaVencedora === 4) {
+        retaVitoria.classList.add("reta-vertical", "meio-vertical")
+    } else if (indiceRetaVencedora === 5) {
+        retaVitoria.classList.add("reta-vertical", "ultima-vertical")
+    } else if (indiceRetaVencedora === 6) {
+        retaVitoria.classList.add("reta-diagonal", "diagonal-inicio")
+    } else if (indiceRetaVencedora === 7) {
+        retaVitoria.classList.add("reta-diagonal", "diagonal-fim")
     }
 }
 
@@ -167,6 +221,7 @@ function verSeGanhou(simboloJogador) {
             cadaReta.forEach(cadaCampo => {
                 contadorSimbolo += simboloJogador === cadaCampo && 1
                 contadorSimbolo === 3 ? indiceRetaVencedora = indiceCadaReta : false
+
             });
         }
     });
@@ -176,6 +231,7 @@ function verSeGanhou(simboloJogador) {
     } else {
         return false
     }
+
 }
 
 function verSeEmpatou() {
