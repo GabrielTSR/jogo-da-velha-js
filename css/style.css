@@ -357,11 +357,66 @@ button {
 }
 
 #jogo-container {
+    position: relative;
     width: 360px;
     height: 360px;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
+}
+
+#reta-vitoria {
+    width: 100%;
+    height: 4%;
+    position: absolute;
+    align-self: center;
+    display: none;
+}
+
+#jogo-container>.reta-diagonal {
+    width: 130%;
+}
+
+#jogo-container>.diagonal-inicio {
+    transform: rotate(45deg);
+    right: -15%;
+}
+
+#jogo-container>.diagonal-fim {
+    transform: rotate(-45deg);
+    left: -15%;
+}
+
+#jogo-container>.reta-horizontal {
+    transform: rotate(0deg);
+}
+
+#jogo-container>.primeira-horizontal {
+    top: 14%;
+}
+
+#jogo-container>.meio-horizontal {
+    top: 48%;
+}
+
+#jogo-container>.ultima-horizontal {
+    bottom: 14%;
+}
+
+#jogo-container>.reta-vertical {
+    transform: rotate(90deg);
+}
+
+#jogo-container>.primeira-vertical {
+    right: 34%;
+}
+
+#jogo-container>.meio-vertical {
+    right: 0;
+}
+
+#jogo-container>.ultima-vertical {
+    left: 34%;
 }
 
 .cada-campo {

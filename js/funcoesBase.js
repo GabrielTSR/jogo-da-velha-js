@@ -43,6 +43,14 @@ function checarSeOJogoAcabou() {
         0
 }
 
+function exibirReta() {
+    retaVitoria.style.display = "flex"
+
+    if (indiceRetaVencedora === 0) {
+        retaVitoria.classList.add("reta-horizontal", "primeira-horizontal")
+    }
+}
+
 function exibirResultado() {
 
     let mensagem
@@ -53,6 +61,9 @@ function exibirResultado() {
         } else {
             mensagem = `"${vencedorDaPartida}" venceu!`
         }
+
+        exibirReta()
+
         escreverResultado(mensagem)
         abrirModalResultado()
     }
@@ -139,6 +150,8 @@ function resetarJogo() {
 
     maquinaComeca() && maquinaPodeJogar() ? aplicarPrimeiraJogadaMaquina() : false
 
+    retaVitoria.style.display = "none"
+
 }
 
 const encontrouSimbolo = () =>
@@ -147,12 +160,13 @@ const encontrouSimbolo = () =>
 function verSeGanhou(simboloJogador) {
 
     let contadorSimbolo = 0
-    possibilidadesVitoriaMatriz.forEach(cadaReta => {
+    possibilidadesVitoriaMatriz.forEach((cadaReta, indiceCadaReta) => {
 
         if (contadorSimbolo < 3) {
             contadorSimbolo = 0
             cadaReta.forEach(cadaCampo => {
                 contadorSimbolo += simboloJogador === cadaCampo && 1
+                contadorSimbolo === 3 ? indiceRetaVencedora = indiceCadaReta : false
             });
         }
     });

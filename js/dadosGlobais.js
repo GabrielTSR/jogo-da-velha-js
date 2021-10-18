@@ -18,6 +18,8 @@ const campo7 = document.getElementById("campo-7")
 const campo8 = document.getElementById("campo-8")
 const campo9 = document.getElementById("campo-9")
 
+const retaVitoria = document.getElementById("reta-vitoria")
+
 let campoSelecionado
 
 //** FIM --> PEGANDO ELEMENTOS ATRAVÉS DO ID E CLASSE **/
@@ -34,6 +36,10 @@ var dificuldadeDaMaquina = document.getElementById("dificuldadeMaquina")
 var dificuldadeDaMaquinaSelecionada = dificuldadeDaMaquina.value
 
 var vencedorDaPartida = 0 //entre 0, 'x', e 'fantasma'
+
+var indiceRetaVencedora = 0
+    /*Valor em que armazenaremos uma reta vinda de 
+"possibilidadesVitoriaMatriz" (correspondente a vitória)*/
 
 var matrizJogo = [
         0, 0, 0,
