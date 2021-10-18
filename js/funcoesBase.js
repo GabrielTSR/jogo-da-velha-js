@@ -95,7 +95,6 @@ function exibirReta() {
 
 function exibirResultado() {
 
-    let mensagem
     if (vencedorDaPartida !== 0) {
 
         if (vencedorDaPartida === 'empate') {
@@ -104,11 +103,22 @@ function exibirResultado() {
             mensagem = `"${vencedorDaPartida}" venceu!`
         }
 
-        exibirReta()
+        atrasarExibicaoResultado()
 
+    }
+
+}
+
+function atrasarExibicaoResultado() {
+
+    exibirReta()
+
+    setTimeout(function() {
         escreverResultado(mensagem)
         abrirModalResultado()
-    }
+    }, 1100);
+
+
 }
 
 function desabilitarDificuldadeDaMaquina() {

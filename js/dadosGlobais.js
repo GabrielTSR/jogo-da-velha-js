@@ -85,4 +85,6 @@ var campoQueSeraMarcado
 
 var indiceCampoQueSeraMarcado
 
+var mensagem
+
 //** FIM --> DECLARANDO VARIAVEIS GLOBAIS **//
