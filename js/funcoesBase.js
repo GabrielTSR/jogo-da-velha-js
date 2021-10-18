@@ -45,8 +45,7 @@ function checarSeOJogoAcabou() {
 
 function exibirReta() {
 
-    retaVitoria.className = ""
-
+    retaVitoria.style.transition = "width 1s ease-in-out"
     if (vencedorDaPartida === 'x') {
         retaVitoria.style.backgroundColor = "#BD00FF"
     } else {
@@ -193,6 +192,7 @@ function resetarJogo() {
 
     maquinaComeca() && maquinaPodeJogar() ? aplicarPrimeiraJogadaMaquina() : false
 
+    retaVitoria.style.transition = ""
     retaVitoria.className = ""
     retaVitoria.style.width = "0"
 

@@ -371,7 +371,6 @@ button {
     width: 0;
     height: 4%;
     position: absolute;
-    transition: width 1s ease-in-out;
 }
 
 #jogo-container>.reta-diagonal {
