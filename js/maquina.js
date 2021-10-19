@@ -1,5 +1,12 @@
 "use strict"
 
+function abrirModalCarregamento() {
+    window.location.replace('#carregamento-container')
+    setTimeout(function() {
+        window.location.replace('#')
+    }, 2000);
+}
+
 const jogarAleatoriamente = (matrizCampos) => {
     const jogadaAleatoria = Math.floor(Math.random() * matrizCampos.length)
     return campoSelecionado = matrizCampos[jogadaAleatoria]
@@ -70,6 +77,9 @@ function resgatarIndexDoCampoEmMatrizJogo(campo) {
 }
 
 function aplicarJogadaDaMaquina(adversarioSimbolo, simbolo) {
+
+
+
     let campoSelecionado
 
     if (dificuldadeDaMaquinaSelecionada === 'facil') {
@@ -83,6 +93,7 @@ function aplicarJogadaDaMaquina(adversarioSimbolo, simbolo) {
         }
 
     } else if ('dificil') {
+        abrirModalCarregamento()
 
         if (haCheque(simbolo)) {
             campoSelecionado = campoQueSeraMarcado //var vindo da função ha cheque
