@@ -99,11 +99,12 @@ function exibirResultado() {
 
         if (vencedorDaPartida === 'empate') {
             mensagem = `O jogo está empatado!`
+            escreverResultado(mensagem)
+            abrirModalResultado()
         } else {
             mensagem = `"${vencedorDaPartida}" venceu!`
+            atrasarExibicaoResultado()
         }
-
-        atrasarExibicaoResultado()
 
     }
 
