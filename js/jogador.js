@@ -22,8 +22,5 @@ function aplicarJogadaDoJogador(campo, indiceCampoSelecionado) {
         aplicarJogada(campoSelecionado, indiceCampoSelecionado, simbolo, adversarioSimbolo)
 
         maquinaPodeJogar() ? aplicarJogadaDaMaquina(simbolo, adversarioSimbolo) : false
-    } else {
-        exibirResultado()
-        return false
-    }
+    } else vencedorDaPartida !== 0 ? abrirModalResultado() : false
 }

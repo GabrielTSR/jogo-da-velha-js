@@ -11,8 +11,7 @@
     font-family: 'Vermin Vibes';
 }
 
-:root {
-}
+:root {}
 
 .modal-container {
     display: flex;
@@ -395,40 +394,44 @@ button {
     position: absolute;
 }
 
-#jogo-container > .reta-diagonal {
+#reta-vitoria:hover {
+    cursor: pointer;
+}
+
+#jogo-container>.reta-diagonal {
     width: 125%;
 }
 
-#jogo-container > .diagonal-inicio {
+#jogo-container>.diagonal-inicio {
     transform: rotate(45deg);
 }
 
-#jogo-container > .diagonal-fim {
+#jogo-container>.diagonal-fim {
     transform: rotate(-45deg);
 }
 
-#jogo-container > .reta-horizontal {
+#jogo-container>.reta-horizontal {
     transform: rotate(0deg);
     right: 0%;
 }
 
-#jogo-container > .primeira-horizontal {
+#jogo-container>.primeira-horizontal {
     top: 14%;
 }
 
-#jogo-container > .ultima-horizontal {
+#jogo-container>.ultima-horizontal {
     bottom: 14%;
 }
 
-#jogo-container > .reta-vertical {
+#jogo-container>.reta-vertical {
     transform: rotate(90deg);
 }
 
-#jogo-container > .primeira-vertical {
+#jogo-container>.primeira-vertical {
     margin-right: 69%;
 }
 
-#jogo-container > .ultima-vertical {
+#jogo-container>.ultima-vertical {
     margin-left: 69%;
 }
 

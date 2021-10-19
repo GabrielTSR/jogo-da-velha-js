@@ -37,14 +37,17 @@ var dificuldadeDaMaquinaSelecionada = dificuldadeDaMaquina.value
 var vencedorDaPartida = 0 //entre 0, 'x', e 'fantasma'
 
 var indiceRetaVencedora = 0
-/*Valor em que armazenaremos uma reta vinda de 
-"possibilidadesVitoriaMatriz" (correspondente a vitória)*/
+    /*Valor em que armazenaremos uma reta vinda de 
+    "possibilidadesVitoriaMatriz" (correspondente a vitória)*/
 
 var matrizJogo = [0, 0, 0, 0, 0, 0, 0, 0, 0] //0 = vazio
 
 var camposVagos = [campo1, campo2, campo3, campo4, campo5, campo6, campo7, campo8, campo9]
 
 var possibilidadesVitoriaMatriz = [
+    [matrizJogo[0], matrizJogo[4], matrizJogo[8]],
+    [matrizJogo[2], matrizJogo[4], matrizJogo[6]],
+
     [matrizJogo[0], matrizJogo[1], matrizJogo[2]],
     [matrizJogo[3], matrizJogo[4], matrizJogo[5]],
     [matrizJogo[6], matrizJogo[7], matrizJogo[8]],
@@ -52,12 +55,12 @@ var possibilidadesVitoriaMatriz = [
     [matrizJogo[0], matrizJogo[3], matrizJogo[6]],
     [matrizJogo[1], matrizJogo[4], matrizJogo[7]],
     [matrizJogo[2], matrizJogo[5], matrizJogo[8]],
-
-    [matrizJogo[0], matrizJogo[4], matrizJogo[8]],
-    [matrizJogo[2], matrizJogo[4], matrizJogo[6]],
 ]
 
 var possibilidadesVitoriaCampo = [
+    [campo1, campo5, campo9],
+    [campo3, campo5, campo7],
+
     [campo1, campo2, campo3],
     [campo4, campo5, campo6],
     [campo7, campo8, campo9],
@@ -65,12 +68,11 @@ var possibilidadesVitoriaCampo = [
     [campo1, campo4, campo7],
     [campo2, campo5, campo8],
     [campo3, campo6, campo9],
-
-    [campo1, campo5, campo9],
-    [campo3, campo5, campo7],
 ]
 
 var eX = true //true para primeiro jogador, false para segundo jogador
+
+var indicesCamposVaziosDeCadaReta = [] //Utilizada dentro da função haCaminhoLivre
 
 var campoQueSeraMarcado
 

@@ -2,7 +2,7 @@
 
 function abrirModalCarregamento() {
     window.location.replace('#carregamento-container')
-    setTimeout(function () {
+    setTimeout(function() {
         window.location.replace('#')
     }, 500)
 }
@@ -18,7 +18,6 @@ function haCheque(simbolo) {
     let retornoDaFuncao = false
 
     possibilidadesVitoriaMatriz.forEach((cadaReta, indiceCadaReta) => {
-        // if (contadorSimbolo !== 2 && contadorVazio !== 1) {
         contadorVazio = 0
         contadorSimbolo = 0
 
@@ -30,6 +29,34 @@ function haCheque(simbolo) {
 
         if (contadorSimbolo === 2 && contadorVazio === 1) {
             campoQueSeraMarcado = possibilidadesVitoriaCampo[indiceCadaReta][indiceCampoQueSeraMarcado]
+
+            retornoDaFuncao = true
+        }
+    })
+    return retornoDaFuncao
+}
+
+function haCaminhoLivre(simbolo) {
+    let contadorSimbolo = 0
+    let contadorVazio = 0
+    let retornoDaFuncao = false
+
+    possibilidadesVitoriaMatriz.forEach((cadaReta, indiceCadaReta) => {
+        contadorVazio = 0
+        contadorSimbolo = 0
+        indicesCamposVaziosDeCadaReta = []
+
+
+        cadaReta.forEach((cadaCampo, indiceCadaCampo) => {
+            contadorSimbolo += simbolo === cadaCampo && 1
+            contadorVazio += 0 === cadaCampo && 1
+            0 === cadaCampo ? indicesCamposVaziosDeCadaReta.push(indiceCadaCampo) : false
+        })
+
+        if (contadorSimbolo === 1 && contadorVazio === 2) {
+            const jogadaAleatoria = Math.floor(Math.random() * indicesCamposVaziosDeCadaReta.length)
+            const campoVazioAleatorio = indicesCamposVaziosDeCadaReta[jogadaAleatoria]
+            campoQueSeraMarcado = possibilidadesVitoriaCampo[indiceCadaReta][campoVazioAleatorio]
 
             retornoDaFuncao = true
         }
@@ -86,11 +113,26 @@ function aplicarJogadaDaMaquina(adversarioSimbolo, simbolo) {
         abrirModalCarregamento()
 
         if (haCheque(simbolo)) {
+            console.log("ganhando")
             campoSelecionado = campoQueSeraMarcado //var vindo da função ha cheque
         } else if (haCheque(adversarioSimbolo)) {
+            console.log("bloqueando adversario")
             campoSelecionado = campoQueSeraMarcado //var vindo da função ha cheque
-        } else if (matrizJogo[4] === 0) {
-            campoSelecionado = campo5
+        } else if (
+            //Jogada nas bordas
+            matrizJogo[0] === 0 &&
+            matrizJogo[1] === 0 &&
+            matrizJogo[2] === 0 &&
+            matrizJogo[3] === 0 &&
+            matrizJogo[4] === 0 &&
+            matrizJogo[5] === 0 &&
+            matrizJogo[6] === 0 &&
+            matrizJogo[7] === 0 &&
+            matrizJogo[8] === 0
+        ) {
+            console.log("Seleionando qualquer campo na beirada")
+            const bordasTabuleiro = [campo1, campo2, campo3, campo4, campo6, campo7, campo8, campo9]
+            campoSelecionado = jogarAleatoriamente(bordasTabuleiro)
         } else if (
             matrizJogo[4] === adversarioSimbolo &&
             matrizJogo[0] === 0 &&
@@ -98,11 +140,18 @@ function aplicarJogadaDaMaquina(adversarioSimbolo, simbolo) {
             matrizJogo[6] === 0 &&
             matrizJogo[8] === 0
         ) {
-            console.log('tenho q jogar na ponta')
-
+            console.log("Selecionando qualquer ponta")
+                //jogada nas pontas
             const pontasTabuleiro = [campo1, campo3, campo7, campo9]
             campoSelecionado = jogarAleatoriamente(pontasTabuleiro)
+        } else if (matrizJogo[4] === 0) {
+            console.log("marcando no meio")
+            campoSelecionado = campo5
+        } else if (haCaminhoLivre(simbolo)) {
+            console.log("usando caminho livre")
+            campoSelecionado = campoQueSeraMarcado //var vindo da função haCaminhoLivre
         } else {
+            console.log("jogada aleatoria")
             campoSelecionado = jogarAleatoriamente(camposVagos)
         }
     }

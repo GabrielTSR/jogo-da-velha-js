@@ -7,7 +7,7 @@ modosDeJogo.addEventListener('input', desabilitarDificuldadeDaMaquina)
 //** FIM --> USO DO EVENT LISTENER **//
 
 desabilitarDificuldadeDaMaquina()
-//Função chamada para o caso de a página carregar com jogador vs jogador habilitado
+    //Função chamada para o caso de a página carregar com jogador vs jogador habilitado
 
 //** INICIO --> FUNÇÕES **//
 
@@ -18,14 +18,16 @@ const atualizarMatrizJogo = (indice, simbolo) => {
     matrizJogo[indice] = simbolo
 
     possibilidadesVitoriaMatriz = [
+        [matrizJogo[0], matrizJogo[4], matrizJogo[8]],
+        [matrizJogo[2], matrizJogo[4], matrizJogo[6]],
+
         [matrizJogo[0], matrizJogo[1], matrizJogo[2]],
         [matrizJogo[3], matrizJogo[4], matrizJogo[5]],
         [matrizJogo[6], matrizJogo[7], matrizJogo[8]],
+
         [matrizJogo[0], matrizJogo[3], matrizJogo[6]],
         [matrizJogo[1], matrizJogo[4], matrizJogo[7]],
         [matrizJogo[2], matrizJogo[5], matrizJogo[8]],
-        [matrizJogo[0], matrizJogo[4], matrizJogo[8]],
-        [matrizJogo[2], matrizJogo[4], matrizJogo[6]],
     ]
 }
 
@@ -34,13 +36,13 @@ const atualizarCamposVagos = () => (camposVagos = camposVagos.filter(retornarCam
 const passarAVez = (simboloVezDe) => (EAVezDe.innerHTML = `É a vez de <br>"${simboloVezDe}"`)
 
 function checarSeOJogoAcabou() {
-    return (vencedorDaPartida = verSeGanhou('x')
-        ? 'x'
-        : verSeGanhou('fantasma')
-        ? 'fantasma'
-        : verSeEmpatou()
-        ? 'empate'
-        : 0)
+    return (vencedorDaPartida = verSeGanhou('x') ?
+        'x' :
+        verSeGanhou('fantasma') ?
+        'fantasma' :
+        verSeEmpatou() ?
+        'empate' :
+        0)
 }
 
 function exibirReta() {
@@ -53,35 +55,35 @@ function exibirReta() {
 
     switch (indiceRetaVencedora) {
         case 0:
-            retaVitoria.className = 'reta-horizontal primeira-horizontal'
-            break
-
-        case 1:
-            retaVitoria.className = 'reta-horizontal'
-            break
-
-        case 2:
-            retaVitoria.className = 'reta-horizontal ultima-horizontal'
-            break
-
-        case 3:
-            retaVitoria.className = 'reta-vertical primeira-vertical'
-            break
-
-        case 4:
-            retaVitoria.className = 'reta-vertical'
-            break
-
-        case 5:
-            retaVitoria.className = 'reta-vertical ultima-vertical'
-            break
-
-        case 6:
             retaVitoria.className = 'reta-diagonal diagonal-inicio'
             break
 
-        default:
+        case 1:
             retaVitoria.className = 'reta-diagonal diagonal-fim'
+            break
+
+        case 2:
+            retaVitoria.className = 'reta-horizontal primeira-horizontal'
+            break
+
+        case 3:
+            retaVitoria.className = 'reta-horizontal'
+            break
+
+        case 4:
+            retaVitoria.className = 'reta-horizontal ultima-horizontal'
+            break
+
+        case 5:
+            retaVitoria.className = 'reta-vertical primeira-vertical'
+            break
+
+        case 6:
+            retaVitoria.className = 'reta-vertical'
+            break
+
+        default:
+            retaVitoria.className = 'reta-vertical ultima-vertical'
             break
     }
     if (retaVitoria.classList.contains('reta-diagonal')) {
@@ -107,7 +109,7 @@ function exibirResultado() {
 function atrasarExibicaoResultado() {
     exibirReta()
 
-    setTimeout(function () {
+    setTimeout(function() {
         escreverResultado(mensagem)
         abrirModalResultado()
     }, 1100)
@@ -147,6 +149,9 @@ const resetarMatrizJogo = () => {
     matrizJogo = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
     possibilidadesVitoriaMatriz = [
+        [matrizJogo[0], matrizJogo[4], matrizJogo[8]],
+        [matrizJogo[2], matrizJogo[4], matrizJogo[6]],
+
         [matrizJogo[0], matrizJogo[1], matrizJogo[2]],
         [matrizJogo[3], matrizJogo[4], matrizJogo[5]],
         [matrizJogo[6], matrizJogo[7], matrizJogo[8]],
@@ -154,9 +159,6 @@ const resetarMatrizJogo = () => {
         [matrizJogo[0], matrizJogo[3], matrizJogo[6]],
         [matrizJogo[1], matrizJogo[4], matrizJogo[7]],
         [matrizJogo[2], matrizJogo[5], matrizJogo[8]],
-
-        [matrizJogo[0], matrizJogo[4], matrizJogo[8]],
-        [matrizJogo[2], matrizJogo[4], matrizJogo[6]],
     ]
 }
 
