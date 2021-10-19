@@ -44,8 +44,7 @@ function haCaminhoLivre(simbolo) {
     possibilidadesVitoriaMatriz.forEach((cadaReta, indiceCadaReta) => {
         contadorVazio = 0
         contadorSimbolo = 0
-        indicesCamposVaziosDeCadaReta = []
-
+        let indicesCamposVaziosDeCadaReta = []
 
         cadaReta.forEach((cadaCampo, indiceCadaCampo) => {
             contadorSimbolo += simbolo === cadaCampo && 1
@@ -54,9 +53,9 @@ function haCaminhoLivre(simbolo) {
         })
 
         if (contadorSimbolo === 1 && contadorVazio === 2) {
-            const jogadaAleatoria = Math.floor(Math.random() * indicesCamposVaziosDeCadaReta.length)
-            const campoVazioAleatorio = indicesCamposVaziosDeCadaReta[jogadaAleatoria]
-            campoQueSeraMarcado = possibilidadesVitoriaCampo[indiceCadaReta][campoVazioAleatorio]
+            const indiceAleatorio = Math.floor(Math.random() * indicesCamposVaziosDeCadaReta.length)
+            const indiceCampoAleatorio = indicesCamposVaziosDeCadaReta[indiceAleatorio]
+            campoQueSeraMarcado = possibilidadesVitoriaCampo[indiceCadaReta][indiceCampoAleatorio]
 
             retornoDaFuncao = true
         }
@@ -130,7 +129,7 @@ function aplicarJogadaDaMaquina(adversarioSimbolo, simbolo) {
             matrizJogo[7] === 0 &&
             matrizJogo[8] === 0
         ) {
-            console.log("Seleionando qualquer campo na beirada")
+            console.log("Selecionando qualquer campo na beirada")
             const bordasTabuleiro = [campo1, campo2, campo3, campo4, campo6, campo7, campo8, campo9]
             campoSelecionado = jogarAleatoriamente(bordasTabuleiro)
         } else if (

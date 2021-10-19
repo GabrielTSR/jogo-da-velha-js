@@ -46,50 +46,52 @@ function checarSeOJogoAcabou() {
 }
 
 function exibirReta() {
-    retaVitoria.style.transition = 'width 1s ease-in-out'
-    if (vencedorDaPartida === 'x') {
-        retaVitoria.style.backgroundColor = '#BD00FF'
-    } else {
-        retaVitoria.style.backgroundColor = '#FF0000'
-    }
+    if (vencedorDaPartida !== 0 && vencedorDaPartida !== 'empate') {
+        retaVitoria.style.transition = 'width 1s ease-in-out'
+        if (vencedorDaPartida === 'x') {
+            retaVitoria.style.backgroundColor = '#BD00FF'
+        } else {
+            retaVitoria.style.backgroundColor = '#FF0000'
+        }
 
-    switch (indiceRetaVencedora) {
-        case 0:
-            retaVitoria.className = 'reta-diagonal diagonal-inicio'
-            break
+        switch (indiceRetaVencedora) {
+            case 0:
+                retaVitoria.className = 'reta-diagonal diagonal-inicio'
+                break
 
-        case 1:
-            retaVitoria.className = 'reta-diagonal diagonal-fim'
-            break
+            case 1:
+                retaVitoria.className = 'reta-diagonal diagonal-fim'
+                break
 
-        case 2:
-            retaVitoria.className = 'reta-horizontal primeira-horizontal'
-            break
+            case 2:
+                retaVitoria.className = 'reta-horizontal primeira-horizontal'
+                break
 
-        case 3:
-            retaVitoria.className = 'reta-horizontal'
-            break
+            case 3:
+                retaVitoria.className = 'reta-horizontal'
+                break
 
-        case 4:
-            retaVitoria.className = 'reta-horizontal ultima-horizontal'
-            break
+            case 4:
+                retaVitoria.className = 'reta-horizontal ultima-horizontal'
+                break
 
-        case 5:
-            retaVitoria.className = 'reta-vertical primeira-vertical'
-            break
+            case 5:
+                retaVitoria.className = 'reta-vertical primeira-vertical'
+                break
 
-        case 6:
-            retaVitoria.className = 'reta-vertical'
-            break
+            case 6:
+                retaVitoria.className = 'reta-vertical'
+                break
 
-        default:
-            retaVitoria.className = 'reta-vertical ultima-vertical'
-            break
-    }
-    if (retaVitoria.classList.contains('reta-diagonal')) {
-        retaVitoria.style.width = '130%'
-    } else {
-        retaVitoria.style.width = '100%'
+            default:
+                retaVitoria.className = 'reta-vertical ultima-vertical'
+                break
+        }
+        if (retaVitoria.classList.contains('reta-diagonal')) {
+            retaVitoria.style.width = '130%'
+        } else {
+            retaVitoria.style.width = '100%'
+        }
     }
 }
 
@@ -98,11 +100,10 @@ function exibirResultado() {
         if (vencedorDaPartida === 'empate') {
             mensagem = `O jogo está empatado!`
             escreverResultado(mensagem)
-            abrirModalResultado()
         } else {
             mensagem = `"${vencedorDaPartida}" venceu!`
-            atrasarExibicaoResultado()
         }
+        atrasarExibicaoResultado()
     }
 }
 
@@ -232,5 +233,6 @@ function aplicarJogada(campoSelecionado, indice, simbolo, adversarioSimbolo) {
     eX = !eX
     passarAVez(adversarioSimbolo)
     checarSeOJogoAcabou()
+
     exibirResultado()
 }

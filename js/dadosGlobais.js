@@ -72,8 +72,6 @@ var possibilidadesVitoriaCampo = [
 
 var eX = true //true para primeiro jogador, false para segundo jogador
 
-var indicesCamposVaziosDeCadaReta = [] //Utilizada dentro da função haCaminhoLivre
-
 var campoQueSeraMarcado
 
 var indiceCampoQueSeraMarcado
