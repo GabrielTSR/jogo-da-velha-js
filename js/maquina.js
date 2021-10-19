@@ -112,10 +112,10 @@ function aplicarJogadaDaMaquina(adversarioSimbolo, simbolo) {
         abrirModalCarregamento()
 
         if (haCheque(simbolo)) {
-            console.log("ganhando")
+            console.log('ganhando')
             campoSelecionado = campoQueSeraMarcado //var vindo da função ha cheque
         } else if (haCheque(adversarioSimbolo)) {
-            console.log("bloqueando adversario")
+            console.log('bloqueando adversario')
             campoSelecionado = campoQueSeraMarcado //var vindo da função ha cheque
         } else if (
             //Jogada nas bordas
@@ -129,7 +129,7 @@ function aplicarJogadaDaMaquina(adversarioSimbolo, simbolo) {
             matrizJogo[7] === 0 &&
             matrizJogo[8] === 0
         ) {
-            console.log("Selecionando qualquer campo na beirada")
+            console.log('Selecionando qualquer campo na beirada')
             const bordasTabuleiro = [campo1, campo2, campo3, campo4, campo6, campo7, campo8, campo9]
             campoSelecionado = jogarAleatoriamente(bordasTabuleiro)
         } else if (
@@ -139,18 +139,18 @@ function aplicarJogadaDaMaquina(adversarioSimbolo, simbolo) {
             matrizJogo[6] === 0 &&
             matrizJogo[8] === 0
         ) {
-            console.log("Selecionando qualquer ponta")
+            console.log('Selecionando qualquer ponta')
                 //jogada nas pontas
             const pontasTabuleiro = [campo1, campo3, campo7, campo9]
             campoSelecionado = jogarAleatoriamente(pontasTabuleiro)
         } else if (matrizJogo[4] === 0) {
-            console.log("marcando no meio")
+            console.log('marcando no meio')
             campoSelecionado = campo5
         } else if (haCaminhoLivre(simbolo)) {
-            console.log("usando caminho livre")
+            console.log('usando caminho livre')
             campoSelecionado = campoQueSeraMarcado //var vindo da função haCaminhoLivre
         } else {
-            console.log("jogada aleatoria")
+            console.log('jogada aleatoria')
             campoSelecionado = jogarAleatoriamente(camposVagos)
         }
     }
