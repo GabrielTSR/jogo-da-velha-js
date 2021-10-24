@@ -63,6 +63,22 @@ function haCaminhoLivre(simbolo) {
     return retornoDaFuncao
 }
 
+function houveBloqueioDiagonalInicial(adversarioSimbolo, simbolo) {
+    if (
+        (adversarioSimbolo === 'x' && matrizJogo[4] === adversarioSimbolo && matrizJogo[0] === simbolo) ||
+        matrizJogo[2] === simbolo ||
+        matrizJogo[6] === simbolo ||
+        matrizJogo[8] === simbolo
+    ) {
+        if (!reagiuADiagonalInicialBloqueada) {
+            reagiuADiagonalInicialBloqueada = true
+            return true
+        }
+    }
+
+    return false
+}
+
 function resgatarIndexDoCampoEmMatrizJogo(campo) {
     switch (campo.id) {
         case 'campo-1':
@@ -132,6 +148,12 @@ function aplicarJogadaDaMaquina(adversarioSimbolo, simbolo) {
             console.log('Selecionando qualquer campo na beirada')
             const bordasTabuleiro = [campo1, campo2, campo3, campo4, campo6, campo7, campo8, campo9]
             campoSelecionado = jogarAleatoriamente(bordasTabuleiro)
+        } else if (!reagiuADiagonalInicialBloqueada && houveBloqueioDiagonalInicial(adversarioSimbolo, simbolo)) {
+            console.log('bloqueando estrategia da diagonal')
+            const pontasTabuleiro = [campo1, campo3, campo7, campo9]
+            do {
+                campoSelecionado = jogarAleatoriamente(pontasTabuleiro)
+            } while (campoSelecionado.innerHTML !== '')
         } else if (
             matrizJogo[4] === adversarioSimbolo &&
             matrizJogo[0] === 0 &&

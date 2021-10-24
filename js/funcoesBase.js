@@ -192,6 +192,8 @@ function resetarJogo() {
     retaVitoria.style.transition = ''
     retaVitoria.className = ''
     retaVitoria.style.width = '0'
+
+    reagiuADiagonalInicialBloqueada = false
 }
 
 const encontrouSimbolo = () => (simboloEncontrado += simboloJogador === cadaCampo && 1)

@@ -38,7 +38,7 @@ var vencedorDaPartida = 0 //entre 0, 'x', e 'fantasma'
 
 var indiceRetaVencedora = 0
     /*Valor em que armazenaremos uma reta vinda de 
-            "possibilidadesVitoriaMatriz" (correspondente a vitória)*/
+                    "possibilidadesVitoriaMatriz" (correspondente a vitória)*/
 
 var matrizJogo = [0, 0, 0, 0, 0, 0, 0, 0, 0] //0 = vazio
 
@@ -77,5 +77,7 @@ var campoQueSeraMarcado
 var indiceCampoQueSeraMarcado
 
 var mensagem
+
+var reagiuADiagonalInicialBloqueada = false
 
 //** FIM --> DECLARANDO VARIAVEIS GLOBAIS **//
