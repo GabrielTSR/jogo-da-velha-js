@@ -63,19 +63,38 @@ function haCaminhoLivre(simbolo) {
     return retornoDaFuncao
 }
 
-function houveBloqueioDiagonalInicial(adversarioSimbolo, simbolo) {
+function haBloqueioDiagonalInicial(adversarioSimbolo, simbolo) {
     if (
         (adversarioSimbolo === 'x' && matrizJogo[4] === adversarioSimbolo && matrizJogo[0] === simbolo) ||
         matrizJogo[2] === simbolo ||
         matrizJogo[6] === simbolo ||
         matrizJogo[8] === simbolo
     ) {
-        if (!reagiuADiagonalInicialBloqueada) {
-            reagiuADiagonalInicialBloqueada = true
-            return true
-        }
+        jaReagiuADiagonalInicialBloqueada = true
+
+        const pontasTabuleiro = [campo1, campo3, campo7, campo9]
+        do {
+            campoQueSeraMarcado = jogarAleatoriamente(pontasTabuleiro)
+        } while (campoQueSeraMarcado.innerHTML !== '')
+
+        return true
     }
 
+    return false
+}
+
+function haDiagonalCurta(adversarioSimbolo, simbolo) {
+    if (adversarioSimbolo === 'x' && matrizJogo[4] === simbolo) {
+        jaReagiuADiagonalCurta = true
+
+        if (matrizJogo[1] === adversarioSimbolo && matrizJogo[5] === adversarioSimbolo) {
+            campoQueSeraMarcado = campo3
+        } else if (matrizJogo[3] === adversarioSimbolo && matrizJogo[7] === adversarioSimbolo) {
+            campoQueSeraMarcado = campo7
+        }
+        jaReagiuADiagonalCurta = true
+        return true
+    }
     return false
 }
 
@@ -148,12 +167,12 @@ function aplicarJogadaDaMaquina(adversarioSimbolo, simbolo) {
             console.log('Selecionando qualquer campo na beirada')
             const bordasTabuleiro = [campo1, campo2, campo3, campo4, campo6, campo7, campo8, campo9]
             campoSelecionado = jogarAleatoriamente(bordasTabuleiro)
-        } else if (!reagiuADiagonalInicialBloqueada && houveBloqueioDiagonalInicial(adversarioSimbolo, simbolo)) {
+        } else if (!jaReagiuADiagonalInicialBloqueada && haBloqueioDiagonalInicial(adversarioSimbolo, simbolo)) {
             console.log('bloqueando estrategia da diagonal')
-            const pontasTabuleiro = [campo1, campo3, campo7, campo9]
-            do {
-                campoSelecionado = jogarAleatoriamente(pontasTabuleiro)
-            } while (campoSelecionado.innerHTML !== '')
+            campoSelecionado = campoQueSeraMarcado
+        } else if (!jaReagiuADiagonalCurta && haDiagonalCurta(adversarioSimbolo, simbolo)) {
+            console.log('bloqueando diagonal curta')
+            campoSelecionado = campoQueSeraMarcado
         } else if (
             matrizJogo[4] === adversarioSimbolo &&
             matrizJogo[0] === 0 &&
