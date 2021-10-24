@@ -84,16 +84,33 @@ function haBloqueioDiagonalInicial(adversarioSimbolo, simbolo) {
 }
 
 function haDiagonalCurta(adversarioSimbolo, simbolo) {
-    if (adversarioSimbolo === 'x' && matrizJogo[4] === simbolo) {
-        jaReagiuADiagonalCurta = true
-
-        if (matrizJogo[1] === adversarioSimbolo && matrizJogo[5] === adversarioSimbolo) {
+    if (
+        adversarioSimbolo === 'x' &&
+        matrizJogo[4] === simbolo &&
+        matrizJogo[0] === 0 &&
+        matrizJogo[2] === 0 &&
+        matrizJogo[6] === 0 &&
+        matrizJogo[8] === 0
+    ) {
+        if (
+            matrizJogo[1] === adversarioSimbolo &&
+            matrizJogo[5] === adversarioSimbolo &&
+            matrizJogo[3] === 0 &&
+            matrizJogo[7] === 0
+        ) {
             campoQueSeraMarcado = campo3
-        } else if (matrizJogo[3] === adversarioSimbolo && matrizJogo[7] === adversarioSimbolo) {
+            jaReagiuADiagonalCurta = true
+            return true
+        } else if (
+            matrizJogo[3] === adversarioSimbolo &&
+            matrizJogo[7] === adversarioSimbolo &&
+            matrizJogo[1] === 0 &&
+            matrizJogo[5] === 0
+        ) {
             campoQueSeraMarcado = campo7
+            jaReagiuADiagonalCurta = true
+            return true
         }
-        jaReagiuADiagonalCurta = true
-        return true
     }
     return false
 }
