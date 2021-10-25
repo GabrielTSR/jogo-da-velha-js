@@ -10,7 +10,7 @@ function aplicarJogadaDoJogador(campo, indiceCampoSelecionado) {
     let simbolo
     let adversarioSimbolo
 
-    if (campoEstaVazio(campoSelecionado) && vencedorDaPartida === 0) {
+    if (campoEstaVazio(campoSelecionado) && vencedorDaPartida === 0 && camposSaoClicaveis) {
         if (eX) {
             simbolo = 'x'
             adversarioSimbolo = 'fantasma'

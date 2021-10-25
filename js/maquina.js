@@ -4,6 +4,7 @@ function criarDelay(campoSelecionado, indexDoCampo, simbolo, adversarioSimbolo, 
     setTimeout(function() {
         document.getElementById('maquina-pensando').style.display = 'none'
         aplicarJogada(campoSelecionado, indexDoCampo, simbolo, adversarioSimbolo, eX)
+        camposSaoClicaveis = true
     }, 750)
 }
 
@@ -156,6 +157,7 @@ function resgatarIndexDoCampoEmMatrizJogo(campo) {
 }
 
 function aplicarJogadaDaMaquina(adversarioSimbolo, simbolo) {
+    camposSaoClicaveis = false
     let campoSelecionado
 
     if (dificuldadeDaMaquinaSelecionada === 'facil') {
