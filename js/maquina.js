@@ -138,6 +138,22 @@ function haGambitoDoCanto(adversarioSimbolo, simbolo) {
         campoQueFuncaoEscolheuMarcar = campo3
         return true
     }
+
+    if (
+        adversarioSimbolo === 'x' &&
+        matrizJogo[0] === simbolo &&
+        matrizJogo[1] === simbolo &&
+        matrizJogo[2] === adversarioSimbolo &&
+        matrizJogo[3] === adversarioSimbolo &&
+        matrizJogo[4] === simbolo &&
+        matrizJogo[5] === 0 &&
+        matrizJogo[6] === 0 &&
+        matrizJogo[7] === adversarioSimbolo &&
+        matrizJogo[8] === 0
+    ) {
+        campoQueFuncaoEscolheuMarcar = campo9
+        return true
+    }
     return false
 }
 
