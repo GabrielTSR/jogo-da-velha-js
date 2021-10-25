@@ -1,10 +1,10 @@
 'use strict'
 
-function abrirModalCarregamento() {
-    document.getElementById('maquina-pensando').style.display = 'flex'
+function criarDelay(campoSelecionado, indexDoCampo, simbolo, adversarioSimbolo, eX) {
     setTimeout(function() {
         document.getElementById('maquina-pensando').style.display = 'none'
-    }, 500)
+        aplicarJogada(campoSelecionado, indexDoCampo, simbolo, adversarioSimbolo, eX)
+    }, 750)
 }
 
 const jogarAleatoriamente = (matrizCampos) => {
@@ -167,7 +167,8 @@ function aplicarJogadaDaMaquina(adversarioSimbolo, simbolo) {
             campoSelecionado = jogarAleatoriamente(camposVagos)
         }
     } else if (dificuldadeDaMaquinaSelecionada === 'dificil') {
-        abrirModalCarregamento()
+        document.getElementById('maquina-pensando').style.display = 'flex'
+        document.getElementById('maquina-pensando').style.transform += 'rotate(90deg)'
 
         if (haCheque(simbolo)) {
             console.log('ganhando')
@@ -220,7 +221,7 @@ function aplicarJogadaDaMaquina(adversarioSimbolo, simbolo) {
     }
 
     const indexDoCampo = resgatarIndexDoCampoEmMatrizJogo(campoSelecionado)
-    aplicarJogada(campoSelecionado, indexDoCampo, simbolo, adversarioSimbolo, eX)
+    criarDelay(campoSelecionado, indexDoCampo, simbolo, adversarioSimbolo, eX)
 }
 
 function aplicarPrimeiraJogadaMaquina() {
