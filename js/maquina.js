@@ -64,20 +64,26 @@ function haCaminhoLivre(simbolo) {
 }
 
 function haBloqueioDiagonalInicial(adversarioSimbolo, simbolo) {
+    //Verificando se o adversário da máquina é x
+    //se x marcou no meio,
+    //e se há uma marcação aliada em uma das pontas.
     if (
         (adversarioSimbolo === 'x' && matrizJogo[4] === adversarioSimbolo && matrizJogo[0] === simbolo) ||
         matrizJogo[2] === simbolo ||
         matrizJogo[6] === simbolo ||
         matrizJogo[8] === simbolo
     ) {
-        jaReagiuADiagonalInicialBloqueada = true
+        //Verificando se há alguma ponta livre.
+        if (matrizJogo[0] === 0 || matrizJogo[2] === 0 || matrizJogo[6] === 0 || matrizJogo[8] === 0) {
+            jaReagiuADiagonalInicialBloqueada = true
 
-        const pontasTabuleiro = [campo1, campo3, campo7, campo9]
-        do {
-            campoQueSeraMarcado = jogarAleatoriamente(pontasTabuleiro)
-        } while (campoQueSeraMarcado.innerHTML !== '')
+            const pontasTabuleiro = [campo1, campo3, campo7, campo9]
+            do {
+                campoQueSeraMarcado = jogarAleatoriamente(pontasTabuleiro)
+            } while (campoQueSeraMarcado.innerHTML !== '')
 
-        return true
+            return true
+        }
     }
 
     return false
@@ -160,7 +166,7 @@ function aplicarJogadaDaMaquina(adversarioSimbolo, simbolo) {
         } else {
             campoSelecionado = jogarAleatoriamente(camposVagos)
         }
-    } else if ('dificil') {
+    } else if (dificuldadeDaMaquinaSelecionada === 'dificil') {
         abrirModalCarregamento()
 
         if (haCheque(simbolo)) {
