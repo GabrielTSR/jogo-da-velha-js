@@ -103,7 +103,7 @@ function exibirResultado() {
             escreverResultado(mensagem)
         } else {
             document.getElementById('imagem-vencedor').src = `img/${vencedorDaPartida}_vencedor.png`
-            mensagem = 'venceu!'
+            mensagem = `"${vencedorDaPartida}" venceu!`
         }
         atrasarExibicaoResultado()
     }

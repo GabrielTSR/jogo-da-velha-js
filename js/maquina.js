@@ -29,7 +29,7 @@ function haCheque(simbolo) {
         })
 
         if (contadorSimbolo === 2 && contadorVazio === 1) {
-            campoQueSeraMarcado = possibilidadesVitoriaCampo[indiceCadaReta][indiceCampoQueSeraMarcado]
+            campoQueFuncaoEscolheuMarcar = possibilidadesVitoriaCampo[indiceCadaReta][indiceCampoQueSeraMarcado]
 
             retornoDaFuncao = true
         }
@@ -56,7 +56,7 @@ function haCaminhoLivre(simbolo) {
         if (contadorSimbolo === 1 && contadorVazio === 2) {
             const indiceAleatorio = Math.floor(Math.random() * indicesCamposVaziosDeCadaReta.length)
             const indiceCampoAleatorio = indicesCamposVaziosDeCadaReta[indiceAleatorio]
-            campoQueSeraMarcado = possibilidadesVitoriaCampo[indiceCadaReta][indiceCampoAleatorio]
+            campoQueFuncaoEscolheuMarcar = possibilidadesVitoriaCampo[indiceCadaReta][indiceCampoAleatorio]
 
             retornoDaFuncao = true
         }
@@ -80,8 +80,8 @@ function haBloqueioDiagonalInicial(adversarioSimbolo, simbolo) {
 
             const pontasTabuleiro = [campo1, campo3, campo7, campo9]
             do {
-                campoQueSeraMarcado = jogarAleatoriamente(pontasTabuleiro)
-            } while (campoQueSeraMarcado.innerHTML !== '')
+                campoQueFuncaoEscolheuMarcar = jogarAleatoriamente(pontasTabuleiro)
+            } while (campoQueFuncaoEscolheuMarcar.innerHTML !== '')
 
             return true
         }
@@ -105,7 +105,7 @@ function haDiagonalCurta(adversarioSimbolo, simbolo) {
             matrizJogo[3] === 0 &&
             matrizJogo[7] === 0
         ) {
-            campoQueSeraMarcado = campo3
+            campoQueFuncaoEscolheuMarcar = campo3
             jaReagiuADiagonalCurta = true
             return true
         } else if (
@@ -114,10 +114,29 @@ function haDiagonalCurta(adversarioSimbolo, simbolo) {
             matrizJogo[1] === 0 &&
             matrizJogo[5] === 0
         ) {
-            campoQueSeraMarcado = campo7
+            campoQueFuncaoEscolheuMarcar = campo7
             jaReagiuADiagonalCurta = true
             return true
         }
+    }
+    return false
+}
+
+function haGambitoDoCanto(adversarioSimbolo, simbolo) {
+    if (
+        adversarioSimbolo === 'x' &&
+        matrizJogo[0] === adversarioSimbolo &&
+        matrizJogo[1] === 0 &&
+        matrizJogo[2] === 0 &&
+        matrizJogo[3] === simbolo &&
+        matrizJogo[4] === simbolo &&
+        matrizJogo[5] === adversarioSimbolo &&
+        matrizJogo[6] === 0 &&
+        matrizJogo[7] === adversarioSimbolo &&
+        matrizJogo[8] === 0
+    ) {
+        campoQueFuncaoEscolheuMarcar = campo3
+        return true
     }
     return false
 }
@@ -164,7 +183,7 @@ function aplicarJogadaDaMaquina(adversarioSimbolo, simbolo) {
         campoSelecionado = jogarAleatoriamente(camposVagos)
     } else if (dificuldadeDaMaquinaSelecionada === 'medio') {
         if (haCheque(adversarioSimbolo) === true) {
-            campoSelecionado = campoQueSeraMarcado //var vindo da função ha cheque
+            campoSelecionado = campoQueFuncaoEscolheuMarcar //var vindo da função ha cheque
         } else {
             campoSelecionado = jogarAleatoriamente(camposVagos)
         }
@@ -174,10 +193,10 @@ function aplicarJogadaDaMaquina(adversarioSimbolo, simbolo) {
 
         if (haCheque(simbolo)) {
             console.log('ganhando')
-            campoSelecionado = campoQueSeraMarcado //var vindo da função ha cheque
+            campoSelecionado = campoQueFuncaoEscolheuMarcar //var vindo da função ha cheque
         } else if (haCheque(adversarioSimbolo)) {
             console.log('bloqueando adversario')
-            campoSelecionado = campoQueSeraMarcado //var vindo da função ha cheque
+            campoSelecionado = campoQueFuncaoEscolheuMarcar //var vindo da função ha cheque
         } else if (
             //Jogada nas bordas
             matrizJogo[0] === 0 &&
@@ -195,10 +214,13 @@ function aplicarJogadaDaMaquina(adversarioSimbolo, simbolo) {
             campoSelecionado = jogarAleatoriamente(bordasTabuleiro)
         } else if (!jaReagiuADiagonalInicialBloqueada && haBloqueioDiagonalInicial(adversarioSimbolo, simbolo)) {
             console.log('bloqueando estrategia da diagonal')
-            campoSelecionado = campoQueSeraMarcado
+            campoSelecionado = campoQueFuncaoEscolheuMarcar
         } else if (!jaReagiuADiagonalCurta && haDiagonalCurta(adversarioSimbolo, simbolo)) {
             console.log('bloqueando diagonal curta')
-            campoSelecionado = campoQueSeraMarcado
+            campoSelecionado = campoQueFuncaoEscolheuMarcar
+        } else if (haGambitoDoCanto(adversarioSimbolo, simbolo)) {
+            console.log('bloqueando Gambito do canto')
+            campoSelecionado = campoQueFuncaoEscolheuMarcar
         } else if (
             matrizJogo[4] === adversarioSimbolo &&
             matrizJogo[0] === 0 &&
@@ -215,7 +237,7 @@ function aplicarJogadaDaMaquina(adversarioSimbolo, simbolo) {
             campoSelecionado = campo5
         } else if (haCaminhoLivre(simbolo)) {
             console.log('usando caminho livre')
-            campoSelecionado = campoQueSeraMarcado //var vindo da função haCaminhoLivre
+            campoSelecionado = campoQueFuncaoEscolheuMarcar //var vindo da função haCaminhoLivre
         } else {
             console.log('jogada aleatoria')
             campoSelecionado = jogarAleatoriamente(camposVagos)

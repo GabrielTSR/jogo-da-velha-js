@@ -38,7 +38,7 @@ var vencedorDaPartida = 0 //entre 0, 'x', e 'fantasma'
 
 var indiceRetaVencedora = 0
     /*Valor em que armazenaremos uma reta vinda de 
-                                    "possibilidadesVitoriaMatriz" (correspondente a vitória)*/
+                                        "possibilidadesVitoriaMatriz" (correspondente a vitória)*/
 
 var matrizJogo = [0, 0, 0, 0, 0, 0, 0, 0, 0] //0 = vazio
 
@@ -72,7 +72,7 @@ var possibilidadesVitoriaCampo = [
 
 var eX = true //true para primeiro jogador, false para segundo jogador
 
-var campoQueSeraMarcado
+var campoQueFuncaoEscolheuMarcar
 
 var indiceCampoQueSeraMarcado
 
