@@ -436,8 +436,16 @@ button {
 }
 
 .cada-campo img {
-    width: 50%;
-    height: 50%;
+    width: 4vw;
+    height: 4vw;
+    object-fit: cover;
+}
+
+.cada-campo:hover img {
+    -webkit-animation: swing 1s ease;
+    animation: swing 1s ease;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
 }
 
 #campo-1,

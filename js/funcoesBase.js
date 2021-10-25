@@ -12,7 +12,7 @@ desabilitarDificuldadeDaMaquina()
 //** INICIO --> FUNÇÕES **//
 
 const inserirElemento = (campoSelecionado, elementoInserido) =>
-    (campoSelecionado.innerHTML = `<img src="./img/${elementoInserido}.png" alt="${elementoInserido}">`)
+    (campoSelecionado.innerHTML = `<img class="animate__animated animate__bounceIn" src="./img/${elementoInserido}.png" alt="${elementoInserido}">`)
 
 const atualizarMatrizJogo = (indice, simbolo) => {
     matrizJogo[indice] = simbolo
