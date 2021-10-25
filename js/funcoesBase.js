@@ -98,10 +98,12 @@ function exibirReta() {
 function exibirResultado() {
     if (vencedorDaPartida !== 0) {
         if (vencedorDaPartida === 'empate') {
+            document.getElementById('imagem-vencedor').src = `img/${vencedorDaPartida}.png`
             mensagem = `O jogo está empatado!`
             escreverResultado(mensagem)
         } else {
-            mensagem = `"${vencedorDaPartida}" venceu!`
+            document.getElementById('imagem-vencedor').src = `img/${vencedorDaPartida}_vencedor.png`
+            mensagem = 'venceu!'
         }
         atrasarExibicaoResultado()
     }
@@ -171,6 +173,8 @@ const fecharModal = () => window.location.replace('#')
 const maquinaComeca = () => xSera === 'outro'
 
 function resetarJogo() {
+    document.getElementById('imagem-vencedor').src = `img/jogo_inacabado.png`
+
     tagDaDivulgacao.innerText = 'Jogo inacabado'
 
     EAVezDe.innerHTML = 'É a vez de <br>"X"'
