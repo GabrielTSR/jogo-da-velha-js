@@ -49,25 +49,12 @@
     border: 10px outset whitesmoke;
 }
 
-#carregamento-container {
+#maquina-pensando {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
     display: none;
-}
-
-#carregamento-container:target {
-    display: flex;
-}
-
-#carregamento-modal {
-    justify-content: space-around;
-    padding: 10px;
-    width: auto;
-    max-width: 400px;
-    height: 200px;
-    background: linear-gradient(87deg, #082368 28%, #07017e 66%);
-    background-color: black;
-    border-top-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border: 10px outset whitesmoke;
 }
 
 .botao-container {

@@ -1,9 +1,9 @@
 'use strict'
 
 function abrirModalCarregamento() {
-    window.location.replace('#carregamento-container')
+    document.getElementById('maquina-pensando').style.display = 'flex'
     setTimeout(function() {
-        window.location.replace('#')
+        document.getElementById('maquina-pensando').style.display = 'none'
     }, 500)
 }
 
