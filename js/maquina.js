@@ -183,7 +183,7 @@ function haGambitoDoCanto(adversarioSimbolo, simbolo) {
         matrizJogo[7] === simbolo &&
         matrizJogo[8] === 0
     ) {
-        campoQueFuncaoEscolheuMarcar = campo7
+        campoQueFuncaoEscolheuMarcar = campo1
         return true
     }
     return false
