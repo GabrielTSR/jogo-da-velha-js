@@ -29,6 +29,8 @@ let campoSelecionado
 var modosDeJogo = document.getElementById('quemContraQuem')
 var modoDeJogoSelecionado = modosDeJogo.value
 
+var selectFormulario = document.getElementsByClassName('caixaDeSelecao')
+
 var xSera = document.getElementById('xSera').value
 
 var dificuldadeDaMaquina = document.getElementById('dificuldadeMaquina')
@@ -37,12 +39,22 @@ var dificuldadeDaMaquinaSelecionada = dificuldadeDaMaquina.value
 var vencedorDaPartida = 0 //entre 0, 'x', e 'fantasma'
 
 var indiceRetaVencedora = 0
-    /*Valor em que armazenaremos uma reta vinda de 
+/*Valor em que armazenaremos uma reta vinda de 
                                         "possibilidadesVitoriaMatriz" (correspondente a vitória)*/
 
 var matrizJogo = [0, 0, 0, 0, 0, 0, 0, 0, 0] //0 = vazio
 
-var camposVagos = [campo1, campo2, campo3, campo4, campo5, campo6, campo7, campo8, campo9]
+var camposVagos = [
+    campo1,
+    campo2,
+    campo3,
+    campo4,
+    campo5,
+    campo6,
+    campo7,
+    campo8,
+    campo9,
+]
 
 var possibilidadesVitoriaMatriz = [
     [matrizJogo[0], matrizJogo[4], matrizJogo[8]],

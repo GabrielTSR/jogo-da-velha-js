@@ -33,6 +33,21 @@
             </div>
         </div>
 
+        <div class="modal-container" id="alteracaoDetectada-container">
+            <div
+                class="flex-column-centralized"
+                id="alteracaoDetectada-modal"
+            >
+                <h2>Deseja aplicar as configurações?</h2>
+                <div class="botao-container">
+                    <button onclick="aplicarAlteracoesConfig()">
+                        <img src="img/reset.svg" alt="reset" />
+                    </button>
+                    <button><a href="#">CANCELAR</a></button>
+                </div>
+            </div>
+        </div>
+
         <div id="ranking-container" class="modal-container">
             <div id="ranking-modal">
                 <a href="#" class="fechar"><i class="fas fa-times"></i></a>
@@ -141,7 +156,7 @@
 
                 <div class="cada-questao-container">
                     <label for="quemContraQuem">MODO DE JOGO</label>
-                    <select name="quemContraQuemSelect" id="quemContraQuem">
+                    <select  class="caixaDeSelecao" name="quemContraQuemSelect" id="quemContraQuem">
                             <option value="jvsj">Jogador vs Jogador</option>
                             <option value="jvsm">Jogador vs Máquina</option>
                         </select>
@@ -149,7 +164,7 @@
 
                 <div class="cada-questao-container">
                     <label for="xSera">"X" SERÁ</label>
-                    <select name="xSera" id="xSera">
+                    <select  class="caixaDeSelecao" name="xSera" id="xSera">
                             <option value="jogador1">Jogador 1</option>
                             <option value="outro">Outro</option>
                         </select>
@@ -157,7 +172,7 @@
 
                 <div class="cada-questao-container">
                     <label for="dificuldadeMaquinaSelect">DIFICULDADE DA MÁQUINA</label>
-                    <select name="dificuldadeMaquinaSelect" id="dificuldadeMaquina">
+                    <select  class="caixaDeSelecao" name="dificuldadeMaquinaSelect" id="dificuldadeMaquina">
                             <option value="facil">Fácil</option>
                             <option value="medio">Médio</option>
                             <option value="dificil">Difícil</option>
