@@ -5,16 +5,13 @@
 modosDeJogo.addEventListener('input', desabilitarDificuldadeDaMaquina)
 
 for (var contador = selectFormulario.length - 1; contador >= 0; contador--) {
-    selectFormulario[contador].addEventListener(
-        'input',
-        confirmacaoConfiguracao
-    )
+    selectFormulario[contador].addEventListener('input', confirmacaoConfiguracao)
 }
 
 //** FIM --> USO DO EVENT LISTENER **//
 
 desabilitarDificuldadeDaMaquina()
-//Função chamada para o caso de a página carregar com jogador vs jogador habilitado
+    //Função chamada para o caso de a página carregar com jogador vs jogador habilitado
 
 //** INICIO --> FUNÇÕES **//
 
@@ -38,20 +35,18 @@ const atualizarMatrizJogo = (indice, simbolo) => {
     ]
 }
 
-const atualizarCamposVagos = () =>
-    (camposVagos = camposVagos.filter(retornarCamposVazios))
+const atualizarCamposVagos = () => (camposVagos = camposVagos.filter(retornarCamposVazios))
 
-const passarAVez = (simboloVezDe) =>
-    (EAVezDe.innerHTML = `É a vez de <br>"${simboloVezDe}"`)
+const passarAVez = (simboloVezDe) => (EAVezDe.innerHTML = `É a vez de <br>"${simboloVezDe}"`)
 
 function checarSeOJogoAcabou() {
-    return (vencedorDaPartida = verSeGanhou('x')
-        ? 'x'
-        : verSeGanhou('fantasma')
-        ? 'fantasma'
-        : verSeEmpatou()
-        ? 'empate'
-        : 0)
+    return (vencedorDaPartida = verSeGanhou('x') ?
+        'x' :
+        verSeGanhou('fantasma') ?
+        'fantasma' :
+        verSeEmpatou() ?
+        'empate' :
+        0)
 }
 
 function exibirReta() {
@@ -107,15 +102,11 @@ function exibirReta() {
 function exibirResultado() {
     if (vencedorDaPartida !== 0) {
         if (vencedorDaPartida === 'empate') {
-            document.getElementById(
-                'imagem-vencedor'
-            ).src = `img/${vencedorDaPartida}.png`
+            document.getElementById('imagem-vencedor').src = `img/${vencedorDaPartida}.png`
             mensagem = `O jogo está empatado!`
             escreverResultado(mensagem)
         } else {
-            document.getElementById(
-                'imagem-vencedor'
-            ).src = `img/${vencedorDaPartida}_vencedor.png`
+            document.getElementById('imagem-vencedor').src = `img/${vencedorDaPartida}_vencedor.png`
             mensagem = `"${vencedorDaPartida}" venceu!`
         }
         atrasarExibicaoResultado()
@@ -125,7 +116,7 @@ function exibirResultado() {
 function atrasarExibicaoResultado() {
     exibirReta()
 
-    setTimeout(function () {
+    setTimeout(function() {
         escreverResultado(mensagem)
         abrirModalResultado()
     }, 1100)
@@ -145,8 +136,7 @@ function retornarCamposVazios(campo) {
     }
 }
 
-const resetarCadaCampo = (cadaCampo, contador) =>
-    (cadaCampo[contador].innerHTML = '')
+const resetarCadaCampo = (cadaCampo, contador) => (cadaCampo[contador].innerHTML = '')
 
 function aplicarAlteracoesConfig() {
     modoDeJogoSelecionado = modosDeJogo.value
@@ -156,8 +146,8 @@ function aplicarAlteracoesConfig() {
     resetarJogo()
 }
 
-const abrirConfirmacaoConfig = () =>
-    window.location.replace('#alteracaoDetectada-container')
+const abrirConfirmacaoConfig = () => (caixaDeAlteracao.style.display = 'flex')
+const fecharConfirmacaoConfig = () => (caixaDeAlteracao.style.display = 'none')
 
 function confirmacaoConfiguracao() {
     if (
@@ -167,7 +157,7 @@ function confirmacaoConfiguracao() {
     ) {
         abrirConfirmacaoConfig()
     } else {
-        fecharModal()
+        fecharConfirmacaoConfig()
     }
 }
 
@@ -195,17 +185,7 @@ const resetarMatrizJogo = () => {
 }
 
 const resetarCamposVagos = () =>
-    (camposVagos = [
-        campo1,
-        campo2,
-        campo3,
-        campo4,
-        campo5,
-        campo6,
-        campo7,
-        campo8,
-        campo9,
-    ])
+    (camposVagos = [campo1, campo2, campo3, campo4, campo5, campo6, campo7, campo8, campo9])
 
 const fecharModal = () => window.location.replace('#')
 
@@ -230,9 +210,7 @@ function resetarJogo() {
 
     fecharModal()
 
-    maquinaComeca() && maquinaPodeJogar()
-        ? aplicarPrimeiraJogadaMaquina()
-        : false
+    maquinaComeca() && maquinaPodeJogar() ? aplicarPrimeiraJogadaMaquina() : false
 
     retaVitoria.style.transition = ''
     retaVitoria.className = ''
@@ -243,8 +221,7 @@ function resetarJogo() {
     jaReagiuADiagonalCurta = false
 }
 
-const encontrouSimbolo = () =>
-    (simboloEncontrado += simboloJogador === cadaCampo && 1)
+const encontrouSimbolo = () => (simboloEncontrado += simboloJogador === cadaCampo && 1)
 
 function verSeGanhou(simboloJogador) {
     let contadorSimbolo = 0
@@ -253,9 +230,7 @@ function verSeGanhou(simboloJogador) {
             contadorSimbolo = 0
             cadaReta.forEach((cadaCampo) => {
                 contadorSimbolo += simboloJogador === cadaCampo && 1
-                contadorSimbolo === 3
-                    ? (indiceRetaVencedora = indiceCadaReta)
-                    : false
+                contadorSimbolo === 3 ? (indiceRetaVencedora = indiceCadaReta) : false
             })
         }
     })
@@ -276,8 +251,7 @@ const escreverResultado = (mensagem) => {
     EAVezDe.innerText = mensagem
 }
 
-const abrirModalResultado = () =>
-    window.location.replace('#resultado-container')
+const abrirModalResultado = () => window.location.replace('#resultado-container')
 
 function aplicarJogada(campoSelecionado, indice, simbolo, adversarioSimbolo) {
     inserirElemento(campoSelecionado, simbolo)
