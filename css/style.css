@@ -61,7 +61,7 @@
 #botao-aplicar-configuracoes:hover,
 #botao-cancelar-configuracoes:hover {
     color: white;
-    transition: all 2s;
+    transition: all 1s ease-in-out;
     border: none;
 }
 
@@ -71,8 +71,8 @@
 }
 
 #botao-aplicar-configuracoes:hover {
-    background-color: #9000d8;
-    box-shadow: 0 0 10px 0 #69009e inset, 0 0 10px 4px #550080;
+    background-color: #31adff;
+    box-shadow: 0 0 10px 0 #23689c inset, 0 0 10px 4px #23689c;
 }
 
 #botao-cancelar-configuracoes:hover {
