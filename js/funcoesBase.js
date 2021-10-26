@@ -116,7 +116,7 @@ function exibirResultado() {
 function atrasarExibicaoResultado() {
     exibirReta()
 
-    setTimeout(function() {
+    setTimeout(() => {
         escreverResultado(mensagem)
         abrirModalResultado()
     }, 1100)
@@ -191,6 +191,13 @@ const fecharModal = () => window.location.replace('#')
 
 const maquinaComeca = () => xSeraSelecionado === 'outro'
 
+function desativarBotaoJogarTemporariamente() {
+    botaoJogar.disabled = true
+    setTimeout(() => {
+        botaoJogar.disabled = false
+    }, 1500)
+}
+
 function resetarJogo() {
     document.getElementById('imagem-vencedor').src = `img/jogo_inacabado.png`
 
@@ -209,6 +216,8 @@ function resetarJogo() {
     limparTabuleiro()
 
     fecharModal()
+
+    desativarBotaoJogarTemporariamente()
 
     maquinaComeca() && maquinaPodeJogar() ? aplicarPrimeiraJogadaMaquina() : false
 

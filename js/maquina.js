@@ -1,7 +1,7 @@
 'use strict'
 
 function criarDelay(campoSelecionado, indexDoCampo, simbolo, adversarioSimbolo, eX) {
-    setTimeout(function() {
+    setTimeout(() => {
         document.getElementById('maquina-pensando').style.display = 'none'
         aplicarJogada(campoSelecionado, indexDoCampo, simbolo, adversarioSimbolo, eX)
         camposSaoClicaveis = true
@@ -123,109 +123,78 @@ function haDiagonalCurta(adversarioSimbolo, simbolo) {
 }
 
 function haGambitoDoCanto(adversarioSimbolo, simbolo) {
-    if (
-        adversarioSimbolo === 'x' && 
-        matrizJogo[4] === simbolo
-        ) {
-
-        if(
+    if (adversarioSimbolo === 'x' && matrizJogo[4] === simbolo) {
+        if (
             matrizJogo[1] === 0 &&
             matrizJogo[3] === 0 &&
             matrizJogo[8] === 0 &&
             matrizJogo[6] === 0 &&
             matrizJogo[5] === 0 &&
             matrizJogo[7] === adversarioSimbolo
-            ){
-
-            if (
-                matrizJogo[0] === adversarioSimbolo &&
-                matrizJogo[2] === 0
-            ) {
+        ) {
+            if (matrizJogo[0] === adversarioSimbolo && matrizJogo[2] === 0) {
                 campoQueFuncaoEscolheuMarcar = campo9
                 return true
             }
 
-            if (
-                matrizJogo[0] === 0 &&
-                matrizJogo[2] === adversarioSimbolo
-            ) {
+            if (matrizJogo[0] === 0 && matrizJogo[2] === adversarioSimbolo) {
                 campoQueFuncaoEscolheuMarcar = campo7
                 return true
             }
         }
 
-        if(
+        if (
             matrizJogo[0] === 0 &&
             matrizJogo[2] === 0 &&
             matrizJogo[3] === 0 &&
             matrizJogo[5] === 0 &&
             matrizJogo[7] === 0 &&
             matrizJogo[1] === adversarioSimbolo
-            ){
-
-            if (
-                matrizJogo[6] === 0 &&
-                matrizJogo[8] === adversarioSimbolo
-            ) {
+        ) {
+            if (matrizJogo[6] === 0 && matrizJogo[8] === adversarioSimbolo) {
                 campoQueFuncaoEscolheuMarcar = campo3
                 return true
             }
 
-            if (
-                matrizJogo[6] === adversarioSimbolo &&
-                matrizJogo[8] === 0
-            ) {
+            if (matrizJogo[6] === adversarioSimbolo && matrizJogo[8] === 0) {
                 campoQueFuncaoEscolheuMarcar = campo1
                 return true
             }
         }
 
-        if(
+        if (
             matrizJogo[0] === 0 &&
             matrizJogo[1] === 0 &&
             matrizJogo[5] === 0 &&
             matrizJogo[6] === 0 &&
             matrizJogo[7] === 0 &&
-            matrizJogo[3] === adversarioSimbolo){
-
-            if (
-                matrizJogo[2] === adversarioSimbolo &&
-                matrizJogo[8] === 0
-            ) {
+            matrizJogo[3] === adversarioSimbolo
+        ) {
+            if (matrizJogo[2] === adversarioSimbolo && matrizJogo[8] === 0) {
                 campoQueFuncaoEscolheuMarcar = campo1
                 return true
             }
 
-            if (
-                matrizJogo[2] === 0 &&
-                matrizJogo[8] === adversarioSimbolo
-            ) {
+            if (matrizJogo[2] === 0 && matrizJogo[8] === adversarioSimbolo) {
                 campoQueFuncaoEscolheuMarcar = campo1
                 return true
             }
         }
 
-        if(
+        if (
             matrizJogo[1] === 0 &&
             matrizJogo[2] === 0 &&
             matrizJogo[3] === 0 &&
             matrizJogo[7] === 0 &&
             matrizJogo[8] === 0 &&
             matrizJogo[5] === adversarioSimbolo
-            ){
-
-            if (
-                matrizJogo[0] === adversarioSimbolo &&
-                matrizJogo[6] === 0
-            ) {
+        ) {
+            if (matrizJogo[0] === adversarioSimbolo && matrizJogo[6] === 0) {
                 campoQueFuncaoEscolheuMarcar = campo3
                 return true
             }
 
-            if (
-                matrizJogo[0] === 0 &&
-                matrizJogo[6] === adversarioSimbolo
-            ) {
+            if (matrizJogo[0] === 0 && matrizJogo[6] === adversarioSimbolo) {
                 campoQueFuncaoEscolheuMarcar = campo9
                 return true
             }
@@ -270,6 +239,7 @@ function resgatarIndexDoCampoEmMatrizJogo(campo) {
 
 function aplicarJogadaDaMaquina(adversarioSimbolo, simbolo) {
     camposSaoClicaveis = false
+
     let campoSelecionado
 
     if (dificuldadeDaMaquinaSelecionada === 'facil') {
