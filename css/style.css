@@ -426,8 +426,14 @@ button {
     box-shadow: 0 0 10px 0 #23689c inset, 0 0 10px 4px #23689c;
 }
 
+#aplicar-alteracoes-config:disabled {
+    color: #31adff;
+    background-color: white;
+}
+
 #campo-config .cada-questao-container select:hover,
-.button-container button:hover {
+.button-container button:hover,
+#aplicar-alteracoes-config:disabled {
     border: none;
     transition: all 0.5s;
     box-shadow: 0 0 10px 0 #31adff inset, 0 0 10px 4px #31adff;
