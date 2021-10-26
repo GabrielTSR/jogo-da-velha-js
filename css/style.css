@@ -28,6 +28,49 @@
     z-index: 999;
 }
 
+#pagina-aterrissagem {
+    display: none;
+    background: #000000a8;
+    background-image: url('../img/background_pixel.jpg');
+    background-blend-mode: darken;
+    color: white;
+}
+
+#pagina-aterrissagem:target {
+    display: flex;
+}
+
+#pagina-aterrissagem h2 {
+    font-size: 2rem;
+}
+
+#pagina-aterrissagem .campo-nome-e-submit {
+    width: 400px;
+    height: 40px;
+    gap: 20px;
+}
+
+#pagina-aterrissagem .campo-nome-e-submit * {
+    height: 100%;
+    border: none;
+    border-radius: 5px;
+    flex: 1;
+}
+
+#pagina-aterrissagem .campo-nome-e-submit input {
+    padding-left: 10px;
+}
+
+#pagina-aterrissagem .campo-nome-e-submit button {
+    color: white;
+    background-color: #31adff;
+    font-size: 20px;
+}
+
+#pagina-aterrissagem p {
+    margin-bottom: 30px;
+}
+
 #resultado-container {
     display: none;
 }
@@ -132,7 +175,9 @@ body {
     background-color: #111111;
     height: 100vh;
     width: 100%;
-    background-image: url(../img/background_pixel.jpg);
+    background: #000000a8;
+    background-image: url('../img/background_pixel.jpg');
+    background-blend-mode: darken;
     position: relative;
 }
 

@@ -1,6 +1,7 @@
 'use strict'
 
 //** INICIO --> USO DO EVENT LISTENER **//
+abrirPaginaAterrissagem()
 
 modosDeJogo.addEventListener('input', desabilitarDificuldadeDaMaquina)
 
@@ -14,6 +15,8 @@ desabilitarDificuldadeDaMaquina()
     //Função chamada para o caso de a página carregar com jogador vs jogador habilitado
 
 //** INICIO --> FUNÇÕES **//
+
+const abrirPaginaAterrissagem = () => window.location.replace('#pagina-aterrissagem')
 
 const inserirElemento = (campoSelecionado, elementoInserido) =>
     (campoSelecionado.innerHTML = `<img class="animate__animated animate__bounceIn" src="./img/${elementoInserido}.png" alt="${elementoInserido}">`)
