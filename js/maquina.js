@@ -124,67 +124,112 @@ function haDiagonalCurta(adversarioSimbolo, simbolo) {
 
 function haGambitoDoCanto(adversarioSimbolo, simbolo) {
     if (
-        adversarioSimbolo === 'x' &&
-        matrizJogo[0] === adversarioSimbolo &&
-        matrizJogo[1] === 0 &&
-        matrizJogo[2] === 0 &&
-        matrizJogo[3] === simbolo &&
-        matrizJogo[4] === simbolo &&
-        matrizJogo[5] === adversarioSimbolo &&
-        matrizJogo[6] === 0 &&
-        matrizJogo[7] === adversarioSimbolo &&
-        matrizJogo[8] === 0
-    ) {
-        campoQueFuncaoEscolheuMarcar = campo3
-        return true
-    }
+        adversarioSimbolo === 'x' && 
+        matrizJogo[4] === simbolo
+        ) {
 
-    if (
-        adversarioSimbolo === 'x' &&
-        matrizJogo[0] === simbolo &&
-        matrizJogo[1] === simbolo &&
-        matrizJogo[2] === adversarioSimbolo &&
-        matrizJogo[3] === adversarioSimbolo &&
-        matrizJogo[4] === simbolo &&
-        matrizJogo[5] === 0 &&
-        matrizJogo[6] === 0 &&
-        matrizJogo[7] === adversarioSimbolo &&
-        matrizJogo[8] === 0
-    ) {
-        campoQueFuncaoEscolheuMarcar = campo9
-        return true
-    }
+        if(
+            matrizJogo[1] === 0 &&
+            matrizJogo[3] === 0 &&
+            matrizJogo[8] === 0 &&
+            matrizJogo[6] === 0 &&
+            matrizJogo[5] === 0 &&
+            matrizJogo[7] === adversarioSimbolo
+            ){
 
-    if (
-        adversarioSimbolo === 'x' &&
-        matrizJogo[0] === 0 &&
-        matrizJogo[1] === adversarioSimbolo &&
-        matrizJogo[2] === 0 &&
-        matrizJogo[3] === adversarioSimbolo &&
-        matrizJogo[4] === simbolo &&
-        matrizJogo[5] === simbolo &&
-        matrizJogo[6] === 0 &&
-        matrizJogo[7] === 0 &&
-        matrizJogo[8] === adversarioSimbolo
-    ) {
-        campoQueFuncaoEscolheuMarcar = campo7
-        return true
-    }
+            if (
+                matrizJogo[0] === adversarioSimbolo &&
+                matrizJogo[2] === 0
+            ) {
+                campoQueFuncaoEscolheuMarcar = campo9
+                return true
+            }
 
-    if (
-        adversarioSimbolo === 'x' &&
-        matrizJogo[0] === 0 &&
-        matrizJogo[1] === adversarioSimbolo &&
-        matrizJogo[2] === 0 &&
-        matrizJogo[3] === 0 &&
-        matrizJogo[4] === simbolo &&
-        matrizJogo[5] === adversarioSimbolo &&
-        matrizJogo[6] === adversarioSimbolo &&
-        matrizJogo[7] === simbolo &&
-        matrizJogo[8] === 0
-    ) {
-        campoQueFuncaoEscolheuMarcar = campo1
-        return true
+            if (
+                matrizJogo[0] === 0 &&
+                matrizJogo[2] === adversarioSimbolo
+            ) {
+                campoQueFuncaoEscolheuMarcar = campo7
+                return true
+            }
+        }
+
+        if(
+            matrizJogo[0] === 0 &&
+            matrizJogo[2] === 0 &&
+            matrizJogo[3] === 0 &&
+            matrizJogo[5] === 0 &&
+            matrizJogo[7] === 0 &&
+            matrizJogo[1] === adversarioSimbolo
+            ){
+
+            if (
+                matrizJogo[6] === 0 &&
+                matrizJogo[8] === adversarioSimbolo
+            ) {
+                campoQueFuncaoEscolheuMarcar = campo3
+                return true
+            }
+
+            if (
+                matrizJogo[6] === adversarioSimbolo &&
+                matrizJogo[8] === 0
+            ) {
+                campoQueFuncaoEscolheuMarcar = campo1
+                return true
+            }
+        }
+
+        if(
+            matrizJogo[0] === 0 &&
+            matrizJogo[1] === 0 &&
+            matrizJogo[5] === 0 &&
+            matrizJogo[6] === 0 &&
+            matrizJogo[7] === 0 &&
+            matrizJogo[3] === adversarioSimbolo){
+
+            if (
+                matrizJogo[2] === adversarioSimbolo &&
+                matrizJogo[8] === 0
+            ) {
+                campoQueFuncaoEscolheuMarcar = campo1
+                return true
+            }
+
+            if (
+                matrizJogo[2] === 0 &&
+                matrizJogo[8] === adversarioSimbolo
+            ) {
+                campoQueFuncaoEscolheuMarcar = campo1
+                return true
+            }
+        }
+
+        if(
+            matrizJogo[1] === 0 &&
+            matrizJogo[2] === 0 &&
+            matrizJogo[3] === 0 &&
+            matrizJogo[7] === 0 &&
+            matrizJogo[8] === 0 &&
+            matrizJogo[5] === adversarioSimbolo
+            ){
+
+            if (
+                matrizJogo[0] === adversarioSimbolo &&
+                matrizJogo[6] === 0
+            ) {
+                campoQueFuncaoEscolheuMarcar = campo3
+                return true
+            }
+
+            if (
+                matrizJogo[0] === 0 &&
+                matrizJogo[6] === adversarioSimbolo
+            ) {
+                campoQueFuncaoEscolheuMarcar = campo9
+                return true
+            }
+        }
     }
     return false
 }
