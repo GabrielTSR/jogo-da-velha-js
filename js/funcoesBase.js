@@ -150,7 +150,7 @@ const resetarCadaCampo = (cadaCampo, contador) =>
 
 function aplicarAlteracoesConfig() {
     modoDeJogoSelecionado = modosDeJogo.value
-    xSera = document.getElementById('xSera').value
+    xSeraSelecionado = document.getElementById('xSera').value
     dificuldadeDaMaquinaSelecionada = dificuldadeDaMaquina.value
 
     resetarJogo()
@@ -160,7 +160,11 @@ const abrirConfirmacaoConfig = () =>
     window.location.replace('#alteracaoDetectada-container')
 
 function confirmacaoConfiguracao() {
-    if (modosDeJogo.value !== modoDeJogoSelecionado) {
+    if (
+        modosDeJogo.value !== modoDeJogoSelecionado ||
+        xSera.value !== xSeraSelecionado ||
+        dificuldadeDaMaquina.value !== dificuldadeDaMaquinaSelecionada
+    ) {
         abrirConfirmacaoConfig()
     } else {
         fecharModal()
@@ -205,7 +209,7 @@ const resetarCamposVagos = () =>
 
 const fecharModal = () => window.location.replace('#')
 
-const maquinaComeca = () => xSera === 'outro'
+const maquinaComeca = () => xSeraSelecionado === 'outro'
 
 function resetarJogo() {
     document.getElementById('imagem-vencedor').src = `img/jogo_inacabado.png`

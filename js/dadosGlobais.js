@@ -25,13 +25,13 @@ let campoSelecionado
 //** FIM --> PEGANDO ELEMENTOS ATRAVÉS DO ID E CLASSE **/
 
 //** INICIO --> DECLARANDO VARIAVEIS GLOBAIS **//
+var selectFormulario = document.getElementsByClassName('caixaDeSelecao')
 
 var modosDeJogo = document.getElementById('quemContraQuem')
 var modoDeJogoSelecionado = modosDeJogo.value
 
-var selectFormulario = document.getElementsByClassName('caixaDeSelecao')
-
-var xSera = document.getElementById('xSera').value
+var xSera = document.getElementById('xSera')
+var xSeraSelecionado = xSera.value
 
 var dificuldadeDaMaquina = document.getElementById('dificuldadeMaquina')
 var dificuldadeDaMaquinaSelecionada = dificuldadeDaMaquina.value
