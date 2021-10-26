@@ -33,21 +33,6 @@
             </div>
         </div>
 
-        <div class="modal-container" id="alteracaoDetectada-container">
-            <div
-                class="flex-column-centralized"
-                id="alteracaoDetectada-modal"
-            >
-                <h2>Deseja aplicar as configurações?</h2>
-                <div class="botao-container">
-                    <button onclick="aplicarAlteracoesConfig()">
-                        <img src="img/reset.svg" alt="reset" />
-                    </button>
-                    <button><a href="#">CANCELAR</a></button>
-                </div>
-            </div>
-        </div>
-
         <div id="ranking-container" class="modal-container">
             <div id="ranking-modal">
                 <a href="#" class="fechar"><i class="fas fa-times"></i></a>
@@ -188,6 +173,20 @@
         <h2 id="quem-e-a-vez-mensagem">É a vez de <br />"X"</h2>
 
         <div id="jogo-container">
+            <div class="flex-column-centralized" id="alteracaoDetectada-container">
+                <div
+                    class="flex-column-centralized"
+                    id="alteracaoDetectada-modal"
+                >
+                    <h2>Deseja aplicar as configurações?</h2>
+                    <div class="botao-container">
+                        <button onclick="aplicarAlteracoesConfig()">
+                            <img src="img/reset.svg" alt="reset" />
+                        </button>
+                        <button><a href="#">CANCELAR</a></button>
+                    </div>
+                </div>
+            </div>
             <div id="reta-vitoria" onclick="abrirModalResultado()"></div>
             <img id="maquina-pensando" src="gif/maquina_calculando.gif" alt="maquina calculando" />
             <div onclick="aplicarJogadaDoJogador('campo-1', 0)" id="campo-1" class="cada-campo flex-column-centralized"></div>
