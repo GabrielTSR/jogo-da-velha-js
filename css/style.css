@@ -233,6 +233,14 @@ h1:hover {
     background-color: #ff4949;
 }
 
+#ranking-modal h2{
+    background-color: white;
+    border-radius: 5px;
+    padding: 5px;
+    color: black;
+    min-width: 90px;
+}
+
 #ranking-modal table {
     border: none;
     border-collapse: collapse;
@@ -241,13 +249,17 @@ h1:hover {
 }
 
 #ranking-modal table tr th {
-    background-color: white;
-    color: black;
+    min-width: 90px;
+    padding-bottom: 15px;
 }
 
 #ranking-modal table tr th:first-of-type {
     border: none;
     background-color: transparent;
+}
+
+#ranking-modal table tr td:first-of-type {
+    font-size: 1.5rem;
 }
 
 #ranking-modal table td {
@@ -256,6 +268,8 @@ h1:hover {
     height: 30px;
     border-top: 1px solid black;
     border-bottom-right-radius: 1px solid black;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .fonte-amarela {
