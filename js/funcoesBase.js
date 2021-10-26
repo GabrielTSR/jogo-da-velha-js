@@ -193,8 +193,10 @@ const maquinaComeca = () => xSeraSelecionado === 'outro'
 
 function desativarBotaoJogarTemporariamente() {
     botaoJogar.disabled = true
+    botaoJogarNovamente.disabled = true
     setTimeout(() => {
         botaoJogar.disabled = false
+        botaoJogarNovamente.disabled = false
     }, 1500)
 }
 
