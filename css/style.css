@@ -44,31 +44,38 @@
     font-size: 2rem;
 }
 
-#pagina-aterrissagem .campo-nome-e-submit {
-    width: 400px;
-    height: 40px;
+#pagina-aterrissagem p {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+#campo-nome-e-submit {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    max-width: 400px;
+    width: 100%;
+    height: 120px;
     gap: 20px;
 }
 
-#pagina-aterrissagem .campo-nome-e-submit * {
-    height: 100%;
+#pagina-aterrissagem #campo-nome-e-submit * {
+    height: 40px;
     border: none;
     border-radius: 5px;
-    flex: 1;
 }
 
-#pagina-aterrissagem .campo-nome-e-submit input {
+#pagina-aterrissagem #campo-nome-e-submit input {
     padding-left: 10px;
+    width: 100%;
 }
 
-#pagina-aterrissagem .campo-nome-e-submit button {
+#pagina-aterrissagem #campo-nome-e-submit button {
     color: white;
     background-color: #31adff;
     font-size: 20px;
-}
-
-#pagina-aterrissagem p {
-    margin-bottom: 30px;
+    width: 150px;
 }
 
 #resultado-container {
