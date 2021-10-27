@@ -466,6 +466,10 @@ button:hover {
     cursor: pointer;
 }
 
+#logout:hover {
+    cursor: pointer;
+}
+
 #campo-config .cada-questao-container select,
 button {
     box-shadow: 0 0 10px 0 #23689c inset, 0 0 10px 4px #23689c;
