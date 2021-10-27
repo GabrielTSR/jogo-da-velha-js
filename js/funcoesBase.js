@@ -6,9 +6,7 @@ function abrirPaginaAterrissagem() {
     window.location.replace('#pagina-aterrissagem')
 }
 
-abrirPaginaAterrissagem()
-
-modosDeJogo.addEventListener('input', desabilitarDificuldadeDaMaquina)
+const abrirPaginaAterrissagem = () => modosDeJogo.addEventListener('input', desabilitarDificuldadeDaMaquina)
 
 for (var contador = selectFormulario.length - 1; contador >= 0; contador--) {
     selectFormulario[contador].addEventListener('input', confirmacaoConfiguracao)
