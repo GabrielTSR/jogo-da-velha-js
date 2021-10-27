@@ -78,6 +78,8 @@ var possibilidadesVitoriaCampo = [
     [campo3, campo6, campo9],
 ]
 
+
+
 var eX = true //true para primeiro jogador, false para segundo jogador
 
 var campoQueFuncaoEscolheuMarcar
