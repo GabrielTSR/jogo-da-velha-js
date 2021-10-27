@@ -78,6 +78,11 @@
     width: 150px;
 }
 
+#pagina-aterrissagem #campo-nome-e-submit button:hover {
+    transition: all 1s;
+    box-shadow: 0 0 10px 0 #31adff inset, 0 0 10px 4px #31adff;
+}
+
 #resultado-container {
     display: none;
 }
