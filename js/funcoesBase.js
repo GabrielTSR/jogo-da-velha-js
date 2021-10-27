@@ -2,11 +2,10 @@
 
 //** INICIO --> USO DO EVENT LISTENER **//
 
-function abrirPaginaAterrissagem() {
-    window.location.replace('#pagina-aterrissagem')
-}
+const abrirPaginaAterrissagem = () => window.location.replace('#pagina-aterrissagem')
+abrirPaginaAterrissagem()
 
-const abrirPaginaAterrissagem = () => modosDeJogo.addEventListener('input', desabilitarDificuldadeDaMaquina)
+modosDeJogo.addEventListener('input', desabilitarDificuldadeDaMaquina)
 
 for (var contador = selectFormulario.length - 1; contador >= 0; contador--) {
     selectFormulario[contador].addEventListener('input', confirmacaoConfiguracao)
@@ -18,10 +17,6 @@ desabilitarDificuldadeDaMaquina()
     //Função chamada para o caso de a página carregar com jogador vs jogador habilitado
 
 //** INICIO --> FUNÇÕES **//
-
-
-
-
 
 const inserirElemento = (campoSelecionado, elementoInserido) =>
     (campoSelecionado.innerHTML = `<img class="animate__animated animate__bounceIn" src="./img/${elementoInserido}.png" alt="${elementoInserido}">`)
