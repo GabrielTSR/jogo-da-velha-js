@@ -26,10 +26,10 @@
 
     <main class="flex-column-centralized">
         <div class="modal-container flex-column-centralized" id="pagina-aterrissagem">
-            <h2>Bem-vindo ao <span style="color: #31adff;">jogo da velha</span></h2>
+            <h2>Bem-vindo ao <span style="color: #31adff">jogo da velha</span></h2>
             <p>Olá! Como gosta de ser chamado?</p>
             <div id="campo-nome-e-submit">
-                <input id="input-nome-jogador" placeholder="Exemplo: MestreDoX" type="text" pattern="[a-z\s]+$" maxlength="10">
+                <input id="input-nome-jogador" placeholder="Exemplo: MestreDoX" type="text" pattern="[a-z\s]+$" maxlength="10" />
                 <button onclick="fecharModal(), armazenarJogador()">JOGAR</button>
             </div>
         </div>
@@ -55,118 +55,7 @@
                             <th></th>
                             <th>Jogadores</th>
                         </thead>
-                        <tbody id="ranking-campo-Jogadores">
-                            <tr class="fonte-dourada">
-                                <td>1°</td>
-                                <td>
-                                    Nome: Marcelinho</br>
-                                    </br>
-                                    Fácil: 1999</br>
-                                    </br>
-                                    Médio: 1999</br>
-                                    </br>
-                                    Difícil: 1999
-                                </td>
-                            </tr>
-                            <tr class="fonte-prateada">
-                                <td>
-                                    2°
-                                </td>
-                                <td>
-                                    Nome: Marcelinho</br>
-                                    </br>
-                                    Fácil: 1999</br>
-                                    </br>
-                                    Médio: 1999</br>
-                                    </br>
-                                    Difícil: 1999
-                                </td>
-                            </tr>
-                            <tr class="fonte-bronzeada">
-                                <td>3°</td>
-                                <td>
-                                    Nome: Marcelinho</br>
-                                    </br>
-                                    Fácil: 1999</br>
-                                    </br>
-                                    Médio: 1999</br>
-                                    </br>
-                                    Difícil: 1999
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4°</td>
-                                <td>
-                                    Nome: Marcelinho</br>
-                                    </br>
-                                    Fácil: 1999</br>
-                                    </br>
-                                    Médio: 1999</br>
-                                    </br>
-                                    Difícil: 1999
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5°</td>
-                                <td>
-                                    Nome: Marcelinho</br>
-                                    </br>
-                                    Fácil: 1999</br>
-                                    </br>
-                                    Médio: 1999</br>
-                                    </br>
-                                    Difícil: 1999
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>6°</td>
-                                <td>
-                                    Nome: Marcelinho</br>
-                                    </br>
-                                    Fácil: 1999</br>
-                                    </br>
-                                    Médio: 1999</br>
-                                    </br>
-                                    Difícil: 1999
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>7°</td>
-                                <td>
-                                    Nome: Marcelinho</br>
-                                    </br>
-                                    Fácil: 1999</br>
-                                    </br>
-                                    Médio: 1999</br>
-                                    </br>
-                                    Difícil: 1999
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>8°</td>
-                                <td>
-                                    Nome: Marcelinho</br>
-                                    </br>
-                                    Fácil: 1999</br>
-                                    </br>
-                                    Médio: 1999</br>
-                                    </br>
-                                    Difícil: 1999
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>9°</td>
-                                <td>
-                                    Nome: Marcelinho</br>
-                                    </br>
-                                    Fácil: 1999</br>
-                                    </br>
-                                    Médio: 1999</br>
-                                    </br>
-                                    Difícil: 1999
-                                </td>
-                            </tr>
-                        </tbody>
+                        <tbody id="ranking-campo-Jogadores"></tbody>
                     </tr>
                 </table>
             </div>
@@ -204,7 +93,9 @@
                 </div>
 
                 <div class="button-container flex-row-centralized">
-                    <button onclick="fecharConfirmacaoConfig(), aplicarAlteracoesConfig()" id="aplicar-alteracoes-config">JOGAR</button>
+                    <button onclick="fecharConfirmacaoConfig(), aplicarAlteracoesConfig()" id="aplicar-alteracoes-config">
+                            JOGAR
+                        </button>
                 </div>
             </section>
         </div>
@@ -212,12 +103,15 @@
         <h2 id="quem-e-a-vez-mensagem">É a vez de <br />"X"</h2>
 
         <div id="jogo-container">
-
             <div class="flex-column-centralized" id="alteracao-detectada-modal">
                 <h2>Deseja aplicar as configurações?</h2>
                 <div class="botao-container" id="container-botoes-alteracao-detectada">
-                    <button id="botao-aplicar-configuracoes" onclick="fecharConfirmacaoConfig(), aplicarAlteracoesConfig()"><i class="fas fa-check"></i></button>
-                    <button id="botao-cancelar-configuracoes" onclick="fecharConfirmacaoConfig()"><i class="fas fa-times"></i></button>
+                    <button id="botao-aplicar-configuracoes" onclick="fecharConfirmacaoConfig(), aplicarAlteracoesConfig()">
+                            <i class="fas fa-check"></i>
+                        </button>
+                    <button id="botao-cancelar-configuracoes" onclick="fecharConfirmacaoConfig()">
+                            <i class="fas fa-times"></i>
+                        </button>
                 </div>
             </div>
 
@@ -242,7 +136,7 @@
         <div id="footer-img-container" class="flex-column-centralized">
             <a id="config-icon" href="#config-modal-container"><img src="./img/config-icone.png" alt="configurações" /></a>
             <a href="#ranking-container"><img src="./img/trofeu.png" alt="troféu" /></a>
-            <a id="logout" href="#pagina-aterrissagem" onclick="limparDadosJogador()"><img src="img/log-out.png" alt="Log out"></a>
+            <a id="logout" href="#pagina-aterrissagem" onclick="limparDadosJogador()"><img src="img/log-out.png" alt="Log out" /></a>
         </div>
     </footer>
 </body>
