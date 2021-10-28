@@ -1,16 +1,12 @@
 'use strict'
 
 function atualizarTabelaRanking() {
-    let matrizJogadores = JSON.parse(localStorage.getItem('matrizJogadores'))
-
-    rankingCampoJogadores.innerHTML = ''
+    const matrizJogadores = JSON.parse(localStorage.getItem('matrizJogadores'))
 
     let contador = 1
+
     matrizJogadores.forEach((jogador) => {
         const cadaLinha = document.createElement('tr')
-
-        cadaLinha.className =
-            contador > 3 ? '' : contador === 3 ? 'fonte-bronzeada' : contador === 2 ? 'fonte-prateada' : 'fonte-dourada'
 
         cadaLinha.innerHTML = `
         <td>
@@ -25,6 +21,10 @@ function atualizarTabelaRanking() {
             </br></br>
             Difícil: ${jogador.pontosDificil}
         </td>`
+
+        cadaLinha.className =
+            contador > 3 ? '' : contador === 3 ? 'fonte-bronzeada' : contador === 2 ? 'fonte-prateada' : 'fonte-dourada'
+
         contador++
 
         rankingCampoJogadores.appendChild(cadaLinha)

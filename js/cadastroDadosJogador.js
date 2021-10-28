@@ -21,8 +21,8 @@ function armazenarJogador() {
         }
 
         escreverSaudacoes(nomeJogador)
-        atualizarTabelaRanking()
     }
+    atualizarTabelaRanking()
 }
 
 function inserirNovoJogadorNaMatriz(novoJogador) {
@@ -59,15 +59,13 @@ function resgatarJogadorDaMatriz() {
 
     matrizJogadores.forEach(verificarSeNomeExisteNaMatriz)
 
-    if (houveNomeRepetido === true) return true
-    else return false
+    return houveNomeRepetido
 }
 
 function verificarSeNomeExisteNaMatriz(jogador) {
     if (jogador.nome === nomeJogador) {
         localStorage.setItem('jogadorAtual', JSON.stringify(jogador))
-        houveNomeRepetido = true
-        return true
+        return (houveNomeRepetido = true)
     }
 }
 
@@ -77,17 +75,14 @@ function acrescentarPontuacao(dificuldade) {
     switch (dificuldade) {
         case 'facil':
             jogadorAtual.pontosFacil += 10
-            jogadorAtual.pontosTotal += 10
             break
 
         case 'medio':
             jogadorAtual.pontosMedio += 40
-            jogadorAtual.pontosTotal += 40
             break
 
         case 'dificil':
             jogadorAtual.pontosDificil += 1000
-            jogadorAtual.pontosTotal += 1000
             break
 
         default:
@@ -109,11 +104,20 @@ function atualizarMatrizLocalStorage(jogadorAtual) {
         }
     })
 
-    matrizJogadores = matrizJogadores.sort((jogadorComMaisPontos, jogadorComMenosPontos) => {
-        return jogadorComMenosPontos.pontosTotal - jogadorComMaisPontos.pontosTotal
-    })
+    matrizJogadores = matrizJogadores.sort(deixarEmOrdemDecrescente)
 
     localStorage.setItem('matrizJogadores', JSON.stringify(matrizJogadores))
+}
+
+function deixarEmOrdemDecrescente(jogadorComMaisPontos, jogadorComMenosPontos) {
+    return (
+        jogadorComMenosPontos.pontosFacil +
+        jogadorComMenosPontos.pontosMedio +
+        jogadorComMenosPontos.pontosDificil -
+        jogadorComMaisPontos.pontosFacil +
+        jogadorComMaisPontos.pontosMedio +
+        jogadorComMaisPontos.pontosDificil
+    )
 }
 
 function limparDadosJogador() {
