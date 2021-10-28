@@ -1,16 +1,28 @@
 'use strict'
 
+let contadorRanking = 0
+
 function atualizarTabelaRanking() {
     const matrizJogadores = JSON.parse(localStorage.getItem('matrizJogadores'))
 
-    let contador = 1
+    rankingCampoJogadores.innerHTML = ''
 
-    matrizJogadores.forEach((jogador) => {
-        const cadaLinha = document.createElement('tr')
+    let matrizTop25Jogadores = []
+    for (let contador = 0; contador <= 24; contador++) {
+        if (matrizJogadores[contador] !== undefined) matrizTop25Jogadores[contador] = matrizJogadores[contador]
+        else break
+    }
 
-        cadaLinha.innerHTML = `
+    contadorRanking = 1
+    matrizTop25Jogadores.forEach(edificandoLinhasRanking)
+}
+
+function edificandoLinhasRanking(jogador) {
+    const cadaLinha = document.createElement('tr')
+
+    cadaLinha.innerHTML = `
         <td>
-            ${contador}°
+            ${contadorRanking}°
         </td>
         <td>
             Nome: ${jogador.nome}
@@ -22,11 +34,16 @@ function atualizarTabelaRanking() {
             Difícil: ${jogador.pontosDificil}
         </td>`
 
-        cadaLinha.className =
-            contador > 3 ? '' : contador === 3 ? 'fonte-bronzeada' : contador === 2 ? 'fonte-prateada' : 'fonte-dourada'
+    cadaLinha.className =
+        contadorRanking > 3 ?
+        '' :
+        contadorRanking === 3 ?
+        'fonte-bronzeada' :
+        contadorRanking === 2 ?
+        'fonte-prateada' :
+        'fonte-dourada'
 
-        contador++
+    contadorRanking++
 
-        rankingCampoJogadores.appendChild(cadaLinha)
-    })
+    rankingCampoJogadores.appendChild(cadaLinha)
 }
