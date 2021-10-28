@@ -1,4 +1,7 @@
 @media (max-width: 1018px) {
+    h1 {
+        width: 90%;
+    }
     main {
         width: 100%;
     }
