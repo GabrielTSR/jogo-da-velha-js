@@ -10,7 +10,7 @@ function armazenarJogador() {
     nomeJogador = document.getElementById('input-nome-jogador').value
     houveNomeRepetido = false
 
-    if (nomeJogador.trim() !== '') {
+    if (nomeJogador.trim() !== '' && nomeJogador.length <= 10) {
         if (matrizJogadoresEstaVazia()) {
             criarMatrizJogadores()
         }
