@@ -21,6 +21,7 @@ function armazenarJogador() {
         }
 
         escreverSaudacoes(nomeJogador)
+        atualizarTabelaRanking()
     }
 }
 
@@ -37,6 +38,7 @@ function criarNovoJogador() {
     novoJogador.pontosFacil = 0
     novoJogador.pontosMedio = 0
     novoJogador.pontosDificil = 0
+    novoJogador.pontosTotal = 0
 
     localStorage.setItem('jogadorAtual', JSON.stringify(novoJogador))
 
@@ -75,14 +77,17 @@ function acrescentarPontuacao(dificuldade) {
     switch (dificuldade) {
         case 'facil':
             jogadorAtual.pontosFacil += 10
+            jogadorAtual.pontosTotal += 10
             break
 
         case 'medio':
             jogadorAtual.pontosMedio += 40
+            jogadorAtual.pontosTotal += 40
             break
 
         case 'dificil':
             jogadorAtual.pontosDificil += 1000
+            jogadorAtual.pontosTotal += 1000
             break
 
         default:
@@ -91,16 +96,24 @@ function acrescentarPontuacao(dificuldade) {
 
     localStorage.setItem('jogadorAtual', JSON.stringify(jogadorAtual))
     atualizarMatrizLocalStorage(jogadorAtual)
+    atualizarTabelaRanking()
 }
 
 function atualizarMatrizLocalStorage(jogadorAtual) {
     let matrizJogadores = JSON.parse(localStorage.getItem('matrizJogadores'))
 
     matrizJogadores.forEach((jogador, indice, matrizJogadores) => {
-        jogador.nome === jogadorAtual.nome ? (matrizJogadores[indice] = jogadorAtual) : false
-
-        localStorage.setItem('matrizJogadores', JSON.stringify(matrizJogadores))
+        if (jogador.nome === jogadorAtual.nome) {
+            matrizJogadores[indice] = jogadorAtual
+            return true
+        }
     })
+
+    matrizJogadores = matrizJogadores.sort((jogadorComMaisPontos, jogadorComMenosPontos) => {
+        return jogadorComMenosPontos.pontosTotal - jogadorComMaisPontos.pontosTotal
+    })
+
+    localStorage.setItem('matrizJogadores', JSON.stringify(matrizJogadores))
 }
 
 function limparDadosJogador() {
