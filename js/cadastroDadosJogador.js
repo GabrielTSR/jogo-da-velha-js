@@ -1,34 +1,75 @@
 'use strict'
 
+let nomeJogador = ''
+
+let houveNomeRepetido = false
+
+const escreverSaudacoes = (nomeJogador) => (textoSaudacoes.innerText = `Olá! ${nomeJogador}`)
+
 function armazenarJogador() {
-    const nomeJogador = document.getElementById('input-nome-jogador').value
+    nomeJogador = document.getElementById('input-nome-jogador').value
+    houveNomeRepetido = false
 
     if (nomeJogador.trim() !== '') {
-        let jogadorAtual = new Object()
-        jogadorAtual.nome = nomeJogador
-        jogadorAtual.pontosFacil = 0
-        jogadorAtual.pontosMedio = 0
-        jogadorAtual.pontosDificil = 0
-
-        localStorage.setItem('jogadorAtual', JSON.stringify(jogadorAtual))
-
-        let matrizJogadores = JSON.parse(localStorage.getItem('matrizJogadores'))
-
-        if (JSON.parse(localStorage.getItem('matrizJogadores')) === null) {
-            console.log('matriz jogadores estava vazio')
-            matrizJogadores = []
-            matrizJogadores.push(jogadorAtual)
-            localStorage.setItem('matrizJogadores', JSON.stringify(matrizJogadores))
-        } else {
-            console.log(matrizJogadores)
-            matrizJogadores.push(jogadorAtual)
-            localStorage.setItem('matrizJogadores', JSON.stringify(matrizJogadores))
+        if (matrizJogadoresEstaVazia()) {
+            criarMatrizJogadores()
         }
+
+        if (!resgatarJogadorDaMatriz()) {
+            const novoJogador = criarNovoJogador()
+            inserirNovoJogadorNaMatriz(novoJogador)
+        }
+
+        escreverSaudacoes(nomeJogador)
+    }
+}
+
+function inserirNovoJogadorNaMatriz(novoJogador) {
+    let matrizJogadores = JSON.parse(localStorage.getItem('matrizJogadores'))
+
+    matrizJogadores.push(novoJogador)
+    localStorage.setItem('matrizJogadores', JSON.stringify(matrizJogadores))
+}
+
+function criarNovoJogador() {
+    const novoJogador = new Object()
+    novoJogador.nome = nomeJogador
+    novoJogador.pontosFacil = 0
+    novoJogador.pontosMedio = 0
+    novoJogador.pontosDificil = 0
+
+    localStorage.setItem('jogadorAtual', JSON.stringify(novoJogador))
+
+    return novoJogador
+}
+
+function criarMatrizJogadores() {
+    const matrizJogadores = []
+    localStorage.setItem('matrizJogadores', JSON.stringify(matrizJogadores))
+}
+
+const matrizJogadoresEstaVazia = () => JSON.parse(localStorage.getItem('matrizJogadores')) === null
+
+function criarObjetoJogador() {}
+
+function resgatarJogadorDaMatriz() {
+    const matrizJogadores = JSON.parse(localStorage.getItem('matrizJogadores'))
+
+    matrizJogadores.forEach(verificarSeNomeExisteNaMatriz)
+
+    if (houveNomeRepetido === true) return true
+    else return false
+}
+
+function verificarSeNomeExisteNaMatriz(jogador) {
+    if (jogador.nome === nomeJogador) {
+        localStorage.setItem('jogadorAtual', JSON.stringify(jogador))
+        houveNomeRepetido = true
+        return true
     }
 }
 
 function acrescentarPontuacao(dificuldade) {
-    // acrescentarPontuacao('dificil')
     let jogadorAtual = JSON.parse(localStorage.getItem('jogadorAtual'))
 
     switch (dificuldade) {
@@ -64,4 +105,6 @@ function atualizarMatrizLocalStorage(jogadorAtual) {
 
 function limparDadosJogador() {
     localStorage.removeItem('jogadorAtual')
+
+    textoSaudacoes.innerText = 'Olá!'
 }

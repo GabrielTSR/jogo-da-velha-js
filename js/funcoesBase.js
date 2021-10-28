@@ -42,14 +42,19 @@ const atualizarCamposVagos = () => (camposVagos = camposVagos.filter(retornarCam
 
 const passarAVez = (simboloVezDe) => (EAVezDe.innerHTML = `É a vez de <br>"${simboloVezDe}"`)
 
-function checarSeOJogoAcabou() {
-    return (vencedorDaPartida = verSeGanhou('x') ?
-        'x' :
-        verSeGanhou('fantasma') ?
-        'fantasma' :
-        verSeEmpatou() ?
-        'empate' :
-        0)
+const checarSeOJogoAcabou = () =>
+    (vencedorDaPartida = verSeGanhou('x') ? 'x' : verSeGanhou('fantasma') ? 'fantasma' : verSeEmpatou() ? 'empate' : 0)
+
+function aplicarPontosDeVitoria() {
+    if (modoDeJogoSelecionado === 'jvsm') {
+        if (
+            (vencedorDaPartida === 'x' && xSeraSelecionado === 'jogador1') ||
+            (vencedorDaPartida === 'fantasma' && xSeraSelecionado === 'outro')
+        ) {
+            acrescentarPontuacao(dificuldadeDaMaquinaSelecionada)
+        }
+    }
+    return false
 }
 
 function exibirReta() {
@@ -274,6 +279,6 @@ function aplicarJogada(campoSelecionado, indice, simbolo, adversarioSimbolo) {
     eX = !eX
     passarAVez(adversarioSimbolo)
     checarSeOJogoAcabou()
-
+    aplicarPontosDeVitoria()
     exibirResultado()
 }

@@ -1,6 +1,6 @@
 [{
     "nome": "Rodolfo",
-    "facil": 0,
-    "medio": 0,
-    "dificil": 0
+    "pontosFacil": 0,
+    "pontosMedio": 0,
+    "pontosDificil": 0
 }]

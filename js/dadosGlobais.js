@@ -2,6 +2,10 @@
 
 //** INICIO --> PEGANDO ELEMENTOS ATRAVÉS DO ID E CLASSE **//
 
+const rankingCampoJogadores = document.getElementById('ranking-campo-Jogadores')
+
+const textoSaudacoes = document.getElementById('texto-saudacoes')
+
 const caixaDeAlteracao = document.getElementById('alteracao-detectada-modal')
 
 const cadaCampo = document.getElementsByClassName('cada-campo')
@@ -46,7 +50,7 @@ var vencedorDaPartida = 0 //entre 0, 'x', e 'fantasma'
 
 var indiceRetaVencedora = 0
     /*Valor em que armazenaremos uma reta vinda de 
-                                                                                    "possibilidadesVitoriaMatriz" (correspondente a vitória)*/
+                                                                                            "possibilidadesVitoriaMatriz" (correspondente a vitória)*/
 
 var matrizJogo = [0, 0, 0, 0, 0, 0, 0, 0, 0] //0 = vazio
 
@@ -77,8 +81,6 @@ var possibilidadesVitoriaCampo = [
     [campo2, campo5, campo8],
     [campo3, campo6, campo9],
 ]
-
-
 
 var eX = true //true para primeiro jogador, false para segundo jogador
 

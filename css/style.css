@@ -184,10 +184,10 @@
 
 body {
     padding: 10px;
-    background-color: #111111;
     height: 100vh;
     width: 100%;
     background: #000000a8;
+    color: white;
     background-image: url('../img/background_pixel.jpg');
     background-blend-mode: darken;
     position: relative;
@@ -234,6 +234,7 @@ h1 {
     border-bottom-right-radius: 20px;
     border: 10px outset whitesmoke;
     transition: all 1s;
+    margin-bottom: 10px;
 }
 
 h1:hover {
