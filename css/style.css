@@ -11,7 +11,9 @@
     font-family: 'Vermin Vibes';
 }
 
-:root {}
+:root {
+    --azul-principal: #31adff;
+}
 
 .modal-container {
     display: flex;
@@ -76,14 +78,14 @@
 
 #pagina-aterrissagem #campo-nome-e-submit button {
     color: white;
-    background-color: #31adff;
+    background-color: var(--azul-principal);
     font-size: 20px;
     width: 150px;
 }
 
 #pagina-aterrissagem #campo-nome-e-submit button:hover {
     transition: all 1s;
-    box-shadow: 0 0 10px 0 #31adff inset, 0 0 10px 4px #31adff;
+    box-shadow: 0 0 10px 0 var(--azul-principal) inset, 0 0 10px 4px var(--azul-principal);
 }
 
 #resultado-container {
@@ -129,7 +131,7 @@
 }
 
 #botao-aplicar-configuracoes:hover {
-    background-color: #31adff;
+    background-color: var(--azul-principal);
     box-shadow: 0 0 10px 0 #23689c inset, 0 0 10px 4px #23689c;
 }
 
@@ -492,7 +494,7 @@ button {
 }
 
 #aplicar-alteracoes-config:disabled {
-    color: #31adff;
+    color: var(--azul-principal);
     background-color: white;
 }
 
@@ -501,7 +503,7 @@ button {
 #aplicar-alteracoes-config:disabled {
     border: none;
     transition: all 0.5s;
-    box-shadow: 0 0 10px 0 #31adff inset, 0 0 10px 4px #31adff;
+    box-shadow: 0 0 10px 0 var(--azul-principal) inset, 0 0 10px 4px var(--azul-principal);
 }
 
 #quem-e-a-vez-mensagem {
