@@ -29,30 +29,31 @@
             <h2>Bem-vindo ao <span style="color: #31adff">jogo da velha</span></h2>
             <form id="formulario-login" class="flex-column-centralized">
                 <p>Login</p>
-                <p id="texto-erros"></p>
+                <ul id="erros-container"></ul>
                 <div class="flex-column-centralized" id="container-input">
                     <input id="input-nome" placeholder="Nome" type="text" pattern="[a-z\s]+$" maxlength="10" />
                     <input id="input-senha" placeholder="Senha" type="password" pattern="[a-z\s]+$" maxlength="10" />
                     <div class="flex-row-centralized" id="botao-container-login">
-                        <button type="button" onclick="fecharModal(), armazenarJogador()">LOGAR</button>
+                        <button type="button" onclick="realizarLogin()">LOGAR</button>
                     </div>
                 </div>
                 <div class="flex-column-centralized" id="links-cadastro-convidado">
                     <a href="./html/cadastroJogador.html">Não possui uma conta?</a>
-                    <a onclick="fecharModal()">Jogar sem cadastro</a>
-                </div>
-            </form>
-        </div>
-
-        <div class="modal-container" id="resultado-container">
-            <div class="flex-column-centralized caixa-padrao" id="resultado-modal">
-                <img id="imagem-vencedor" src="img/jogo_inacabado.png" alt="" />
-                <h2 class="quem-venceu" id="quem-venceu">Jogo inacabado</h2>
-                <div class="botao-container">
-                    <button id="botao-jogar-novamente" onclick="resetarJogo()">JOGAR NOVAMENTE</button>
-                    <button><a href="#">CANCELAR</a></button>
-                </div>
+                    <a onclick="fecharModal(), atualizarTabelaRanking(), limparDadosJogador()">Jogar sem cadastro</a
+                        >
+                    </div>
+                </form>
             </div>
+
+            <div class="modal-container" id="resultado-container">
+                <div class="flex-column-centralized caixa-padrao" id="resultado-modal">
+                    <img id="imagem-vencedor" src="img/jogo_inacabado.png" alt="" />
+                    <h2 class="quem-venceu" id="quem-venceu">Jogo inacabado</h2>
+                    <div class="botao-container">
+                        <button id="botao-jogar-novamente" onclick="resetarJogo()">JOGAR NOVAMENTE</button>
+                        <button><a href="#">CANCELAR</a></button>
+                </div>
+        </div>
         </div>
 
         <div id="ranking-container" class="modal-container">

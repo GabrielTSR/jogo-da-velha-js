@@ -8,6 +8,8 @@ let senhaJogador = ''
 
 let houveNomeRepetido = false
 
+let loginFoiRealizado = false
+
 const escreverSaudacoes = (nomeJogador) => (textoSaudacoes.innerText = `Olá! ${nomeJogador}`)
 
 const erroContainer = document.getElementById('erros-container')
@@ -30,6 +32,20 @@ function validarCadastro(nomeJogador, senha, senhaConfirmacao) {
     }
 
     if (!senhasCoincidem(senha.value, senhaConfirmacao.value)) {
+        cadastroEValido = false
+    }
+
+    return cadastroEValido
+}
+
+function validarLogin(nomeJogador, senha) {
+    erroContainer.innerHTML = ''
+
+    let cadastroEValido = true
+    if (!campoFoiPreenchido(nomeJogador)) {
+        cadastroEValido = false
+    }
+    if (!campoFoiPreenchido(senha)) {
         cadastroEValido = false
     }
 
@@ -98,7 +114,7 @@ function esseNomeJaExiste() {
 
             erroEncontrado = document.createElement('li')
             erroEncontrado.classList.add('texto-erro')
-            erroEncontrado.innerHTML = `"${valorDoCampo.placeholder}" deve ser preenchido. <br/><br/>`
+            erroEncontrado.innerHTML = `"${nomeJogador}" já está sendo utilizado. <br/><br/>`
 
             erroContainer.appendChild(erroEncontrado)
 
@@ -124,22 +140,27 @@ function realizarLogin() {
     nomeJogador = inputNome.value
     senhaJogador = inputSenha.value
 
-    if (validarCadastro(inputNome, inputSenha, inputSenhaConfirmacao) && !esseNomeJaExiste(inputNome.value)) {
-        const novoJogador = criarNovoJogador()
-        inserirNovoJogadorNaMatriz(novoJogador)
-
-        window.location.replace('../index.html')
-
-        // houveNomeRepetido = false
-        // if (nomeJogador.trim() !== '' && nomeJogador.length <= 10) {
-        //     if (!resgatarJogadorDaMatriz()) {
-        //         const novoJogador = criarNovoJogador()
-        //         inserirNovoJogadorNaMatriz(novoJogador)
-        //     }
-        //     escreverSaudacoes(nomeJogador)
-        // }
-        // atualizarTabelaRanking()
+    if (validarLogin(inputNome, inputSenha)) {
+        if (resgatarJogadorDaMatriz()) {
+            escreverSaudacoes(nomeJogador)
+            atualizarTabelaRanking()
+            fecharModal()
+        } else {
+            divulgarSenhaIncorreta()
+        }
     }
+}
+
+function divulgarSenhaIncorreta() {
+    let erroEncontrado = ''
+
+    erroEncontrado = document.createElement('li')
+    erroEncontrado.classList.add('texto-erro')
+    erroEncontrado.innerHTML = `O nome de usuário ou senha estão incorretos! <br/><br/>`
+
+    erroContainer.appendChild(erroEncontrado)
+
+    return true
 }
 
 function inserirNovoJogadorNaMatriz(novoJogador) {
@@ -176,20 +197,25 @@ function criarObjetoJogador() {}
 function resgatarJogadorDaMatriz() {
     const matrizJogadores = JSON.parse(localStorage.getItem('matrizJogadores'))
 
+    loginFoiRealizado = false
+
     matrizJogadores.forEach(verificarSeNomeExisteEAtribuir)
 
-    return houveNomeRepetido
+    return loginFoiRealizado
 }
 
 function verificarSeNomeExisteEAtribuir(jogador) {
-    if (jogador.nome === nomeJogador) {
+    if (
+        jogador.nome.toLowerCase() === nomeJogador.toLowerCase() &&
+        jogador.senha.toLowerCase() === senhaJogador.toLowerCase()
+    ) {
         localStorage.setItem('jogadorAtual', JSON.stringify(jogador))
-        return (houveNomeRepetido = true)
+        return (loginFoiRealizado = true)
     }
 }
 
 function verificarSeNomeExiste(jogador) {
-    if (jogador.nome === nomeJogador) {
+    if (jogador.nome.toLowerCase() === nomeJogador.toLowerCase()) {
         houveNomeRepetido = true
         return true
     }

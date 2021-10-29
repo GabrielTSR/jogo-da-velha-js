@@ -131,8 +131,8 @@ header h2,
 }
 
 #links-cadastro-convidado a {
+    text-decoration: underline;
     text-align: end;
-    text-decoration: none;
     color: white;
 }
 
