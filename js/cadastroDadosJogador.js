@@ -110,14 +110,17 @@ function atualizarMatrizLocalStorage(jogadorAtual) {
 }
 
 function deixarEmOrdemDecrescente(jogadorComMaisPontos, jogadorComMenosPontos) {
-    return (
-        jogadorComMenosPontos.pontosFacil +
-        jogadorComMenosPontos.pontosMedio +
-        jogadorComMenosPontos.pontosDificil -
-        jogadorComMaisPontos.pontosFacil +
-        jogadorComMaisPontos.pontosMedio +
-        jogadorComMaisPontos.pontosDificil
-    )
+    const totalJogadorMenosPontos = 
+          jogadorComMenosPontos.pontosFacil +
+          jogadorComMenosPontos.pontosMedio +
+          jogadorComMenosPontos.pontosDificil
+    
+    const totalJogadorMaisPontos = 
+          jogadorComMaisPontos.pontosFacil +
+          jogadorComMaisPontos.pontosMedio +
+          jogadorComMaisPontos.pontosDificil
+    
+    return totalJogadorMenosPontos - totalJogadorMaisPontos
 }
 
 function limparDadosJogador() {
