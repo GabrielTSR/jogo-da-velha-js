@@ -1,5 +1,6 @@
 [{
     "nome": "Rodolfo",
+    "senha": "123456",
     "pontosFacil": 0,
     "pontosMedio": 0,
     "pontosDificil": 0

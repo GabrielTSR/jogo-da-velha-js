@@ -54,15 +54,28 @@ header h2,
     font-size: 2rem;
 }
 
-#formulario-login>p {
+#formulario-cadastro>p:first-of-type,
+#formulario-login>p:first-of-type {
     font-size: 1.4rem;
     margin-bottom: 30px;
     text-align: center;
     color: var(--azul-principal);
 }
 
+#formulario-cadastro,
 #formulario-login {
     padding: 10px;
+}
+
+#erros-container {
+    width: 230px;
+    align-self: flex-start;
+    margin-bottom: 10px;
+}
+
+.texto-erro {
+    font-size: 10px;
+    color: #f54747;
 }
 
 #container-input {

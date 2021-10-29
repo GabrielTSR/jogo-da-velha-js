@@ -1,28 +1,145 @@
 'use strict'
 
+const inputNome = document.getElementById('input-nome')
+const inputSenha = document.getElementById('input-senha')
+const inputSenhaConfirmacao = document.getElementById('input-senha-confirmacao')
 let nomeJogador = ''
+let senhaJogador = ''
 
 let houveNomeRepetido = false
 
 const escreverSaudacoes = (nomeJogador) => (textoSaudacoes.innerText = `Olá! ${nomeJogador}`)
 
-function armazenarJogador() {
-    nomeJogador = document.getElementById('input-nome-jogador').value
-    houveNomeRepetido = false
+const erroContainer = document.getElementById('erros-container')
 
-    if (nomeJogador.trim() !== '' && nomeJogador.length <= 10) {
-        if (matrizJogadoresEstaVazia()) {
-            criarMatrizJogadores()
-        }
+function validarCadastro(nomeJogador, senha, senhaConfirmacao) {
+    erroContainer.innerHTML = ''
 
-        if (!resgatarJogadorDaMatriz()) {
-            const novoJogador = criarNovoJogador()
-            inserirNovoJogadorNaMatriz(novoJogador)
-        }
-
-        escreverSaudacoes(nomeJogador)
+    let cadastroEValido = true
+    if (!campoFoiPreenchido(nomeJogador)) {
+        cadastroEValido = false
     }
-    atualizarTabelaRanking()
+    if (!campoFoiPreenchido(senha)) {
+        cadastroEValido = false
+    }
+    if (!campoFoiPreenchido(senhaConfirmacao)) {
+        cadastroEValido = false
+    }
+    if (!nomeUltrapassa10Caracteres(nomeJogador.value)) {
+        cadastroEValido = false
+    }
+
+    if (!senhasCoincidem(senha.value, senhaConfirmacao.value)) {
+        cadastroEValido = false
+    }
+
+    return cadastroEValido
+}
+
+function nomeUltrapassa10Caracteres(nomeJogador) {
+    let erroEncontrado = ''
+
+    if (nomeJogador.length > 10) {
+        erroEncontrado = document.createElement('li')
+        erroEncontrado.classList.add('texto-erro')
+        erroEncontrado.innerHTML = `O nome não pode ultrapassar 10 dígitos. <br/><br/>`
+
+        erroContainer.appendChild(erroEncontrado)
+        return false
+    }
+    return true
+}
+
+const senhasCoincidem = (senha, senhaConfirmacao) => {
+    let erroEncontrado = ''
+
+    if (senha !== senhaConfirmacao) {
+        erroEncontrado = document.createElement('li')
+        erroEncontrado.classList.add('texto-erro')
+        erroEncontrado.innerHTML = `As senhas devem ser iguais. <br/><br/>`
+
+        erroContainer.appendChild(erroEncontrado)
+        return false
+    }
+    return true
+}
+
+function campoFoiPreenchido(campo) {
+    let erroEncontrado = ''
+
+    if (campo.value.trim() === '') {
+        erroEncontrado = document.createElement('li')
+        erroEncontrado.classList.add('texto-erro')
+        erroEncontrado.innerHTML = `"${campo.placeholder}" deve ser preenchido. <br/><br/>`
+
+        erroContainer.appendChild(erroEncontrado)
+
+        return false
+    }
+
+    return true
+}
+
+function esseNomeJaExiste() {
+    let matrizJogadores = []
+        //Apenas foi declarada com um valor abstrato, a função checará se está vazia pelo local storage
+
+    if (matrizJogadoresEstaVazia()) {
+        matrizJogadores = criarMatrizJogadores()
+        return false
+    } else {
+        matrizJogadores = JSON.parse(localStorage.getItem('matrizJogadores'))
+
+        houveNomeRepetido = false
+        matrizJogadores.forEach(verificarSeNomeExiste)
+
+        if (houveNomeRepetido) {
+            let erroEncontrado = ''
+
+            erroEncontrado = document.createElement('li')
+            erroEncontrado.classList.add('texto-erro')
+            erroEncontrado.innerHTML = `"${valorDoCampo.placeholder}" deve ser preenchido. <br/><br/>`
+
+            erroContainer.appendChild(erroEncontrado)
+
+            return true
+        }
+        return false
+    }
+}
+
+function cadastrarJogador() {
+    nomeJogador = inputNome.value
+    senhaJogador = inputSenha.value
+
+    if (validarCadastro(inputNome, inputSenha, inputSenhaConfirmacao) && !esseNomeJaExiste(inputNome.value)) {
+        const novoJogador = criarNovoJogador()
+        inserirNovoJogadorNaMatriz(novoJogador)
+
+        window.location.replace('../index.html')
+    }
+}
+
+function realizarLogin() {
+    nomeJogador = inputNome.value
+    senhaJogador = inputSenha.value
+
+    if (validarCadastro(inputNome, inputSenha, inputSenhaConfirmacao) && !esseNomeJaExiste(inputNome.value)) {
+        const novoJogador = criarNovoJogador()
+        inserirNovoJogadorNaMatriz(novoJogador)
+
+        window.location.replace('../index.html')
+
+        // houveNomeRepetido = false
+        // if (nomeJogador.trim() !== '' && nomeJogador.length <= 10) {
+        //     if (!resgatarJogadorDaMatriz()) {
+        //         const novoJogador = criarNovoJogador()
+        //         inserirNovoJogadorNaMatriz(novoJogador)
+        //     }
+        //     escreverSaudacoes(nomeJogador)
+        // }
+        // atualizarTabelaRanking()
+    }
 }
 
 function inserirNovoJogadorNaMatriz(novoJogador) {
@@ -35,6 +152,7 @@ function inserirNovoJogadorNaMatriz(novoJogador) {
 function criarNovoJogador() {
     const novoJogador = new Object()
     novoJogador.nome = nomeJogador
+    novoJogador.senha = senhaJogador
     novoJogador.pontosFacil = 0
     novoJogador.pontosMedio = 0
     novoJogador.pontosDificil = 0
@@ -48,6 +166,7 @@ function criarNovoJogador() {
 function criarMatrizJogadores() {
     const matrizJogadores = []
     localStorage.setItem('matrizJogadores', JSON.stringify(matrizJogadores))
+    return matrizJogadores
 }
 
 const matrizJogadoresEstaVazia = () => JSON.parse(localStorage.getItem('matrizJogadores')) === null
@@ -57,15 +176,22 @@ function criarObjetoJogador() {}
 function resgatarJogadorDaMatriz() {
     const matrizJogadores = JSON.parse(localStorage.getItem('matrizJogadores'))
 
-    matrizJogadores.forEach(verificarSeNomeExisteNaMatriz)
+    matrizJogadores.forEach(verificarSeNomeExisteEAtribuir)
 
     return houveNomeRepetido
 }
 
-function verificarSeNomeExisteNaMatriz(jogador) {
+function verificarSeNomeExisteEAtribuir(jogador) {
     if (jogador.nome === nomeJogador) {
         localStorage.setItem('jogadorAtual', JSON.stringify(jogador))
         return (houveNomeRepetido = true)
+    }
+}
+
+function verificarSeNomeExiste(jogador) {
+    if (jogador.nome === nomeJogador) {
+        houveNomeRepetido = true
+        return true
     }
 }
 
@@ -110,16 +236,12 @@ function atualizarMatrizLocalStorage(jogadorAtual) {
 }
 
 function deixarEmOrdemDecrescente(jogadorComMaisPontos, jogadorComMenosPontos) {
-    const totalJogadorMenosPontos = 
-          jogadorComMenosPontos.pontosFacil +
-          jogadorComMenosPontos.pontosMedio +
-          jogadorComMenosPontos.pontosDificil
-    
-    const totalJogadorMaisPontos = 
-          jogadorComMaisPontos.pontosFacil +
-          jogadorComMaisPontos.pontosMedio +
-          jogadorComMaisPontos.pontosDificil
-    
+    const totalJogadorMenosPontos =
+        jogadorComMenosPontos.pontosFacil + jogadorComMenosPontos.pontosMedio + jogadorComMenosPontos.pontosDificil
+
+    const totalJogadorMaisPontos =
+        jogadorComMaisPontos.pontosFacil + jogadorComMaisPontos.pontosMedio + jogadorComMaisPontos.pontosDificil
+
     return totalJogadorMenosPontos - totalJogadorMaisPontos
 }
 

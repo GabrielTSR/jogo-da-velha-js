@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/responsividade.css" />
+    <script src="../js/cadastroDadosJogador.js" defer></script>
     <title>Cadastro</title>
 </head>
 
@@ -18,12 +19,13 @@
         <section class="flex-column-centralized" id="cadastro-campo">
             <form id="formulario-login" class="flex-column-centralized">
                 <p>Cadastro</p>
+                <ul id="erros-container"></ul>
                 <div class="flex-column-centralized" id="container-input">
-                    <input id="input-nome-jogador" placeholder="Usuario" type="text" pattern="[a-z\s]+$" maxlength="10" />
-                    <input id="input-senha-jogador" placeholder="Senha" type="text" pattern="[a-z\s]+$" maxlength="10" />
-                    <input id="input-senha-jogador" placeholder="Confirme a senha" type="text" pattern="[a-z\s]+$" maxlength="10" />
+                    <input id="input-nome" placeholder="Nome" type="text" maxlength="10" />
+                    <input id="input-senha" placeholder="Senha" type="password" />
+                    <input id="input-senha-confirmacao" placeholder="Confirmacao de senha" type="password" />
                     <div class="flex-row-centralized" id="botao-container-login">
-                        <button onclick="criarConta()">CRIAR CONTA</button>
+                        <button type="button" onclick="cadastrarJogador()">CRIAR CONTA</button>
                     </div>
                 </div>
                 <div class="flex-column-centralized" id="links-cadastro-convidado">

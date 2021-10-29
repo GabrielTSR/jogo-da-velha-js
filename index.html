@@ -29,11 +29,12 @@
             <h2>Bem-vindo ao <span style="color: #31adff">jogo da velha</span></h2>
             <form id="formulario-login" class="flex-column-centralized">
                 <p>Login</p>
+                <p id="texto-erros"></p>
                 <div class="flex-column-centralized" id="container-input">
-                    <input id="input-nome-jogador" placeholder="Usuario" type="text" pattern="[a-z\s]+$" maxlength="10" />
-                    <input id="input-senha-jogador" placeholder="Senha" type="text" pattern="[a-z\s]+$" maxlength="10" />
+                    <input id="input-nome" placeholder="Nome" type="text" pattern="[a-z\s]+$" maxlength="10" />
+                    <input id="input-senha" placeholder="Senha" type="password" pattern="[a-z\s]+$" maxlength="10" />
                     <div class="flex-row-centralized" id="botao-container-login">
-                        <button onclick="fecharModal(), armazenarJogador()">LOGAR</button>
+                        <button type="button" onclick="fecharModal(), armazenarJogador()">LOGAR</button>
                     </div>
                 </div>
                 <div class="flex-column-centralized" id="links-cadastro-convidado">
