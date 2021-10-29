@@ -33,59 +33,100 @@
     margin: 30px;
 }
 
+#cadastro-campo,
 #pagina-aterrissagem {
-    display: none;
     background: #000000a8;
     background-image: url('../img/background_pixel.jpg');
     background-blend-mode: darken;
     color: white;
 }
 
+#pagina-aterrissagem {
+    display: none;
+}
+
 #pagina-aterrissagem:target {
     display: flex;
 }
 
+#cadastro-campo h2,
 #pagina-aterrissagem h2 {
     font-size: 2rem;
 }
 
-#pagina-aterrissagem p {
+#formulario-login>p {
+    font-size: 1.4rem;
     margin-bottom: 30px;
     text-align: center;
+    color: var(--azul-principal);
 }
 
-#campo-nome-e-submit {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    max-width: 400px;
+#formulario-login {
+    padding: 10px;
+}
+
+#container-input {
+    max-width: 250px;
     width: 100%;
-    height: 120px;
     gap: 20px;
 }
 
-#pagina-aterrissagem #campo-nome-e-submit * {
+#cadastro-campo #container-input *,
+#pagina-aterrissagem #container-input * {
     height: 40px;
     border: none;
     border-radius: 5px;
 }
 
-#pagina-aterrissagem #campo-nome-e-submit input {
-    padding-left: 10px;
+#cadastro-campo #container-input input,
+#pagina-aterrissagem #container-input input {
+    padding: 10px;
+    width: 100%;
+    background: none;
+    color: white;
+    border: 1px var(--azul-principal) solid;
+}
+
+#cadastro-campo #container-input input::placeholder,
+#pagina-aterrissagem #container-input input::placeholder {
+    color: rgba(255, 255, 255, 0.692);
+}
+
+#botao-container-login {
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+#botao-container-login button {
+    color: white;
+    background-color: var(--azul-principal);
+    font-size: 12px;
     width: 100%;
 }
 
-#pagina-aterrissagem #campo-nome-e-submit button {
-    color: white;
-    background-color: var(--azul-principal);
-    font-size: 20px;
-    width: 150px;
-}
-
-#pagina-aterrissagem #campo-nome-e-submit button:hover {
+#botao-container-login button:hover {
     transition: all 1s;
     box-shadow: 0 0 10px 0 var(--azul-principal) inset, 0 0 10px 4px var(--azul-principal);
+}
+
+#links-cadastro-convidado {
+    align-items: flex-end;
+    font-size: 10px;
+    width: 100%;
+    gap: 10px;
+}
+
+#links-cadastro-convidado a {
+    text-align: end;
+    text-decoration: none;
+    color: white;
+}
+
+#links-cadastro-convidado a:hover {
+    transition: color 0.5s;
+    cursor: pointer;
+    color: var(--azul-principal);
 }
 
 #resultado-container {
@@ -102,11 +143,6 @@
     width: auto;
     max-width: 400px;
     height: 300px;
-    background: linear-gradient(87deg, #082368 28%, #07017e 66%);
-    background-color: black;
-    border-top-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border: 10px outset whitesmoke;
 }
 
 #alteracao-detectada-modal {
@@ -224,8 +260,16 @@ header {
     width: 100%;
 }
 
-h1 {
+.caixa-padrao {
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
     background: linear-gradient(87deg, #082368 28%, #07017e 66%);
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border: 10px outset whitesmoke;
+}
+
+h1 {
     font-family: 'vermin vibes';
     text-align: center;
     color: whitesmoke;
@@ -235,9 +279,6 @@ h1 {
     height: 100px;
     padding-top: 10px;
     padding-bottom: 10px;
-    border-top-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border: 10px outset whitesmoke;
     transition: all 1s;
     margin-bottom: 10px;
 }
@@ -316,10 +357,6 @@ h1:hover {
     min-width: 100px;
     height: 70vh;
     overflow-y: scroll;
-    background: linear-gradient(87deg, #06236d 28%, #181286 66%);
-    border-top-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border: 10px outset whitesmoke;
     color: white;
     padding: 10px;
     display: flex;
@@ -435,11 +472,6 @@ main {
     margin-left: 40px;
     position: absolute;
     left: 0;
-    background: linear-gradient(87deg, #06236d 28%, #181286 66%);
-    border-top-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border: 10px outset whitesmoke;
-    color: white;
     display: flex;
     flex-direction: column;
     gap: 20px;

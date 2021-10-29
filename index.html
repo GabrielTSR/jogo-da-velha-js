@@ -20,22 +20,31 @@
 
 <body class="flex-column-centralized">
     <header class="flex-column-centralized">
-        <h1 class="flex-row-centralized">Jogo da velha</h1>
+        <h1 class="flex-row-centralized caixa-padrao">Jogo da velha</h1>
         <h5 id="texto-saudacoes">Olá!</h5>
     </header>
 
     <main class="flex-column-centralized">
         <div class="modal-container flex-column-centralized" id="pagina-aterrissagem">
             <h2>Bem-vindo ao <span style="color: #31adff">jogo da velha</span></h2>
-            <p>Olá! Como gosta de ser chamado?</p>
-            <div id="campo-nome-e-submit">
-                <input id="input-nome-jogador" placeholder="Exemplo: MestreDoX" type="text" pattern="[a-z\s]+$" maxlength="10" />
-                <button onclick="fecharModal(), armazenarJogador()">JOGAR</button>
-            </div>
+            <form id="formulario-login" class="flex-column-centralized">
+                <p>Login</p>
+                <div class="flex-column-centralized" id="container-input">
+                    <input id="input-nome-jogador" placeholder="Usuario" type="text" pattern="[a-z\s]+$" maxlength="10" />
+                    <input id="input-senha-jogador" placeholder="Senha" type="text" pattern="[a-z\s]+$" maxlength="10" />
+                    <div class="flex-row-centralized" id="botao-container-login">
+                        <button onclick="fecharModal(), armazenarJogador()">LOGAR</button>
+                    </div>
+                </div>
+                <div class="flex-column-centralized" id="links-cadastro-convidado">
+                    <a href="./html/cadastroJogador.html">Não possui conta?</a>
+                    <a onclick="fecharModal()">Jogar sem cadastro</a>
+                </div>
+            </form>
         </div>
 
         <div class="modal-container" id="resultado-container">
-            <div class="flex-column-centralized" id="resultado-modal">
+            <div class="flex-column-centralized caixa-padrao" id="resultado-modal">
                 <img id="imagem-vencedor" src="img/jogo_inacabado.png" alt="" />
                 <h2 class="quem-venceu" id="quem-venceu">Jogo inacabado</h2>
                 <div class="botao-container">
@@ -46,7 +55,7 @@
         </div>
 
         <div id="ranking-container" class="modal-container">
-            <div id="ranking-modal">
+            <div class="caixa-padrao" id="ranking-modal">
                 <a href="#" class="fechar"><i class="fas fa-times"></i></a>
                 <h2>Ranking:</h2>
                 <table>
@@ -62,7 +71,7 @@
         </div>
 
         <div class="modal-container" id="config-modal-container">
-            <section id="campo-config">
+            <section class="caixa-padrao" id="campo-config">
                 <a href="#" class="fechar"><i class="fas fa-times"></i></a>
 
                 <h2 id="h2-opcoes-campo-config">OPÇÕES</h2>
