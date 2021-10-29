@@ -49,7 +49,7 @@
     display: flex;
 }
 
-#cadastro-campo h2,
+header h2,
 #pagina-aterrissagem h2 {
     font-size: 2rem;
 }
@@ -453,6 +453,10 @@ h1:hover {
 main {
     width: calc(90% - 450px);
     flex: 1;
+}
+
+#main-cadastro {
+    width: 100%;
 }
 
 #config-modal-container {
