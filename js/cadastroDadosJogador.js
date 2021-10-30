@@ -199,7 +199,6 @@ function criarNovoJogador() {
     novoJogador.pontosFacil = 0
     novoJogador.pontosMedio = 0
     novoJogador.pontosDificil = 0
-    novoJogador.pontosTotal = 0
 
     localStorage.setItem('jogadorAtual', JSON.stringify(novoJogador))
     jogadorLogado = JSON.parse(localStorage.getItem('jogadorAtual'))
