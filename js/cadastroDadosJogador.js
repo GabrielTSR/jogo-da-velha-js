@@ -244,18 +244,30 @@ function verificarSeNomeExiste(jogador) {
     }
 }
 
-function acrescentarPontuacao(dificuldade) {
-    switch (dificuldade) {
-        case 'facil':
+function alterarPontuacao(situacao) {
+    switch (situacao) {
+        case 'ganhou do facil':
             jogadorLogado.pontosFacil += 10
             break
 
-        case 'medio':
+        case 'ganhou do medio':
             jogadorLogado.pontosMedio += 40
             break
 
-        case 'dificil':
+        case 'ganhou do dificil':
             jogadorLogado.pontosDificil += 1000
+            break
+
+        case 'perdeu para o facil':
+            jogadorLogado.pontosFacil -= 45
+            break
+
+        case 'perdeu para o medio':
+            jogadorLogado.pontosMedio -= 20
+            break
+
+        case 'perdeu para o dificil':
+            jogadorLogado.pontosDificil -= 10
             break
 
         default:

@@ -46,13 +46,21 @@ const checarSeOJogoAcabou = () =>
     (vencedorDaPartida = verSeGanhou('x') ? 'x' : verSeGanhou('fantasma') ? 'fantasma' : verSeEmpatou() ? 'empate' : 0)
 
 function aplicarPontosDeVitoria() {
-    if (modoDeJogoSelecionado === 'jvsm') {
+    if (modoDeJogoSelecionado === 'jvsm' && vencedorDaPartida !== 'empate') {
+        let situacao = ''
         if (
             (vencedorDaPartida === 'x' && xSeraSelecionado === 'jogador1') ||
             (vencedorDaPartida === 'fantasma' && xSeraSelecionado === 'outro')
         ) {
-            acrescentarPontuacao(dificuldadeDaMaquinaSelecionada)
+            situacao = `ganhou do ${dificuldadeDaMaquinaSelecionada}`
+        } else if (
+            (vencedorDaPartida === 'x' && xSeraSelecionado === 'outro') ||
+            (vencedorDaPartida === 'fantasma' && xSeraSelecionado === 'jogador1')
+        ) {
+            situacao = `perdeu para o ${dificuldadeDaMaquinaSelecionada}`
+            console.log(situacao)
         }
+        alterarPontuacao(situacao)
     }
     return false
 }
