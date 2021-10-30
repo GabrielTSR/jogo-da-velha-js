@@ -16,6 +16,8 @@ const escreverSaudacoes = (nomeJogador) => (textoSaudacoes.innerText = `Olá! ${
 
 const erroContainer = document.getElementById('erros-container')
 
+const eNulo = (elemento) => elemento === null
+
 function validarCadastro(nomeJogador, senha, senhaConfirmacao) {
     erroContainer.innerHTML = ''
 
@@ -99,31 +101,23 @@ function campoFoiPreenchido(campo) {
 }
 
 function esseNomeJaExiste() {
-    let matrizJogadores = []
-        //Apenas foi declarada com um valor abstrato, a função checará se está vazia pelo local storage
+    const matrizJogadores = resgatarMatrizJogadores()
 
-    if (matrizJogadoresEstaVazia()) {
-        matrizJogadores = criarMatrizJogadores()
-        return false
-    } else {
-        matrizJogadores = resgatarMatrizJogadores()
+    houveNomeRepetido = false
+    matrizJogadores.forEach(verificarSeNomeExiste)
 
-        houveNomeRepetido = false
-        matrizJogadores.forEach(verificarSeNomeExiste)
+    if (houveNomeRepetido) {
+        let erroEncontrado = ''
 
-        if (houveNomeRepetido) {
-            let erroEncontrado = ''
+        erroEncontrado = document.createElement('li')
+        erroEncontrado.classList.add('texto-erro')
+        erroEncontrado.innerHTML = `"${nomeJogador}" já está sendo utilizado. <br/><br/>`
 
-            erroEncontrado = document.createElement('li')
-            erroEncontrado.classList.add('texto-erro')
-            erroEncontrado.innerHTML = `"${nomeJogador}" já está sendo utilizado. <br/><br/>`
+        erroContainer.appendChild(erroEncontrado)
 
-            erroContainer.appendChild(erroEncontrado)
-
-            return true
-        }
-        return false
+        return true
     }
+    return false
 }
 
 function cadastrarJogador() {
@@ -140,7 +134,7 @@ function cadastrarJogador() {
 }
 
 function realizarLogin() {
-    if (jogadorLogado !== null) {
+    if (!eNulo(jogadorLogado)) {
         nomeJogador = jogadorLogado.nome
         senhaJogador = jogadorLogado.senha
         escreverSaudacoes(nomeJogador)
@@ -190,8 +184,6 @@ function inserirNovoJogadorNaMatriz(novoJogador) {
 function criarNovoJogador() {
     const matrizJogadores = resgatarMatrizJogadores()
 
-    console.log('chegou aq')
-
     const novoJogador = new Object()
     novoJogador.id = matrizJogadores.length + 1
     novoJogador.nome = nomeJogador
@@ -212,8 +204,6 @@ function criarMatrizJogadores() {
     return matrizJogadores
 }
 
-const matrizJogadoresEstaVazia = () => resgatarMatrizJogadores() === null
-
 function criarObjetoJogador() {}
 
 function resgatarJogadorDaMatriz() {
@@ -226,7 +216,14 @@ function resgatarJogadorDaMatriz() {
     return loginFoiRealizado
 }
 
-const resgatarMatrizJogadores = () => JSON.parse(localStorage.getItem('matrizJogadores'))
+function resgatarMatrizJogadores() {
+    let matrizJogadores = JSON.parse(localStorage.getItem('matrizJogadores'))
+
+    if (eNulo(matrizJogadores)) {
+        matrizJogadores = criarMatrizJogadores()
+    }
+    return matrizJogadores
+}
 
 function verificarSeNomeExisteEAtribuir(jogador) {
     if (
