@@ -10,6 +10,8 @@ let houveNomeRepetido = false
 
 let loginFoiRealizado = false
 
+let jogadorLogado = JSON.parse(localStorage.getItem('jogadorAtual'))
+
 const escreverSaudacoes = (nomeJogador) => (textoSaudacoes.innerText = `Olá! ${nomeJogador}`)
 
 const erroContainer = document.getElementById('erros-container')
@@ -104,7 +106,7 @@ function esseNomeJaExiste() {
         matrizJogadores = criarMatrizJogadores()
         return false
     } else {
-        matrizJogadores = JSON.parse(localStorage.getItem('matrizJogadores'))
+        matrizJogadores = resgatarMatrizJogadores()
 
         houveNomeRepetido = false
         matrizJogadores.forEach(verificarSeNomeExiste)
@@ -129,6 +131,7 @@ function cadastrarJogador() {
     senhaJogador = inputSenha.value
 
     if (validarCadastro(inputNome, inputSenha, inputSenhaConfirmacao) && !esseNomeJaExiste(inputNome.value)) {
+        console.log('passou da validacao')
         const novoJogador = criarNovoJogador()
         inserirNovoJogadorNaMatriz(novoJogador)
 
@@ -137,18 +140,32 @@ function cadastrarJogador() {
 }
 
 function realizarLogin() {
-    nomeJogador = inputNome.value
-    senhaJogador = inputSenha.value
+    if (jogadorLogado !== null) {
+        nomeJogador = jogadorLogado.nome
+        senhaJogador = jogadorLogado.senha
+        escreverSaudacoes(nomeJogador)
+        atualizarTabelaRanking()
+        fecharModal()
+        return true
+    } else {
+        nomeJogador = inputNome.value
+        senhaJogador = inputSenha.value
+    }
 
     if (validarLogin(inputNome, inputSenha)) {
         if (resgatarJogadorDaMatriz()) {
             escreverSaudacoes(nomeJogador)
             atualizarTabelaRanking()
             fecharModal()
+            return true
         } else {
             divulgarSenhaIncorreta()
+            return false
         }
     }
+}
+if (jogadorLogado !== null) {
+    realizarLogin()
 }
 
 function divulgarSenhaIncorreta() {
@@ -164,14 +181,19 @@ function divulgarSenhaIncorreta() {
 }
 
 function inserirNovoJogadorNaMatriz(novoJogador) {
-    let matrizJogadores = JSON.parse(localStorage.getItem('matrizJogadores'))
+    let matrizJogadores = resgatarMatrizJogadores()
 
     matrizJogadores.push(novoJogador)
     localStorage.setItem('matrizJogadores', JSON.stringify(matrizJogadores))
 }
 
 function criarNovoJogador() {
+    const matrizJogadores = resgatarMatrizJogadores()
+
+    console.log('chegou aq')
+
     const novoJogador = new Object()
+    novoJogador.id = matrizJogadores.length + 1
     novoJogador.nome = nomeJogador
     novoJogador.senha = senhaJogador
     novoJogador.pontosFacil = 0
@@ -180,6 +202,7 @@ function criarNovoJogador() {
     novoJogador.pontosTotal = 0
 
     localStorage.setItem('jogadorAtual', JSON.stringify(novoJogador))
+    jogadorLogado = JSON.parse(localStorage.getItem('jogadorAtual'))
 
     return novoJogador
 }
@@ -190,12 +213,12 @@ function criarMatrizJogadores() {
     return matrizJogadores
 }
 
-const matrizJogadoresEstaVazia = () => JSON.parse(localStorage.getItem('matrizJogadores')) === null
+const matrizJogadoresEstaVazia = () => resgatarMatrizJogadores() === null
 
 function criarObjetoJogador() {}
 
 function resgatarJogadorDaMatriz() {
-    const matrizJogadores = JSON.parse(localStorage.getItem('matrizJogadores'))
+    const matrizJogadores = resgatarMatrizJogadores()
 
     loginFoiRealizado = false
 
@@ -204,12 +227,16 @@ function resgatarJogadorDaMatriz() {
     return loginFoiRealizado
 }
 
+const resgatarMatrizJogadores = () => JSON.parse(localStorage.getItem('matrizJogadores'))
+
 function verificarSeNomeExisteEAtribuir(jogador) {
     if (
         jogador.nome.toLowerCase() === nomeJogador.toLowerCase() &&
         jogador.senha.toLowerCase() === senhaJogador.toLowerCase()
     ) {
         localStorage.setItem('jogadorAtual', JSON.stringify(jogador))
+        jogadorLogado = JSON.parse(localStorage.getItem('jogadorAtual'))
+
         return (loginFoiRealizado = true)
     }
 }
@@ -222,36 +249,34 @@ function verificarSeNomeExiste(jogador) {
 }
 
 function acrescentarPontuacao(dificuldade) {
-    let jogadorAtual = JSON.parse(localStorage.getItem('jogadorAtual'))
-
     switch (dificuldade) {
         case 'facil':
-            jogadorAtual.pontosFacil += 10
+            jogadorLogado.pontosFacil += 10
             break
 
         case 'medio':
-            jogadorAtual.pontosMedio += 40
+            jogadorLogado.pontosMedio += 40
             break
 
         case 'dificil':
-            jogadorAtual.pontosDificil += 1000
+            jogadorLogado.pontosDificil += 1000
             break
 
         default:
             return false
     }
 
-    localStorage.setItem('jogadorAtual', JSON.stringify(jogadorAtual))
-    atualizarMatrizLocalStorage(jogadorAtual)
+    localStorage.setItem('jogadorAtual', JSON.stringify(jogadorLogado))
+    atualizarMatrizLocalStorage(jogadorLogado)
     atualizarTabelaRanking()
 }
 
-function atualizarMatrizLocalStorage(jogadorAtual) {
-    let matrizJogadores = JSON.parse(localStorage.getItem('matrizJogadores'))
+function atualizarMatrizLocalStorage() {
+    let matrizJogadores = resgatarMatrizJogadores()
 
     matrizJogadores.forEach((jogador, indice, matrizJogadores) => {
-        if (jogador.nome === jogadorAtual.nome) {
-            matrizJogadores[indice] = jogadorAtual
+        if (jogador.nome === jogadorLogado.nome) {
+            matrizJogadores[indice] = jogadorLogado
             return true
         }
     })
@@ -273,6 +298,7 @@ function deixarEmOrdemDecrescente(jogadorComMaisPontos, jogadorComMenosPontos) {
 
 function limparDadosJogador() {
     localStorage.removeItem('jogadorAtual')
+    jogadorLogado = null
 
     textoSaudacoes.innerText = 'Olá!'
 }

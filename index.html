@@ -13,8 +13,8 @@
     <script src="./js/jogador.js" defer></script>
     <script src="./js/maquina.js" defer></script>
     <script src="./js/funcoesBase.js" defer></script>
-    <script src="./js/cadastroDadosJogador.js" defer></script>
     <script src="./js/ranking.js" defer></script>
+    <script src="./js/cadastroDadosJogador.js" defer></script>
     <title>Jogo da velha</title>
 </head>
 
@@ -31,8 +31,8 @@
                 <p>Login</p>
                 <ul id="erros-container"></ul>
                 <div class="flex-column-centralized" id="container-input">
-                    <input id="input-nome" placeholder="Nome" type="text" pattern="[a-z\s]+$" maxlength="10" />
-                    <input id="input-senha" placeholder="Senha" type="password" pattern="[a-z\s]+$" maxlength="10" />
+                    <input id="input-nome" placeholder="Nome" type="text" maxlength="10" />
+                    <input id="input-senha" placeholder="Senha" type="password" maxlength="10" />
                     <div class="flex-row-centralized" id="botao-container-login">
                         <button type="button" onclick="realizarLogin()">LOGAR</button>
                     </div>
