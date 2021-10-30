@@ -118,11 +118,6 @@ header h2,
     width: 100%;
 }
 
-#botao-container-login button:hover {
-    transition: all 1s;
-    box-shadow: 0 0 10px 0 var(--azul-principal) inset, 0 0 10px 4px var(--azul-principal);
-}
-
 #links-cadastro-convidado {
     align-items: flex-end;
     font-size: 10px;
@@ -276,7 +271,9 @@ header {
 .caixa-padrao {
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    background: linear-gradient(87deg, #082368 28%, #07017e 66%);
+    background: #000000a8;
+    background-image: url('../img/background_pixel.jpg');
+    background-blend-mode: darken;
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;
     border: 10px outset whitesmoke;
@@ -285,7 +282,7 @@ header {
 h1 {
     font-family: 'vermin vibes';
     text-align: center;
-    color: whitesmoke;
+    color: var(--azul-principal);
     font-weight: lighter;
     font-size: 30px;
     width: 420px;
@@ -407,10 +404,8 @@ h1:hover {
 }
 
 #ranking-modal table {
-    border: none;
     border-collapse: collapse;
     width: 100%;
-    border-color: black;
 }
 
 #ranking-modal table tr th {
@@ -431,8 +426,8 @@ h1:hover {
     padding-left: 20px;
     font-size: 10px;
     height: 30px;
-    border-top: 1px solid black;
-    border-bottom-right-radius: 1px solid black;
+    border-top: 1px solid white;
+    border-bottom-right-radius: 1px solid white;
     padding-top: 5px;
     padding-bottom: 5px;
 }
@@ -531,6 +526,8 @@ main {
 
 button:hover {
     cursor: pointer;
+    transition: all 1s;
+    box-shadow: 0 0 10px 0 var(--azul-principal) inset, 0 0 10px 4px var(--azul-principal);
 }
 
 #logout:hover {
@@ -547,9 +544,7 @@ button {
     background-color: white;
 }
 
-#campo-config .cada-questao-container select:hover,
-.button-container button:hover,
-#aplicar-alteracoes-config:disabled {
+#campo-config .cada-questao-container select:hover #aplicar-alteracoes-config:disabled {
     border: none;
     transition: all 0.5s;
     box-shadow: 0 0 10px 0 var(--azul-principal) inset, 0 0 10px 4px var(--azul-principal);
