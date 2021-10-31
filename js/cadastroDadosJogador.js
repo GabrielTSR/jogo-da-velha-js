@@ -22,13 +22,13 @@ function validarCadastro(nomeJogador, senha, senhaConfirmacao) {
     erroContainer.innerHTML = ''
 
     let cadastroEValido = true
-    if (!campoFoiPreenchido(nomeJogador)) {
+    if (!campoFoiPreenchido(nomeJogador, 'nome')) {
         cadastroEValido = false
     }
-    if (!campoFoiPreenchido(senha)) {
+    if (!campoFoiPreenchido(senha, 'senha')) {
         cadastroEValido = false
     }
-    if (!campoFoiPreenchido(senhaConfirmacao)) {
+    if (!campoFoiPreenchido(senhaConfirmacao, 'Confirmação de senha')) {
         cadastroEValido = false
     }
     if (!nomeUltrapassa10Caracteres(nomeJogador.value)) {
@@ -60,40 +60,26 @@ function nomeUltrapassa10Caracteres(nomeJogador) {
     let erroEncontrado = ''
 
     if (nomeJogador.length > 10) {
-        erroEncontrado = document.createElement('li')
-        erroEncontrado.classList.add('texto-erro')
-        erroEncontrado.innerHTML = `O nome não pode ultrapassar 10 dígitos. <br/><br/>`
-
-        erroContainer.appendChild(erroEncontrado)
+        const mensagemErro = `O nome não pode ultrapassar 10 dígitos. <br/><br/>`
+        acrescentarTopicoErro(mensagemErro)
         return false
     }
     return true
 }
 
 const senhasCoincidem = (senha, senhaConfirmacao) => {
-    let erroEncontrado = ''
-
     if (senha !== senhaConfirmacao) {
-        erroEncontrado = document.createElement('li')
-        erroEncontrado.classList.add('texto-erro')
-        erroEncontrado.innerHTML = `As senhas devem ser iguais. <br/><br/>`
-
-        erroContainer.appendChild(erroEncontrado)
+        const mensagemErro = `As senhas devem ser iguais. <br/><br/>`
+        acrescentarTopicoErro(mensagemErro)
         return false
     }
     return true
 }
 
-function campoFoiPreenchido(campo) {
-    let erroEncontrado = ''
-
+function campoFoiPreenchido(campo, nomeDoCampo) {
     if (campo.value.trim() === '') {
-        erroEncontrado = document.createElement('li')
-        erroEncontrado.classList.add('texto-erro')
-        erroEncontrado.innerHTML = `"${campo.placeholder}" deve ser preenchido. <br/><br/>`
-
-        erroContainer.appendChild(erroEncontrado)
-
+        const mensagemErro = `O campo de "${nomeDoCampo}" é obrigatório. <br/><br/>`
+        acrescentarTopicoErro(mensagemErro)
         return false
     }
 
@@ -107,13 +93,8 @@ function esseNomeJaExiste() {
     matrizJogadores.forEach(verificarSeNomeExiste)
 
     if (houveNomeRepetido) {
-        let erroEncontrado = ''
-
-        erroEncontrado = document.createElement('li')
-        erroEncontrado.classList.add('texto-erro')
-        erroEncontrado.innerHTML = `"${nomeJogador}" já está sendo utilizado. <br/><br/>`
-
-        erroContainer.appendChild(erroEncontrado)
+        const mensagemErro = `"${nomeJogador}" já está sendo utilizado. <br/><br/>`
+        acrescentarTopicoErro(mensagemErro)
 
         return true
     }
@@ -153,7 +134,8 @@ function realizarLogin() {
             fecharModal()
             return true
         } else {
-            divulgarSenhaIncorreta()
+            const erro = `O nome de usuário ou senha estão incorretos! <br/><br/>`
+            acrescentarTopicoErro(mensagemErro)
             return false
         }
     }
@@ -162,12 +144,12 @@ if (jogadorLogado !== null) {
     realizarLogin()
 }
 
-function divulgarSenhaIncorreta() {
+function acrescentarTopicoErro(mensagemErro) {
     let erroEncontrado = ''
 
     erroEncontrado = document.createElement('li')
     erroEncontrado.classList.add('texto-erro')
-    erroEncontrado.innerHTML = `O nome de usuário ou senha estão incorretos! <br/><br/>`
+    erroEncontrado.innerHTML = mensagemErro
 
     erroContainer.appendChild(erroEncontrado)
 
