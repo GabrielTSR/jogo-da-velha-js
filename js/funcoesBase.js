@@ -45,8 +45,11 @@ const passarAVez = (simboloVezDe) => (EAVezDe.innerHTML = `É a vez de <br>"${si
 const checarSeOJogoAcabou = () =>
     (vencedorDaPartida = verSeGanhou('x') ? 'x' : verSeGanhou('fantasma') ? 'fantasma' : verSeEmpatou() ? 'empate' : 0)
 
+const vitoriaDeveAplicarPontos = () =>
+    modoDeJogoSelecionado === 'jvsm' && vencedorDaPartida !== 'empate' && jogadorLogado !== null
+
 function aplicarPontosDeVitoria() {
-    if (modoDeJogoSelecionado === 'jvsm' && vencedorDaPartida !== 'empate') {
+    if (vitoriaDeveAplicarPontos()) {
         let situacao = ''
         if (
             (vencedorDaPartida === 'x' && xSeraSelecionado === 'jogador1') ||

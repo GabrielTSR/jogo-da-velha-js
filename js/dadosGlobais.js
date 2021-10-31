@@ -2,6 +2,8 @@
 
 //** INICIO --> PEGANDO ELEMENTOS ATRAVÉS DO ID E CLASSE **//
 
+let jogadorLogado = JSON.parse(localStorage.getItem('jogadorAtual'))
+
 const rankingCampoJogadores = document.getElementById('ranking-campo-Jogadores')
 
 const textoSaudacoes = document.getElementById('texto-saudacoes')
@@ -50,7 +52,7 @@ var vencedorDaPartida = 0 //entre 0, 'x', e 'fantasma'
 
 var indiceRetaVencedora = 0
     /*Valor em que armazenaremos uma reta vinda de 
-                                                                                                            "possibilidadesVitoriaMatriz" (correspondente a vitória)*/
+                                                                                                                "possibilidadesVitoriaMatriz" (correspondente a vitória)*/
 
 var matrizJogo = [0, 0, 0, 0, 0, 0, 0, 0, 0] //0 = vazio
 

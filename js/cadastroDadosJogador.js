@@ -10,8 +10,6 @@ let houveNomeRepetido = false
 
 let loginFoiRealizado = false
 
-let jogadorLogado = JSON.parse(localStorage.getItem('jogadorAtual'))
-
 const escreverSaudacoes = (nomeJogador) => (textoSaudacoes.innerText = `Olá! ${nomeJogador}`)
 
 const erroContainer = document.getElementById('erros-container')
