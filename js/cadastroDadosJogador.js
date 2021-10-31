@@ -46,10 +46,10 @@ function validarLogin(nomeJogador, senha) {
     erroContainer.innerHTML = ''
 
     let cadastroEValido = true
-    if (!campoFoiPreenchido(nomeJogador)) {
+    if (!campoFoiPreenchido(nomeJogador, 'nome')) {
         cadastroEValido = false
     }
-    if (!campoFoiPreenchido(senha)) {
+    if (!campoFoiPreenchido(senha, 'senha')) {
         cadastroEValido = false
     }
 
