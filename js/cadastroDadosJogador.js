@@ -3,6 +3,7 @@
 const inputNome = document.getElementById('input-nome')
 const inputSenha = document.getElementById('input-senha')
 const inputSenhaConfirmacao = document.getElementById('input-senha-confirmacao')
+let jogadorLogado = JSON.parse(localStorage.getItem('jogadorAtual'))
 let nomeJogador = ''
 let senhaJogador = ''
 

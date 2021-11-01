@@ -2,8 +2,6 @@
 
 //** INICIO --> PEGANDO ELEMENTOS ATRAVÉS DO ID E CLASSE **//
 
-let jogadorLogado = JSON.parse(localStorage.getItem('jogadorAtual'))
-
 const rankingCampoJogadores = document.getElementById('ranking-campo-Jogadores')
 
 const textoSaudacoes = document.getElementById('texto-saudacoes')
