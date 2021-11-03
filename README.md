@@ -1,4 +1,4 @@
-# interactive-lamp-js
+# JOGO-DA-VELHA
 
 Site created for the didactic purpose of the PWFE classes of the Systems Development course at [SENAI Jandira] (https://jandira.sp.senai.br/), about teacher orientation [Fernando Leonid] (https: // github .com / fernandoleonid)
 
