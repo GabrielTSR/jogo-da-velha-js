@@ -48,6 +48,26 @@ const checarSeOJogoAcabou = () =>
 const vitoriaDeveAplicarPontos = () =>
     modoDeJogoSelecionado === 'jvsm' && vencedorDaPartida !== 'empate' && jogadorLogado !== null
 
+function acrescentarPontuacaoPlacar(vencedorDaPartida) {
+
+    switch (vencedorDaPartida) {
+        case 'x':
+            const placarX = document.getElementById("pontuacaoX")
+            const pontuacaoAtualX = parseInt(placarX.innerText)
+            placarX.innerText = pontuacaoAtualX + 1
+            break;
+
+        case 'fantasma':
+            const placarFantasma = document.getElementById("pontuacaoFantasma")
+            const pontuacaoAtualFantasma = parseInt(placarFantasma.innerText)
+            placarFantasma.innerText = pontuacaoAtualFantasma + 1
+            break;
+    
+        default:
+            return false
+    }
+}
+
 function aplicarPontosDeVitoria() {
     if (vitoriaDeveAplicarPontos()) {
         let situacao = ''
@@ -65,7 +85,7 @@ function aplicarPontosDeVitoria() {
         }
         alterarPontuacao(situacao)
     }
-    return false
+    acrescentarPontuacaoPlacar(vencedorDaPartida)
 }
 
 function exibirReta() {
@@ -156,6 +176,11 @@ function retornarCamposVazios(campo) {
 }
 
 const resetarCadaCampo = (cadaCampo, contador) => (cadaCampo[contador].innerHTML = '')
+
+const resetarPlacar = () => {
+    document.getElementById("pontuacaoX").innerText = 0
+    document.getElementById("pontuacaoFantasma").innerText = 0
+}
 
 function aplicarAlteracoesConfig() {
     modoDeJogoSelecionado = modosDeJogo.value
