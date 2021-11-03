@@ -1,161 +1,292 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+        />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/responsividade.css" />
+        <script
+            src="https://kit.fontawesome.com/0ceead7302.js"
+            crossorigin="anonymous"
+        ></script>
+        <script src="./js/dadosGlobais.js" defer></script>
+        <script src="./js/jogador.js" defer></script>
+        <script src="./js/maquina.js" defer></script>
+        <script src="./js/funcoesBase.js" defer></script>
+        <script src="./js/ranking.js" defer></script>
+        <script src="./js/cadastroDadosJogador.js" defer></script>
+        <title>Jogo da velha</title>
+    </head>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/responsividade.css" />
-    <script src="https://kit.fontawesome.com/0ceead7302.js" crossorigin="anonymous"></script>
-    <script src="./js/dadosGlobais.js" defer></script>
-    <script src="./js/jogador.js" defer></script>
-    <script src="./js/maquina.js" defer></script>
-    <script src="./js/funcoesBase.js" defer></script>
-    <script src="./js/ranking.js" defer></script>
-    <script src="./js/cadastroDadosJogador.js" defer></script>
-    <title>Jogo da velha</title>
-</head>
+    <body class="flex-column-centralized">
+        <header class="flex-column-centralized">
+            <h1 class="flex-row-centralized caixa-padrao">Jogo da velha</h1>
+            <h5 id="texto-saudacoes">Olá!</h5>
+            <div class="flex-row-centralized" id="pontuacao-container">
+                <p id="pontuacaoX">0</p>
+                X
+                <p id="pontuacaoFantasma">0</p>
+                <button
+                    class="flex-column-centralized"
+                    onclick="resetarPlacar()"
+                    id="botao-resetar-placar"
+                >
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+        </header>
 
-<body class="flex-column-centralized">
-    <header class="flex-column-centralized">
-        <h1 class="flex-row-centralized caixa-padrao">Jogo da velha</h1>
-        <h5 id="texto-saudacoes">Olá!</h5>
-        <div class="flex-row-centralized" id="pontuacao-container">
-            <p id="pontuacaoX">0</p>
-            X
-            <p id="pontuacaoFantasma">0</p>
-            <button class="flex-column-centralized" onclick="resetarPlacar()" id="botao-resetar-placar"><i class="fas fa-sync-alt"></i></button>
-        </div>
-    </header>
+        <audio
+            controls
+            autoplay
+            id="audio"
+            src="music/y2mate.com - DuckTales Music NES  The Moon Theme.mp3"
+        ></audio>
 
-    <main class="flex-column-centralized">
-        <div class="modal-container flex-column-centralized" id="pagina-aterrissagem">
-            <h2>Bem-vindo ao <span style="color: #31adff">jogo da velha</span></h2>
-            <form id="formulario-login" class="flex-column-centralized">
-                <p>Login</p>
-                <ul id="erros-container"></ul>
-                <div class="flex-column-centralized" id="container-input">
-                    <input id="input-nome" placeholder="Nome" type="text" maxlength="10" />
-                    <input id="input-senha" placeholder="Senha" type="password" maxlength="10" />
-                    <div class="flex-row-centralized" id="botao-container-login">
-                        <button type="button" onclick="realizarLogin()">LOGAR</button>
+        <main class="flex-column-centralized">
+            <div
+                class="modal-container flex-column-centralized"
+                id="pagina-aterrissagem"
+            >
+                <h2>
+                    Bem-vindo ao
+                    <span style="color: #31adff">jogo da velha</span>
+                </h2>
+                <form id="formulario-login" class="flex-column-centralized">
+                    <p>Login</p>
+                    <ul id="erros-container"></ul>
+                    <div class="flex-column-centralized" id="container-input">
+                        <input
+                            id="input-nome"
+                            placeholder="Nome"
+                            type="text"
+                            maxlength="10"
+                        />
+                        <input
+                            id="input-senha"
+                            placeholder="Senha"
+                            type="password"
+                            maxlength="10"
+                        />
+                        <div
+                            class="flex-row-centralized"
+                            id="botao-container-login"
+                        >
+                            <button type="button" onclick="realizarLogin()">
+                                LOGAR
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="flex-column-centralized" id="links-cadastro-convidado">
-                    <a href="./html/cadastroJogador.html">Não possui uma conta?</a>
-                    <a onclick="fecharModal(), atualizarTabelaRanking(), limparDadosJogador()">Jogar sem cadastro</a
+                    <div
+                        class="flex-column-centralized"
+                        id="links-cadastro-convidado"
+                    >
+                        <a href="./html/cadastroJogador.html"
+                            >Não possui uma conta?</a
+                        >
+                        <a
+                            onclick="fecharModal(), atualizarTabelaRanking(), limparDadosJogador()"
+                            >Jogar sem cadastro</a
                         >
                     </div>
                 </form>
             </div>
 
             <div class="modal-container" id="resultado-container">
-                <div class="flex-column-centralized caixa-padrao" id="resultado-modal">
-                    <img id="imagem-vencedor" src="img/jogo_inacabado.png" alt="" />
+                <div
+                    class="flex-column-centralized caixa-padrao"
+                    id="resultado-modal"
+                >
+                    <img
+                        id="imagem-vencedor"
+                        src="img/jogo_inacabado.png"
+                        alt=""
+                    />
                     <h2 class="quem-venceu" id="quem-venceu">Jogo inacabado</h2>
                     <div class="botao-container">
-                        <button id="botao-jogar-novamente" onclick="resetarJogo()">JOGAR NOVAMENTE</button>
+                        <button
+                            id="botao-jogar-novamente"
+                            onclick="resetarJogo()"
+                        >
+                            JOGAR NOVAMENTE
+                        </button>
                         <button><a href="#">CANCELAR</a></button>
+                    </div>
                 </div>
-        </div>
-        </div>
-
-        <div id="ranking-container" class="modal-container">
-            <div class="caixa-padrao" id="ranking-modal">
-                <a href="#" class="fechar"><i class="fas fa-times"></i></a>
-                <h2>Ranking:</h2>
-                <table>
-                    <tr>
-                        <thead>
-                            <th></th>
-                            <th>Jogadores</th>
-                        </thead>
-                        <tbody id="ranking-campo-Jogadores"></tbody>
-                    </tr>
-                </table>
             </div>
-        </div>
 
-        <div class="modal-container" id="config-modal-container">
-            <section class="caixa-padrao" id="campo-config">
-                <a href="#" class="fechar"><i class="fas fa-times"></i></a>
+            <div id="ranking-container" class="modal-container">
+                <div class="caixa-padrao" id="ranking-modal">
+                    <a href="#" class="fechar"><i class="fas fa-times"></i></a>
+                    <h2>Ranking:</h2>
+                    <table>
+                        <tr>
+                            <thead>
+                                <th></th>
+                                <th>Jogadores</th>
+                            </thead>
+                            <tbody id="ranking-campo-Jogadores"></tbody>
+                        </tr>
+                    </table>
+                </div>
+            </div>
 
-                <h2 id="h2-opcoes-campo-config">OPÇÕES</h2>
+            <div class="modal-container" id="config-modal-container">
+                <section class="caixa-padrao" id="campo-config">
+                    <a href="#" class="fechar"><i class="fas fa-times"></i></a>
 
-                <div class="cada-questao-container">
-                    <label for="quemContraQuem">MODO DE JOGO</label>
-                    <select class="caixaDeSelecao" name="quemContraQuemSelect" id="quemContraQuem">
+                    <h2 id="h2-opcoes-campo-config">OPÇÕES</h2>
+
+                    <div class="cada-questao-container">
+                        <label for="quemContraQuem">MODO DE JOGO</label>
+                        <select
+                            class="caixaDeSelecao"
+                            name="quemContraQuemSelect"
+                            id="quemContraQuem"
+                        >
                             <option value="jvsj">Jogador vs Jogador</option>
                             <option value="jvsm">Jogador vs Máquina</option>
                         </select>
-                </div>
+                    </div>
 
-                <div class="cada-questao-container">
-                    <label for="xSera">"X" SERÁ</label>
-                    <select class="caixaDeSelecao" name="xSera" id="xSera">
+                    <div class="cada-questao-container">
+                        <label for="xSera">"X" SERÁ</label>
+                        <select class="caixaDeSelecao" name="xSera" id="xSera">
                             <option value="jogador1">Jogador 1</option>
                             <option value="outro">Outro</option>
                         </select>
-                </div>
+                    </div>
 
-                <div class="cada-questao-container">
-                    <label for="dificuldadeMaquinaSelect">DIFICULDADE DA MÁQUINA</label>
-                    <select class="caixaDeSelecao" name="dificuldadeMaquinaSelect" id="dificuldadeMaquina">
+                    <div class="cada-questao-container">
+                        <label for="dificuldadeMaquinaSelect"
+                            >DIFICULDADE DA MÁQUINA</label
+                        >
+                        <select
+                            class="caixaDeSelecao"
+                            name="dificuldadeMaquinaSelect"
+                            id="dificuldadeMaquina"
+                        >
                             <option value="facil">Fácil</option>
                             <option value="medio">Médio</option>
                             <option value="dificil">Difícil</option>
                         </select>
-                </div>
+                    </div>
 
-                <div class="button-container flex-row-centralized">
-                    <button onclick="fecharConfirmacaoConfig(), aplicarAlteracoesConfig()" id="aplicar-alteracoes-config">
+                    <div class="button-container flex-row-centralized">
+                        <button
+                            onclick="fecharConfirmacaoConfig(), aplicarAlteracoesConfig()"
+                            id="aplicar-alteracoes-config"
+                        >
                             JOGAR
                         </button>
-                </div>
-            </section>
-        </div>
-
-        <h2 id="quem-e-a-vez-mensagem">É a vez de <br />"X"</h2>
-
-        <div id="jogo-container">
-            <div class="flex-column-centralized" id="alteracao-detectada-modal">
-                <h2>Deseja aplicar as configurações?</h2>
-                <div class="botao-container" id="container-botoes-alteracao-detectada">
-                    <button id="botao-aplicar-configuracoes" onclick="fecharConfirmacaoConfig(), aplicarAlteracoesConfig()">
-                            <i class="fas fa-check"></i>
-                        </button>
-                    <button id="botao-cancelar-configuracoes" onclick="fecharConfirmacaoConfig()">
-                            <i class="fas fa-times"></i>
-                        </button>
-                </div>
+                    </div>
+                </section>
             </div>
 
-            <div id="reta-vitoria" onclick="abrirModalResultado()"></div>
+            <h2 id="quem-e-a-vez-mensagem">É a vez de <br />"X"</h2>
 
-            <img id="maquina-pensando" src="gif/maquina_calculando.gif" alt="maquina calculando" />
+            <div id="jogo-container">
+                <div
+                    class="flex-column-centralized"
+                    id="alteracao-detectada-modal"
+                >
+                    <h2>Deseja aplicar as configurações?</h2>
+                    <div
+                        class="botao-container"
+                        id="container-botoes-alteracao-detectada"
+                    >
+                        <button
+                            id="botao-aplicar-configuracoes"
+                            onclick="fecharConfirmacaoConfig(), aplicarAlteracoesConfig()"
+                        >
+                            <i class="fas fa-check"></i>
+                        </button>
+                        <button
+                            id="botao-cancelar-configuracoes"
+                            onclick="fecharConfirmacaoConfig()"
+                        >
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
 
-            <div onclick="aplicarJogadaDoJogador('campo-1', 0)" id="campo-1" class="cada-campo flex-column-centralized"></div>
-            <div onclick="aplicarJogadaDoJogador('campo-2', 1)" id="campo-2" class="cada-campo flex-column-centralized"></div>
-            <div onclick="aplicarJogadaDoJogador('campo-3', 2)" id="campo-3" class="cada-campo flex-column-centralized"></div>
-            <div onclick="aplicarJogadaDoJogador('campo-4', 3)" id="campo-4" class="cada-campo flex-column-centralized"></div>
-            <div onclick="aplicarJogadaDoJogador('campo-5', 4)" id="campo-5" class="cada-campo flex-column-centralized"></div>
-            <div onclick="aplicarJogadaDoJogador('campo-6', 5)" id="campo-6" class="cada-campo flex-column-centralized"></div>
-            <div onclick="aplicarJogadaDoJogador('campo-7', 6)" id="campo-7" class="cada-campo flex-column-centralized"></div>
-            <div onclick="aplicarJogadaDoJogador('campo-8', 7)" id="campo-8" class="cada-campo flex-column-centralized"></div>
-            <div onclick="aplicarJogadaDoJogador('campo-9', 8)" id="campo-9" class="cada-campo flex-column-centralized"></div>
-        </div>
-    </main>
-    <footer>
-        <span> Copyright 2021 Gabriel Tavares AND Daniel Wilson</span>
+                <div id="reta-vitoria" onclick="abrirModalResultado()"></div>
 
-        <div id="footer-img-container" class="flex-column-centralized">
-            <a id="config-icon" href="#config-modal-container"><img src="./img/config-icone.png" alt="configurações" /></a>
-            <a href="#ranking-container"><img src="./img/trofeu.png" alt="troféu" /></a>
-            <a id="logout" href="#pagina-aterrissagem" onclick="limparDadosJogador()"><img src="img/log-out.png" alt="Log out" /></a>
-        </div>
-    </footer>
-</body>
+                <img
+                    id="maquina-pensando"
+                    src="gif/maquina_calculando.gif"
+                    alt="maquina calculando"
+                />
 
+                <div
+                    onclick="aplicarJogadaDoJogador('campo-1', 0)"
+                    id="campo-1"
+                    class="cada-campo flex-column-centralized"
+                ></div>
+                <div
+                    onclick="aplicarJogadaDoJogador('campo-2', 1)"
+                    id="campo-2"
+                    class="cada-campo flex-column-centralized"
+                ></div>
+                <div
+                    onclick="aplicarJogadaDoJogador('campo-3', 2)"
+                    id="campo-3"
+                    class="cada-campo flex-column-centralized"
+                ></div>
+                <div
+                    onclick="aplicarJogadaDoJogador('campo-4', 3)"
+                    id="campo-4"
+                    class="cada-campo flex-column-centralized"
+                ></div>
+                <div
+                    onclick="aplicarJogadaDoJogador('campo-5', 4)"
+                    id="campo-5"
+                    class="cada-campo flex-column-centralized"
+                ></div>
+                <div
+                    onclick="aplicarJogadaDoJogador('campo-6', 5)"
+                    id="campo-6"
+                    class="cada-campo flex-column-centralized"
+                ></div>
+                <div
+                    onclick="aplicarJogadaDoJogador('campo-7', 6)"
+                    id="campo-7"
+                    class="cada-campo flex-column-centralized"
+                ></div>
+                <div
+                    onclick="aplicarJogadaDoJogador('campo-8', 7)"
+                    id="campo-8"
+                    class="cada-campo flex-column-centralized"
+                ></div>
+                <div
+                    onclick="aplicarJogadaDoJogador('campo-9', 8)"
+                    id="campo-9"
+                    class="cada-campo flex-column-centralized"
+                ></div>
+            </div>
+        </main>
+        <footer>
+            <span> Copyright 2021 Gabriel Tavares AND Daniel Wilson</span>
+
+            <div id="footer-img-container" class="flex-column-centralized">
+                <a id="config-icon" href="#config-modal-container"
+                    ><img src="./img/config-icone.png" alt="configurações"
+                /></a>
+                <a href="#ranking-container"
+                    ><img src="./img/trofeu.png" alt="troféu"
+                /></a>
+                <a
+                    id="logout"
+                    href="#pagina-aterrissagem"
+                    onclick="limparDadosJogador()"
+                    ><img src="img/log-out.png" alt="Log out"
+                /></a>
+            </div>
+        </footer>
+    </body>
 </html>

@@ -29,7 +29,7 @@
     z-index: 999;
 }
 
-.modal-container>* {
+.modal-container > * {
     margin: 30px;
 }
 
@@ -54,8 +54,8 @@ header h2,
     font-size: 2rem;
 }
 
-#formulario-cadastro>p:first-of-type,
-#formulario-login>p:first-of-type {
+#formulario-cadastro > p:first-of-type,
+#formulario-login > p:first-of-type {
     font-size: 1.4rem;
     margin-bottom: 30px;
     text-align: center;
@@ -160,6 +160,10 @@ header h2,
     height: 100%;
     background-color: #0000008f;
     z-index: 2;
+}
+
+#audio {
+    display: none;
 }
 
 #botao-aplicar-configuracoes:hover,
@@ -307,15 +311,15 @@ h1:hover {
     position: relative;
 }
 
-#pontuacaoX{
+#pontuacaoX {
     color: red;
 }
 
-#pontuacaoFantasma{
+#pontuacaoFantasma {
     color: rgb(165, 0, 223);
 }
 
-#botao-resetar-placar{
+#botao-resetar-placar {
     position: absolute;
     margin-left: 230px;
     width: 50px;
@@ -551,7 +555,8 @@ main {
 button:hover {
     cursor: pointer;
     transition: all 1s;
-    box-shadow: 0 0 10px 0 var(--azul-principal) inset, 0 0 10px 4px var(--azul-principal);
+    box-shadow: 0 0 10px 0 var(--azul-principal) inset,
+        0 0 10px 4px var(--azul-principal);
 }
 
 #logout:hover {
@@ -568,10 +573,14 @@ button {
     background-color: white;
 }
 
-#campo-config .cada-questao-container select:hover #aplicar-alteracoes-config:disabled {
+#campo-config
+    .cada-questao-container
+    select:hover
+    #aplicar-alteracoes-config:disabled {
     border: none;
     transition: all 0.5s;
-    box-shadow: 0 0 10px 0 var(--azul-principal) inset, 0 0 10px 4px var(--azul-principal);
+    box-shadow: 0 0 10px 0 var(--azul-principal) inset,
+        0 0 10px 4px var(--azul-principal);
 }
 
 #quem-e-a-vez-mensagem {
@@ -600,40 +609,40 @@ button {
     cursor: pointer;
 }
 
-#jogo-container>.reta-diagonal {
+#jogo-container > .reta-diagonal {
     width: 125%;
 }
 
-#jogo-container>.diagonal-inicio {
+#jogo-container > .diagonal-inicio {
     transform: rotate(45deg);
 }
 
-#jogo-container>.diagonal-fim {
+#jogo-container > .diagonal-fim {
     transform: rotate(-45deg);
 }
 
-#jogo-container>.reta-horizontal {
+#jogo-container > .reta-horizontal {
     transform: rotate(0deg);
     right: 0%;
 }
 
-#jogo-container>.primeira-horizontal {
+#jogo-container > .primeira-horizontal {
     top: 14%;
 }
 
-#jogo-container>.ultima-horizontal {
+#jogo-container > .ultima-horizontal {
     bottom: 14%;
 }
 
-#jogo-container>.reta-vertical {
+#jogo-container > .reta-vertical {
     transform: rotate(90deg);
 }
 
-#jogo-container>.primeira-vertical {
+#jogo-container > .primeira-vertical {
     margin-right: 69%;
 }
 
-#jogo-container>.ultima-vertical {
+#jogo-container > .ultima-vertical {
     margin-left: 69%;
 }
 
