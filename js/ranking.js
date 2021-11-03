@@ -5,7 +5,7 @@ let contadorRanking = 0
 function atualizarTabelaRanking() {
     const matrizJogadores = JSON.parse(localStorage.getItem('matrizJogadores'))
 
-    if (matrizJogadores === null) {
+    if (!eNulo(matrizJogadores)) {
         rankingCampoJogadores.innerHTML = ''
 
         let matrizTop25Jogadores = []
@@ -13,9 +13,9 @@ function atualizarTabelaRanking() {
             if (matrizJogadores[contador] !== undefined) matrizTop25Jogadores[contador] = matrizJogadores[contador]
             else break
         }
-    
+
         contadorRanking = 1
-        matrizTop25Jogadores.forEach(edificandoLinhasRanking)   
+        matrizTop25Jogadores.forEach(edificandoLinhasRanking)
     }
 
     return false
