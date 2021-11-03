@@ -164,8 +164,10 @@ function atrasarExibicaoResultado() {
 function desabilitarDificuldadeDaMaquina() {
     if (modosDeJogo.value == 'jvsj') {
         dificuldadeDaMaquina.disabled = true
+        xSera.disabled = true
     } else {
         dificuldadeDaMaquina.disabled = false
+        xSera.disabled = false
     }
 }
 
