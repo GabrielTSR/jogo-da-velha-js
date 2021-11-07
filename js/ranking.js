@@ -21,6 +21,8 @@ const atualizarTabelaRanking = async() => {
     return false
 }
 
+atualizarTabelaRanking()
+
 function edificandoLinhasRanking(jogador) {
     const cadaLinha = document.createElement('tr')
 
