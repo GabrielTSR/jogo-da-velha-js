@@ -17,23 +17,29 @@ function criarMatrizJogadores() {
 
 const resgatarMatrizJogadores = async() => {
     let matrizJogadores = await showJogadores()
-        // JSON.parse(localStorage.getItem('matrizJogadores'))
 
-    if (eNulo(matrizJogadores)) {
-        matrizJogadores = criarMatrizJogadores()
-    }
     return matrizJogadores
 }
 
 function createJogadorNaMatriz(jogador) {
-    console.log(jogador)
     const url = 'http://testeleonid.herokuapp.com/jogadores/'
-    const options = {
-        method: 'POST',
-        body: JSON.stringify(jogador),
-    }
 
-    fetch(url, options)
+    fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(jogador),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            window.location.replace('../index.html')
+            return true
+        })
+        .catch((error) => {
+            console.error('Error:', error)
+            return false
+        })
 }
 
 function deleteJogador(jogadorId) {
@@ -45,4 +51,16 @@ function deleteJogador(jogadorId) {
     fetch(url, options)
 }
 
-// deleteJogador(3)
+function updateJogador(jogador) {
+    const url = `http://testeleonid.herokuapp.com/jogadores/${jogador.id}`
+    const options = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(jogador),
+    }
+    fetch(url, options)
+}
+
+// deleteJogador(1)

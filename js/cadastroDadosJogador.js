@@ -11,8 +11,10 @@ let houveNomeRepetido = false
 
 let loginFoiRealizado = false
 
-if (textoSaudacoes !== null) {
-    const escreverSaudacoes = (nomeJogador) => (textoSaudacoes.innerText = `Olá! ${nomeJogador}`)
+const escreverSaudacoes = (nomeJogador) => {
+    if (!eNulo(textoSaudacoes)) {
+        textoSaudacoes.innerText = `Olá! ${nomeJogador}`
+    }
 }
 
 const erroContainer = document.getElementById('erros-container')
@@ -56,8 +58,6 @@ function validarLogin(nomeJogador, senha) {
 }
 
 function nomeUltrapassa10Caracteres(nomeJogador) {
-    let erroEncontrado = ''
-
     if (nomeJogador.length > 10) {
         const mensagemErro = `O nome não pode ultrapassar 10 dígitos. <br/><br/>`
         acrescentarTopicoErro(mensagemErro)
@@ -104,20 +104,17 @@ const esseNomeJaExiste = async() => {
 async function validarEAplicarCadastro() {
     if (validarCadastro(inputNome, inputSenha, inputSenhaConfirmacao) && !houveNomeRepetido) {
         createJogadorNaMatriz(criarNovoJogador())
-
-        // window.location.replace('../index.html')
     }
 }
 
-async function cadastrarJogador() {
+function cadastrarJogador() {
     nomeJogador = inputNome.value
     senhaJogador = inputSenha.value
 
         !esseNomeJaExiste(inputNome.value).then(validarEAplicarCadastro)
 }
-
-if (textoSaudacoes !== null) {
-    function realizarLogin() {
+const realizarLogin = () => {
+    if (!eNulo(textoSaudacoes)) {
         if (!eNulo(jogadorLogado)) {
             nomeJogador = jogadorLogado.nome
             senhaJogador = jogadorLogado.senha
@@ -144,7 +141,8 @@ if (textoSaudacoes !== null) {
         }
     }
 }
-if (jogadorLogado !== null && textoSaudacoes !== null) {
+
+if (!eNulo(jogadorLogado) && !eNulo(textoSaudacoes)) {
     realizarLogin()
 }
 
@@ -207,8 +205,8 @@ function verificarSeNomeExisteEAtribuir(jogador) {
     }
 }
 
-async function verificarSeNomeExiste(jogador) {
-    if (jogador.nome.toLowerCase() === nomeJogador.toLowerCase()) {
+function verificarSeNomeExiste(jogador) {
+    if ((jogador.nome !== undefined && jogador.nome.toLowerCase()) === nomeJogador.toLowerCase()) {
         houveNomeRepetido = true
         return true
     }
@@ -245,23 +243,8 @@ function alterarPontuacao(situacao) {
     }
 
     localStorage.setItem('jogadorAtual', JSON.stringify(jogadorLogado))
-    atualizarMatrizServer(jogadorLogado)
+    updateJogador(jogadorLogado)
     atualizarTabelaRanking()
-}
-
-function atualizarMatrizServer() {
-    let matrizJogadores = resgatarMatrizJogadores()
-
-    matrizJogadores.forEach((jogador, indice, matrizJogadores) => {
-        if (jogador.nome === jogadorLogado.nome) {
-            matrizJogadores[indice] = jogadorLogado
-            return true
-        }
-    })
-
-    matrizJogadores = matrizJogadores.sort(deixarEmOrdemDecrescente)
-
-    localStorage.setItem('matrizJogadores', JSON.stringify(matrizJogadores))
 }
 
 function deixarEmOrdemDecrescente(jogadorComMaisPontos, jogadorComMenosPontos) {
