@@ -133,7 +133,7 @@ async function realizarLogin() {
                 fecharModal()
                 return true
             } else {
-                const mensagemErro = `O nome de usuário ou senha estão incorretos! <br/><br/>`
+                const mensagemErro = `O nome de usuário ou senha está incorreto! <br/><br/>`
                 acrescentarTopicoErro(mensagemErro)
                 return false
             }
