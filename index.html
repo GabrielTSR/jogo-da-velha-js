@@ -48,7 +48,7 @@
                     <input id="input-nome" placeholder="Nome" type="text" maxlength="10" />
                     <input id="input-senha" placeholder="Senha" type="password" maxlength="10" />
                     <div class="flex-row-centralized" id="botao-container-login">
-                        <button type="button" onclick="realizarLogin()">LOGAR</button>
+                        <button type="button" onclick="realizarLogin(), atualizarTabelaRanking()">LOGAR</button>
                     </div>
                 </div>
                 <div class="flex-column-centralized" id="links-cadastro-convidado">
@@ -64,8 +64,10 @@
                     <img id="imagem-vencedor" src="img/jogo_inacabado.png" alt="" />
                     <h2 class="quem-venceu" id="quem-venceu">Jogo inacabado</h2>
                     <div class="botao-container">
-                        <button id="botao-jogar-novamente" onclick="resetarJogo()">JOGAR NOVAMENTE</button>
-                        <button><a href="#">CANCELAR</a></button>
+                        <button id="botao-jogar-novamente" onclick="resetarJogo(), atualizarTabelaRanking()">
+                            JOGAR NOVAMENTE
+                        </button>
+                        <button onclick="atualizarTabelaRanking()"><a href="#">CANCELAR</a></button>
                 </div>
         </div>
         </div>

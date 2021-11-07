@@ -120,7 +120,6 @@ async function realizarLogin() {
             nomeJogador = jogadorLogado.nome
             senhaJogador = jogadorLogado.senha
             escreverSaudacoes(nomeJogador)
-            atualizarTabelaRanking()
             fecharModal()
             return true
         } else {
@@ -131,7 +130,6 @@ async function realizarLogin() {
         if (validarLogin(inputNome, inputSenha)) {
             if (await resgatarJogadorDaMatriz()) {
                 escreverSaudacoes(nomeJogador)
-                atualizarTabelaRanking()
                 fecharModal()
                 return true
             } else {
@@ -243,7 +241,6 @@ function alterarPontuacao(situacao) {
 
     localStorage.setItem('jogadorAtual', JSON.stringify(jogadorLogado))
     updateJogador(jogadorLogado)
-    atualizarTabelaRanking()
 }
 
 function deixarEmOrdemDecrescente(jogadorComMaisPontos, jogadorComMenosPontos) {
