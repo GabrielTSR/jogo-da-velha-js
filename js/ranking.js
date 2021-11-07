@@ -4,12 +4,14 @@ let contadorRanking = 0
 
 const atualizarTabelaRanking = async() => {
     const matrizJogadores = await resgatarMatrizJogadores()
+    const matrizJogadoresEmOrdem = matrizJogadores.sort(deixarEmOrdemDecrescente)
 
     rankingCampoJogadores.innerHTML = ''
 
     let matrizTop25Jogadores = []
     for (let contador = 0; contador <= 24; contador++) {
-        if (matrizJogadores[contador] !== undefined) matrizTop25Jogadores[contador] = matrizJogadores[contador]
+        if (matrizJogadoresEmOrdem[contador] !== undefined)
+            matrizTop25Jogadores[contador] = matrizJogadoresEmOrdem[contador]
         else break
     }
 
