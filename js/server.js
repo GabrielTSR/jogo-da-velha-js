@@ -4,7 +4,7 @@
 const getJogador = (url) => fetch(url).then((res) => res.json())
 
 const showJogadores = async() => {
-    const url = 'http://testeleonid.herokuapp.com/jogadores'
+    const url = 'https://testeleonid.herokuapp.com/jogadores'
     const jogadores = await getJogador(url)
     return jogadores
 }
@@ -22,7 +22,7 @@ const resgatarMatrizJogadores = async() => {
 }
 
 function createJogadorNaMatriz(jogador) {
-    const url = 'http://testeleonid.herokuapp.com/jogadores/'
+    const url = 'https://testeleonid.herokuapp.com/jogadores/'
 
     fetch(url, {
             method: 'POST',
@@ -43,7 +43,7 @@ function createJogadorNaMatriz(jogador) {
 }
 
 function deleteJogador(jogadorId) {
-    const url = `http://testeleonid.herokuapp.com/jogadores/${jogadorId}`
+    const url = `https://testeleonid.herokuapp.com/jogadores/${jogadorId}`
     const options = {
         method: 'DELETE',
     }
@@ -52,7 +52,7 @@ function deleteJogador(jogadorId) {
 }
 
 function updateJogador(jogador) {
-    const url = `http://testeleonid.herokuapp.com/jogadores/${jogador.id}`
+    const url = `https://testeleonid.herokuapp.com/jogadores/${jogador.id}`
     const options = {
         method: 'PUT',
         headers: {
