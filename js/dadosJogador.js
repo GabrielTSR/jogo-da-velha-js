@@ -113,7 +113,8 @@ function cadastrarJogador() {
 
         !esseNomeJaExiste(inputNome.value).then(validarEAplicarCadastro)
 }
-const realizarLogin = () => {
+
+async function realizarLogin() {
     if (!eNulo(textoSaudacoes)) {
         if (!eNulo(jogadorLogado)) {
             nomeJogador = jogadorLogado.nome
@@ -128,7 +129,7 @@ const realizarLogin = () => {
         }
 
         if (validarLogin(inputNome, inputSenha)) {
-            if (resgatarJogadorDaMatriz()) {
+            if (await resgatarJogadorDaMatriz()) {
                 escreverSaudacoes(nomeJogador)
                 atualizarTabelaRanking()
                 fecharModal()
@@ -194,14 +195,12 @@ const resgatarJogadorDaMatriz = async() => {
 }
 
 function verificarSeNomeExisteEAtribuir(jogador) {
-    if (
-        jogador.nome.toLowerCase() === nomeJogador.toLowerCase() &&
-        jogador.senha.toLowerCase() === senhaJogador.toLowerCase()
-    ) {
+    if (jogador.nome.toLowerCase() === nomeJogador.toLowerCase() && jogador.senha === senhaJogador) {
         localStorage.setItem('jogadorAtual', JSON.stringify(jogador))
         jogadorLogado = JSON.parse(localStorage.getItem('jogadorAtual'))
 
-        return (loginFoiRealizado = true)
+        loginFoiRealizado = true
+        return loginFoiRealizado
     }
 }
 
