@@ -11,15 +11,15 @@ let houveNomeRepetido = false
 
 let loginFoiRealizado = false
 
-const escreverSaudacoes = (nomeJogador) => (textoSaudacoes.innerText = `Olá! ${nomeJogador}`)
+if (textoSaudacoes !== null) {
+    const escreverSaudacoes = (nomeJogador) => (textoSaudacoes.innerText = `Olá! ${nomeJogador}`)
+}
 
 const erroContainer = document.getElementById('erros-container')
 
 const eNulo = (elemento) => elemento === null
 
 function validarCadastro(nomeJogador, senha, senhaConfirmacao) {
-    erroContainer.innerHTML = ''
-
     let cadastroEValido = true
     if (!campoFoiPreenchido(nomeJogador, 'nome')) {
         cadastroEValido = false
@@ -85,61 +85,66 @@ function campoFoiPreenchido(campo, nomeDoCampo) {
     return true
 }
 
-function esseNomeJaExiste() {
-    const matrizJogadores = resgatarMatrizJogadores()
+const esseNomeJaExiste = async() => {
+    const matrizJogadores = await resgatarMatrizJogadores()
+    erroContainer.innerHTML = ''
 
     houveNomeRepetido = false
-    matrizJogadores.forEach(verificarSeNomeExiste)
+    matrizJogadores.forEach(await verificarSeNomeExiste)
 
     if (houveNomeRepetido) {
         const mensagemErro = `"${nomeJogador}" já está sendo utilizado. <br/><br/>`
         acrescentarTopicoErro(mensagemErro)
 
-        return true
+        houveNomeRepetido = true
     }
-    return false
+    return houveNomeRepetido
 }
 
-function cadastrarJogador() {
+async function validarEAplicarCadastro() {
+    if (validarCadastro(inputNome, inputSenha, inputSenhaConfirmacao) && !houveNomeRepetido) {
+        createJogadorNaMatriz(criarNovoJogador())
+
+        // window.location.replace('../index.html')
+    }
+}
+
+async function cadastrarJogador() {
     nomeJogador = inputNome.value
     senhaJogador = inputSenha.value
 
-    if (validarCadastro(inputNome, inputSenha, inputSenhaConfirmacao) && !esseNomeJaExiste(inputNome.value)) {
-        console.log('passou da validacao')
-        const novoJogador = criarNovoJogador()
-        inserirNovoJogadorNaMatriz(novoJogador)
-
-        window.location.replace('../index.html')
-    }
+        !esseNomeJaExiste(inputNome.value).then(validarEAplicarCadastro)
 }
 
-function realizarLogin() {
-    if (!eNulo(jogadorLogado)) {
-        nomeJogador = jogadorLogado.nome
-        senhaJogador = jogadorLogado.senha
-        escreverSaudacoes(nomeJogador)
-        atualizarTabelaRanking()
-        fecharModal()
-        return true
-    } else {
-        nomeJogador = inputNome.value
-        senhaJogador = inputSenha.value
-    }
-
-    if (validarLogin(inputNome, inputSenha)) {
-        if (resgatarJogadorDaMatriz()) {
+if (textoSaudacoes !== null) {
+    function realizarLogin() {
+        if (!eNulo(jogadorLogado)) {
+            nomeJogador = jogadorLogado.nome
+            senhaJogador = jogadorLogado.senha
             escreverSaudacoes(nomeJogador)
             atualizarTabelaRanking()
             fecharModal()
             return true
         } else {
-            const mensagemErro = `O nome de usuário ou senha estão incorretos! <br/><br/>`
-            acrescentarTopicoErro(mensagemErro)
-            return false
+            nomeJogador = inputNome.value
+            senhaJogador = inputSenha.value
+        }
+
+        if (validarLogin(inputNome, inputSenha)) {
+            if (resgatarJogadorDaMatriz()) {
+                escreverSaudacoes(nomeJogador)
+                atualizarTabelaRanking()
+                fecharModal()
+                return true
+            } else {
+                const mensagemErro = `O nome de usuário ou senha estão incorretos! <br/><br/>`
+                acrescentarTopicoErro(mensagemErro)
+                return false
+            }
         }
     }
 }
-if (jogadorLogado !== null) {
+if (jogadorLogado !== null && textoSaudacoes !== null) {
     realizarLogin()
 }
 
@@ -155,23 +160,22 @@ function acrescentarTopicoErro(mensagemErro) {
     return true
 }
 
-function inserirNovoJogadorNaMatriz(novoJogador) {
-    let matrizJogadores = resgatarMatrizJogadores()
+async function inserirNovoJogadorNaMatriz(novoJogador) {
+    let matrizJogadores = await resgatarMatrizJogadores()
 
     matrizJogadores.push(novoJogador)
-    localStorage.setItem('matrizJogadores', JSON.stringify(matrizJogadores))
+
+    createJogador(aluno)
 }
 
 function criarNovoJogador() {
-    const matrizJogadores = resgatarMatrizJogadores()
-
-    const novoJogador = new Object()
-    novoJogador.id = matrizJogadores.length + 1
-    novoJogador.nome = nomeJogador
-    novoJogador.senha = senhaJogador
-    novoJogador.pontosFacil = 0
-    novoJogador.pontosMedio = 0
-    novoJogador.pontosDificil = 0
+    const novoJogador = {
+        nome: nomeJogador,
+        senha: senhaJogador,
+        pontosFacil: 0,
+        pontosMedio: 0,
+        pontosDificil: 0,
+    }
 
     localStorage.setItem('jogadorAtual', JSON.stringify(novoJogador))
     jogadorLogado = JSON.parse(localStorage.getItem('jogadorAtual'))
@@ -179,31 +183,16 @@ function criarNovoJogador() {
     return novoJogador
 }
 
-function criarMatrizJogadores() {
-    const matrizJogadores = []
-    localStorage.setItem('matrizJogadores', JSON.stringify(matrizJogadores))
-    return matrizJogadores
-}
-
 function criarObjetoJogador() {}
 
-function resgatarJogadorDaMatriz() {
-    const matrizJogadores = resgatarMatrizJogadores()
+const resgatarJogadorDaMatriz = async() => {
+    const matrizJogadores = await resgatarMatrizJogadores()
 
     loginFoiRealizado = false
 
     matrizJogadores.forEach(verificarSeNomeExisteEAtribuir)
 
     return loginFoiRealizado
-}
-
-function resgatarMatrizJogadores() {
-    let matrizJogadores = JSON.parse(localStorage.getItem('matrizJogadores'))
-
-    if (eNulo(matrizJogadores)) {
-        matrizJogadores = criarMatrizJogadores()
-    }
-    return matrizJogadores
 }
 
 function verificarSeNomeExisteEAtribuir(jogador) {
@@ -218,7 +207,7 @@ function verificarSeNomeExisteEAtribuir(jogador) {
     }
 }
 
-function verificarSeNomeExiste(jogador) {
+async function verificarSeNomeExiste(jogador) {
     if (jogador.nome.toLowerCase() === nomeJogador.toLowerCase()) {
         houveNomeRepetido = true
         return true
@@ -256,11 +245,11 @@ function alterarPontuacao(situacao) {
     }
 
     localStorage.setItem('jogadorAtual', JSON.stringify(jogadorLogado))
-    atualizarMatrizLocalStorage(jogadorLogado)
+    atualizarMatrizServer(jogadorLogado)
     atualizarTabelaRanking()
 }
 
-function atualizarMatrizLocalStorage() {
+function atualizarMatrizServer() {
     let matrizJogadores = resgatarMatrizJogadores()
 
     matrizJogadores.forEach((jogador, indice, matrizJogadores) => {

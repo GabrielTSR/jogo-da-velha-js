@@ -2,8 +2,8 @@
 
 let contadorRanking = 0
 
-function atualizarTabelaRanking() {
-    const matrizJogadores = JSON.parse(localStorage.getItem('matrizJogadores'))
+const atualizarTabelaRanking = async() => {
+    const matrizJogadores = await resgatarMatrizJogadores()
 
     if (!eNulo(matrizJogadores)) {
         rankingCampoJogadores.innerHTML = ''

@@ -33,14 +33,20 @@ let campoSelecionado
 //** INICIO --> DECLARANDO VARIAVEIS GLOBAIS **//
 var selectFormulario = document.getElementsByClassName('caixaDeSelecao')
 
-var modosDeJogo = document.getElementById('quemContraQuem')
-var modoDeJogoSelecionado = modosDeJogo.value
+const modosDeJogo = document.getElementById('quemContraQuem')
+if (modosDeJogo !== null) {
+    var modoDeJogoSelecionado = modosDeJogo.value
+}
 
-var xSera = document.getElementById('xSera')
-var xSeraSelecionado = xSera.value
+const xSera = document.getElementById('xSera')
+if (modosDeJogo !== null) {
+    var xSeraSelecionado = xSera.value
+}
 
-var dificuldadeDaMaquina = document.getElementById('dificuldadeMaquina')
-var dificuldadeDaMaquinaSelecionada = dificuldadeDaMaquina.value
+const dificuldadeDaMaquina = document.getElementById('dificuldadeMaquina')
+if (dificuldadeDaMaquina !== null) {
+    var dificuldadeDaMaquinaSelecionada = dificuldadeDaMaquina.value
+}
 
 var botaoJogar = document.getElementById('aplicar-alteracoes-config')
 
@@ -50,7 +56,7 @@ var vencedorDaPartida = 0 //entre 0, 'x', e 'fantasma'
 
 var indiceRetaVencedora = 0
     /*Valor em que armazenaremos uma reta vinda de 
-                                                                                                                "possibilidadesVitoriaMatriz" (correspondente a vitória)*/
+                                                                                                                                            "possibilidadesVitoriaMatriz" (correspondente a vitória)*/
 
 var matrizJogo = [0, 0, 0, 0, 0, 0, 0, 0, 0] //0 = vazio
 
