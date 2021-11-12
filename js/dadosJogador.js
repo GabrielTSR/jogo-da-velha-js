@@ -114,37 +114,6 @@ function cadastrarJogador() {
         !esseNomeJaExiste(inputNome.value).then(validarEAplicarCadastro)
 }
 
-async function realizarLogin() {
-    if (!eNulo(textoSaudacoes)) {
-        if (!eNulo(jogadorLogado)) {
-            nomeJogador = jogadorLogado.nome
-            senhaJogador = jogadorLogado.senha
-            escreverSaudacoes(nomeJogador)
-            fecharModal()
-            return true
-        } else {
-            nomeJogador = inputNome.value
-            senhaJogador = inputSenha.value
-        }
-
-        if (validarLogin(inputNome, inputSenha)) {
-            if (await resgatarJogadorDaMatriz()) {
-                escreverSaudacoes(nomeJogador)
-                fecharModal()
-                return true
-            } else {
-                const mensagemErro = `O nome de usuário ou senha está incorreto! <br/><br/>`
-                acrescentarTopicoErro(mensagemErro)
-                return false
-            }
-        }
-    }
-}
-
-if (!eNulo(jogadorLogado) && !eNulo(textoSaudacoes)) {
-    realizarLogin()
-}
-
 function acrescentarTopicoErro(mensagemErro) {
     let erroEncontrado = ''
 
@@ -190,6 +159,38 @@ const resgatarJogadorDaMatriz = async() => {
     matrizJogadores.forEach(verificarSeNomeExisteEAtribuir)
 
     return loginFoiRealizado
+}
+
+async function realizarLogin() {
+    if (!eNulo(textoSaudacoes)) {
+        if (!eNulo(jogadorLogado)) {
+            nomeJogador = jogadorLogado.nome
+            senhaJogador = jogadorLogado.senha
+            await resgatarJogadorDaMatriz()
+            escreverSaudacoes(nomeJogador)
+            fecharModal()
+            return true
+        } else {
+            nomeJogador = inputNome.value
+            senhaJogador = inputSenha.value
+        }
+
+        if (validarLogin(inputNome, inputSenha)) {
+            if (await resgatarJogadorDaMatriz()) {
+                escreverSaudacoes(nomeJogador)
+                fecharModal()
+                return true
+            } else {
+                const mensagemErro = `O nome de usuário ou senha está incorreto! <br/><br/>`
+                acrescentarTopicoErro(mensagemErro)
+                return false
+            }
+        }
+    }
+}
+
+if (!eNulo(jogadorLogado) && !eNulo(textoSaudacoes)) {
+    realizarLogin()
 }
 
 function verificarSeNomeExisteEAtribuir(jogador) {
